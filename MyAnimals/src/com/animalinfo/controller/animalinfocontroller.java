@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.animalinfo.dao.animalinfoDao;
 import com.animalinfo.dao.animalinfoDaoImpl;
 import com.animalinfo.dto.animalinfoDto;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 
 @WebServlet("/animalinfocontroller.do")
 public class animalinfocontroller extends HttpServlet {
@@ -44,7 +46,15 @@ public class animalinfocontroller extends HttpServlet {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			
-			dispatch("test.jsp", request, response);
+			String gson = new Gson().toJson(list);
+			try {
+                //ajax로 리턴해주는 부분
+                response.getWriter().write(gson);
+            } catch (JsonIOException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 			
 			
 		}

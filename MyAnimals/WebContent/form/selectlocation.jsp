@@ -13,7 +13,7 @@
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
 
-		
+
 		$('document').ready(
 			function () {
 				var area0 = ["전국", "서울특별시", "인천광역시", "대전광역시",
@@ -100,25 +100,32 @@
 			});
 	</script>
 	<select name="sido" id="sido"></select>
-		<select name="gugun" id="gugun"></select>
+	<select name="gugun" id="gugun"></select>
 	<input type="button" value="검색" id="selectlocation">
-	
+
 	<script type="text/javascript">
-	$("#selectlocation").click(function(){
-		$.ajax({
-			url: "animalinfocontroller.do?command=select",
-			type: "POST",
-			dataType: "json",
-			data: {'sido':$('#sido').val(),'gugun':$('#gugun').val()},
-			success: function (msg) {
-				alert(msg);
-			},
-			error: function (request, status, error) {
-			}
-		});
-	})
+		$("#selectlocation").click(function () {
+			$.ajax({
+				url: "animalinfocontroller.do?command=select",
+				type: "POST",
+				dataType: "json",
+				data: { 'sido': $('#sido').val(), 'gugun': $('#gugun').val() },
+				success: function (data) {
+					$.each(data, function (key, val) {
+						console.log('key:' + key + ' / ' + 'value:' + val.animalNo);
+						console.log('key:' + key + ' / ' + 'value:' + val.animalHappenPlace);
+						console.log('key:' + key + ' / ' + 'value:' + val.animalKindCd);
+						console.log('key:' + key + ' / ' + 'value:' + val.animalHappenDt);
+						console.log('key:' + key + ' / ' + 'value:' + val.animalSexCd);
+						console.log('key:' + key + ' / ' + 'value:' + val.animalAge);
+					});
+				},
+				error: function (request, status, error) {
+				}
+			});
+		})
 	</script>
-	
+
 
 </body>
 
