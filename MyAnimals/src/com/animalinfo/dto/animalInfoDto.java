@@ -3,12 +3,12 @@ package com.animalinfo.dto;
 
 
 public class animalinfoDto {
-	private int animalNo;
-	private String animalHappenPlace;
-	private String animalKindCd;
-	private String animalHappenDt;
-	private String animalSexCd;
-	private String animalAge;
+	private int animalNo;					// 유기동물 번호
+	private String animalHappenPlace;		// 유기동물 발견장소
+	private String animalKindCd;			// 유기동물 종
+	private String animalHappenDt;			// 유기동물 발견날짜
+	private String animalSexCd;				// 유기동물 성별
+	private String animalAge;				// 유기동물 나이
 	public int getAnimalNo() {
 		return animalNo;
 	}
