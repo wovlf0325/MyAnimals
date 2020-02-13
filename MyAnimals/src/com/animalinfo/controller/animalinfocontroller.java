@@ -2,6 +2,8 @@ package com.animalinfo.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/animalinfocontroller")
+import com.animalinfo.dao.animalinfoDao;
+import com.animalinfo.dao.animalinfoDaoImpl;
+import com.animalinfo.dto.animalinfoDto;
+
+@WebServlet("/animalinfocontroller.do")
 public class animalinfocontroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,13 +29,25 @@ public class animalinfocontroller extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		System.out.println("컨트롤러 들어와씀");
 		String command = request.getParameter("command");
 		System.out.println("command : " + command);
+		animalinfoDao dao = new animalinfoDaoImpl();
 		if (command.equals("select")) {
+			System.out.println("ajax로 무엇이왔을까");
+			String sido = request.getParameter("sido");
+			String gugun = request.getParameter("gugun");
+
+			List<animalinfoDto> list = new ArrayList<>();
+			list = dao.selectAnimal(9854, sido, gugun);
+			request.setAttribute("list", list);
+
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			
+			dispatch("test.jsp", request, response);
+			
 			
 		}
-	
 	}
 
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response)

@@ -5,5 +5,6 @@ import java.util.List;
 import com.animalinfo.dto.animalinfoDto;
 
 public interface animalinfoDao {
-	public List<animalinfoDto> selectAnimal(int Page);
+	public List<animalinfoDto> selectAnimal(int total, String sido, String gugun);
+	
 }
