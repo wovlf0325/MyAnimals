@@ -9,7 +9,7 @@ import java.util.Map;
 public interface animalinfoDao {
 	public Map<String, String[]> selectAll() throws IOException;
 	public Map<String, String[]> selectLocation(String sido);
-	public Map<String, String[]> selectKindAll();
+	public Map<String, Integer> selectKindAll();
 	public Map<String, Integer> selectKindAnimal(String kind);
 	
 }

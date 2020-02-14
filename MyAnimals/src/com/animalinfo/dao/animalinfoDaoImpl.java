@@ -160,16 +160,13 @@ public class animalinfoDaoImpl implements animalinfoDao {
 	}
 
 	@Override
-	public Map<String, String[]> selectKindAll() {
-		String[] animal = { "개", "고양이", "기타" };
-		int[] index = { 0, 0, 0 };
-		String[] indexCount = new String[3];
-
+	public Map<String, Integer> selectKindAll() {
 		BufferedReader br = null;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
 		DocumentBuilder builder;
 		Document doc = null;
+		Map<String, Integer> map = new HashMap<>();
 		try {
 			String key = "ServiceKey=kq8LTv6iloXWHq9Ws0RpiSHKOiPP7yWgWS0LzU6MVbt9%2F%2Bfi1k%2B1b0j5H5SZ%2BryGctFPw5sUckfi3ZkVehwJgQ%3D%3D";
 			String http = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?";
@@ -201,9 +198,13 @@ public class animalinfoDaoImpl implements animalinfoDao {
 					Node node = child.item(j);
 					// xml데이터를 탐색하면서 원하는 값에 해당하는 데이터들을 dto담는다
 					if (node.getNodeName().equals("kindCd")) {
-						for (int k = 0; k < 3; k++) {
-							if (node.getTextContent().contains(animal[k])) {
-								index[k]++;
+						if (node.getNodeName().equals("kindCd")) {
+							String res[] = node.getTextContent().split(" ");
+							System.out.println(res[0]);
+							if(map.containsKey(res[0])==false) {
+								map.put(res[0],1);
+							}else {
+								map.put(res[0],map.get(res[0])+1);
 							}
 						}
 					}
@@ -213,12 +214,7 @@ public class animalinfoDaoImpl implements animalinfoDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		for (int i = 0; i < index.length; i++) {
-			indexCount[i] = Integer.toString(index[i]);
-		}
-		Map<String, String[]> map = new HashMap<>();
-		map.put("index", indexCount);
-		map.put("gugun", animal);
+		
 		return map;
 	}
 
@@ -234,7 +230,7 @@ public class animalinfoDaoImpl implements animalinfoDao {
 		try {
 			String key = "ServiceKey=kq8LTv6iloXWHq9Ws0RpiSHKOiPP7yWgWS0LzU6MVbt9%2F%2Bfi1k%2B1b0j5H5SZ%2BryGctFPw5sUckfi3ZkVehwJgQ%3D%3D";
 			String http = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?";
-			URL url = new URL(http + "upkind=" + upkind + "numOfRows=" + 10000 + "&" + key);
+			URL url = new URL(http + "upkind=" + upkind + "&numOfRows=" + 10000 + "&" + key);
 
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
@@ -264,10 +260,11 @@ public class animalinfoDaoImpl implements animalinfoDao {
 					// xml데이터를 탐색하면서 원하는 값에 해당하는 데이터들을 dto담는다
 					if (node.getNodeName().equals("kindCd")) {
 						String res[] = node.getTextContent().split(" ");
+						System.out.println(res[1]);
 						if(map.containsKey(res[1])==false) {
 							map.put(res[1],1);
 						}else {
-							map.put(res[1],map.get(res[1]));
+							map.put(res[1],map.get(res[1])+1);
 						}
 					}
 				}

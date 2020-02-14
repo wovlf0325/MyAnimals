@@ -30,10 +30,10 @@ public class AnimalInfoKindController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String kind = request.getParameter("kind");
 		animalinfoDao dao = new animalinfoDaoImpl();
-
+		System.out.println("controller kind : " + kind);
 		if (kind.equals("전체")) {
-			System.out.println("controller kind : " + kind);
-			Map<String, String[]> map = dao.selectKindAll();
+			
+			Map<String, Integer> map = dao.selectKindAll();
 			request.setAttribute("map", map);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -47,7 +47,21 @@ public class AnimalInfoKindController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else {
+			
 			Map<String, Integer> map = dao.selectKindAnimal(kind);
+			System.out.println(map.get("한국"));
+			request.setAttribute("map", map);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			String gson = new Gson().toJson(map);
+			try {
+				// ajax로 리턴해주는 부분
+				response.getWriter().write(gson);
+			} catch (JsonIOException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
