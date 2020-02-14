@@ -37,28 +37,7 @@ public class animalinfocontroller extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("command : " + command);
 		animalinfoDao dao = new animalinfoDaoImpl();
-		if (command.equals("selectAll")) {
-			System.out.println("ajax로 무엇이왔을까");
-			String sido = request.getParameter("sido");
-			String gugun = request.getParameter("gugun");
-
-			List<animalinfoDto> list = new ArrayList<>();
-			list = dao.selectAnimal(9854, sido, gugun);
-			request.setAttribute("list", list);
-
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			
-			String gson = new Gson().toJson(list);
-			try {
-                //ajax로 리턴해주는 부분
-                response.getWriter().write(gson);
-            } catch (JsonIOException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-		}else if(command.equals("select")) {
+		if(command.equals("select")) {
 			String sido = request.getParameter("sido");
 			if(sido.equals("전국")) {
 				Map<String, String[]> map  = dao.selectAll();
