@@ -2,8 +2,11 @@ package com.animalinfo.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +37,7 @@ public class animalinfocontroller extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("command : " + command);
 		animalinfoDao dao = new animalinfoDaoImpl();
-		if (command.equals("select")) {
+		if (command.equals("selectAll")) {
 			System.out.println("ajax로 무엇이왔을까");
 			String sido = request.getParameter("sido");
 			String gugun = request.getParameter("gugun");
@@ -55,6 +58,38 @@ public class animalinfocontroller extends HttpServlet {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+		}else if(command.equals("select")) {
+			String sido = request.getParameter("sido");
+			if(sido.equals("전국")) {
+				Map<String, String[]> map  = dao.selectAll();
+				request.setAttribute("map", map);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				String gson = new Gson().toJson(map);
+				try {
+	                //ajax로 리턴해주는 부분
+	                response.getWriter().write(gson);
+	            } catch (JsonIOException e) {
+	                e.printStackTrace();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+			}else {
+				System.out.println("controller sido : "+sido);
+				Map<String, String[]> map = dao.selectLocation(sido);
+				request.setAttribute("map", map);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				String gson = new Gson().toJson(map);
+				try {
+	                //ajax로 리턴해주는 부분
+	                response.getWriter().write(gson);
+	            } catch (JsonIOException e) {
+	                e.printStackTrace();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+			}
 			
 			
 		}
