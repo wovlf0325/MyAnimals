@@ -3,18 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	version="4.0">
-	<display-name>MyAnimals</display-name>
-	
 
-	<servlet>
-		<servlet-name>animal</servlet-name>
-		<servlet-class>com.animalinfo.controller.animalinfocontroller</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>animal</servlet-name>
-		<url-pattern>/animalinfocontroller</url-pattern>
-	</servlet-mapping>
 	
 
 </web-app>

@@ -7,22 +7,45 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
-<%@ include file="./form/selectlocation.jsp"%>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <body>
+	<%@ include file="./getAnimalData.jsp"%>
+	<input type="button" value="지역" id="selectLocationButton">
+	<input type="button" value="종" id="selectKindButton">
+	<input type="button" value="상태" id="selectStateButton" onclick="getData('state')">
+	<br>
+	<script type="text/javascript">
+		$("#selectLocationButton").click(function () {
+			$("#area").css("display", "");
+			$("#animalKind").css("display", "none");
+		})
+		$("#selectKindButton").click(function () {
+			$("#animalKind").css("display", "");
+			$("#area").css("display", "none");
+		})
+		$('#selectStateButton').click(function () {
+			$("#animalKind").css("display", "none");
+			$("#area").css("display", "none");
+		})
+	</script>
+	<%@ include file="./form/selectlocation.jsp"%>
+	<%@ include file="./searchSelect.jsp"%>
+	
+
 	<canvas id="myChart" style="width: 500px; height: 300px;"></canvas>
 	<script type="text/javascript">
 
-		$("#selectlocation").click(function () {
+		$('document').ready(function () {
 			var getgugun = new Array();
 			var locationCount = new Array();
 			$.ajax({
-				url: "animalinfocontroller.do?command=select",
+				url: "location.do",
 				type: "POST",
 				dataType: "json",
 				data: {
-					'sido': $('#sido').val(),
-					'gugun': $('#gugun').val()
+					'sido': '부산광역시'
 				},
 				success: function (data) {
 					$.each(data, function (key, val) {
@@ -37,7 +60,6 @@
 								console.log(locationCount[i]);
 							}
 						}
-
 					});
 					$('#myChart').replaceWith('<canvas id="myChart" style="width: 500px; height: 300px;"></canvas>');
 					var ctx = document.getElementById("myChart").getContext('2d');
@@ -46,7 +68,7 @@
 						data: {
 							labels: getgugun,
 							datasets: [{
-								label: '#',
+								label: $('#sido').val(),
 								data: locationCount,
 								backgroundColor: [
 									'rgba(255, 99, 132, 0.2)',
@@ -132,11 +154,9 @@
 				error: function (request, status, error) {
 				}
 			});
-
 		})
-
 	</script>
-
+</body>
 </body>
 
 </html>

@@ -165,8 +165,16 @@ public class LocationData {
 		}else {
 			return null;
 		}
-		
-		
+	}
+	
+	public static int getKindUp(String kind) {
+		if(kind.equals("개")) {
+			return 417000; 
+		}else if(kind.equals("고양이")) {
+			return 422400;
+		}else {
+			return 429900;
+		}
 		
 	}
 }

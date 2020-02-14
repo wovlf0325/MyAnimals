@@ -121,9 +121,6 @@
 
 				});
 	</script>
-	<select name="sido" id="sido"></select>
-	<select name="gugun" id="gugun"></select>
-	<input type="button" value="검색" id="selectlocation">
 </body>
 
 
