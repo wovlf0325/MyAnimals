@@ -32,7 +32,7 @@ public class AnimalInfoLocationController extends HttpServlet {
 
 		String sido = request.getParameter("sido");
 		if (sido.equals("전국")) {
-			Map<String, String[]> map = dao.selectAll();
+			Map<String, Integer> map = dao.selectLoactionAll();
 			request.setAttribute("map", map);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -47,7 +47,7 @@ public class AnimalInfoLocationController extends HttpServlet {
 			}
 		} else {
 			System.out.println("controller sido : " + sido);
-			Map<String, String[]> map = dao.selectLocation(sido);
+			Map<String, Integer> map = dao.selectLocation(sido);
 			System.out.println("controller dao방문후복귀 with : " + map.get("index"));
 			request.setAttribute("map", map);
 			response.setContentType("application/json");

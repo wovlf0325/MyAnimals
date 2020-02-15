@@ -32,8 +32,20 @@ public class AnimalInfoStateController extends HttpServlet {
 
 		String state = request.getParameter("state");
 
-		if (state.equals("상태")) {
-
+		System.out.println("controller state : " + state);
+		Map<String, Integer> map = dao.selectState();
+		System.out.println("controller dao방문후복귀 with : " + map.get("index"));
+		request.setAttribute("map", map);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		String gson = new Gson().toJson(map);
+		try {
+			// ajax로 리턴해주는 부분
+			response.getWriter().write(gson);
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}

@@ -32,14 +32,15 @@
 	</script>
 	<%@ include file="./form/selectlocation.jsp"%>
 	<%@ include file="./searchSelect.jsp"%>
-	
 
-	<canvas id="myChart" style="width: 500px; height: 300px;"></canvas>
+
+	<canvas id="myChart" style="width: 1000px; height: 500px;"></canvas>
 	<script type="text/javascript">
 
 		$('document').ready(function () {
-			var getgugun = new Array();
-			var locationCount = new Array();
+			var name = new Array();
+			var value = new Array();
+			var index = 0;
 			$.ajax({
 				url: "location.do",
 				type: "POST",
@@ -49,27 +50,19 @@
 				},
 				success: function (data) {
 					$.each(data, function (key, val) {
-						if (key === 'gugun') {
-							for (var i = 0; i < val.length; i++) {
-								getgugun[i] = val[i];
-								console.log(getgugun[i]);
-							}
-						} else if (key == 'index') {
-							for (var i = 0; i < val.length; i++) {
-								locationCount[i] = val[i];
-								console.log(locationCount[i]);
-							}
-						}
+						name[index] = key;
+						value[index] = val;
+						index++;
 					});
-					$('#myChart').replaceWith('<canvas id="myChart" style="width: 500px; height: 300px;"></canvas>');
+					$('#myChart').replaceWith('<canvas id="myChart" style="width: 1000px; height: 500px;"></canvas>');
 					var ctx = document.getElementById("myChart").getContext('2d');
 					var myChart = new Chart(ctx, {
 						type: 'bar',
 						data: {
-							labels: getgugun,
+							labels: name,
 							datasets: [{
 								label: $('#sido').val(),
-								data: locationCount,
+								data: value,
 								backgroundColor: [
 									'rgba(255, 99, 132, 0.2)',
 									'rgba(54, 162, 235, 0.2)',
@@ -140,6 +133,7 @@
 							}]
 						},
 						options: {
+							responsive: false,
 							maintainAspectRatio: false, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
 							scales: {
 								yAxes: [{

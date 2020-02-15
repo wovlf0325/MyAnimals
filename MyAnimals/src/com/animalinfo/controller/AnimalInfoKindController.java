@@ -32,7 +32,6 @@ public class AnimalInfoKindController extends HttpServlet {
 		animalinfoDao dao = new animalinfoDaoImpl();
 		System.out.println("controller kind : " + kind);
 		if (kind.equals("전체")) {
-			
 			Map<String, Integer> map = dao.selectKindAll();
 			request.setAttribute("map", map);
 			response.setContentType("application/json");
@@ -47,9 +46,7 @@ public class AnimalInfoKindController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else {
-			
 			Map<String, Integer> map = dao.selectKindAnimal(kind);
-			System.out.println(map.get("한국"));
 			request.setAttribute("map", map);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");

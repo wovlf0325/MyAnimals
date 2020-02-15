@@ -28,14 +28,14 @@ function getData(x){
 				value[index] = val;
 				index++;				
 			});
-			$('#myChart').replaceWith('<canvas id="myChart" style="width: 500px; height: 300px;"></canvas>');
+			$('#myChart').replaceWith('<canvas id="myChart" style="width: 1000px; height: 500px;"></canvas>');
 			var ctx = document.getElementById("myChart").getContext('2d');
 			var myChart = new Chart(ctx, {
 				type: 'bar',
 				data: {
 					labels: name,
 					datasets: [{
-						label: $('#sido').val(),
+						label: x,
 						data: value,
 						backgroundColor: [
 							'rgba(255, 99, 132, 0.2)',
@@ -107,6 +107,7 @@ function getData(x){
 					}]
 				},
 				options: {
+					responsive: false,
 					maintainAspectRatio: false, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
 					scales: {
 						yAxes: [{
