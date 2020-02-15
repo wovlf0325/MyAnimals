@@ -9,6 +9,7 @@
 </head>
 
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
 <body>
 	<%@ include file="./getAnimalData.jsp"%>
@@ -30,7 +31,6 @@
 			$("#area").css("display", "none");
 		})
 	</script>
-	<%@ include file="./form/selectlocation.jsp"%>
 	<%@ include file="./searchSelect.jsp"%>
 
 
