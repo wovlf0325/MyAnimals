@@ -1,7 +1,5 @@
 package com.animalinfo.dto;
 
-
-
 public class animalinfoDto {
 	private int animalNo;					// 유기동물 번호
 	private String animalHappenPlace;		// 유기동물 발견장소

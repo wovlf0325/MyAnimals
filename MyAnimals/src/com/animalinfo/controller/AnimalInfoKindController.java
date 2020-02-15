@@ -60,6 +60,5 @@ public class AnimalInfoKindController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
 	}
 }

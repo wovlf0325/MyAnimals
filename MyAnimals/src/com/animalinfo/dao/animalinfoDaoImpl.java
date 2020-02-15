@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+
 public class animalinfoDaoImpl implements animalinfoDao {
 	@Override
 	public Map<String, Integer> selectLoactionAll() {
@@ -28,6 +29,7 @@ public class animalinfoDaoImpl implements animalinfoDao {
 
 		BufferedReader br = null;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		
 		factory.setNamespaceAware(true);
 		DocumentBuilder builder;
 		Document doc = null;
@@ -35,9 +37,7 @@ public class animalinfoDaoImpl implements animalinfoDao {
 			String key = "ServiceKey=kq8LTv6iloXWHq9Ws0RpiSHKOiPP7yWgWS0LzU6MVbt9%2F%2Bfi1k%2B1b0j5H5SZ%2BryGctFPw5sUckfi3ZkVehwJgQ%3D%3D";
 			String http = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?";
 			URL url = new URL(http + "numOfRows=" + 9854 + "&" + key);
-
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-
 			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
 			String result = "";
 			String line;
@@ -45,7 +45,6 @@ public class animalinfoDaoImpl implements animalinfoDao {
 			while (((line = br.readLine()) != null)) {
 				result += line.trim();
 			}
-
 			InputSource is = new InputSource(new StringReader(result));
 
 			builder = factory.newDocumentBuilder();

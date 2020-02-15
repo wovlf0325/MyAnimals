@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div id="area">
 		<select name="sido" id="sido">
 			<option>전국</option>

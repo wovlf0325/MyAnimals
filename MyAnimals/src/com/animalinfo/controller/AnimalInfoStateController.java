@@ -27,11 +27,9 @@ public class AnimalInfoStateController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
 		animalinfoDao dao = new animalinfoDaoImpl();
 
 		String state = request.getParameter("state");
-
 		System.out.println("controller state : " + state);
 		Map<String, Integer> map = dao.selectState();
 		System.out.println("controller dao방문후복귀 with : " + map.get("index"));
