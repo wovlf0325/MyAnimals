@@ -1,8 +1,7 @@
 package com.plan.dto;
 
-import com.member.dto.MemberDto;
 
-public class planDto extends MemberDto{
+public class planDto {
 	
 	private int center_seq;
 	private String member_id;
