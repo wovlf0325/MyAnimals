@@ -1,4 +1,4 @@
-package com.member.db;
+package com.mybatis.db;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -12,7 +12,7 @@ public class SqlMapConfig {
 	private SqlSessionFactory sqlSessionFactory;
 	
 	public SqlSessionFactory getSqlSessionFactory() {
-		String resource = "com/member/db/config.xml";
+		String resource = "com/mybatis/db/config.xml";
 		
 		Reader reader;
 		try {

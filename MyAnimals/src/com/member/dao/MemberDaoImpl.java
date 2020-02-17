@@ -2,8 +2,8 @@ package com.member.dao;
 
 import java.util.List;
 
-import com.member.db.SqlMapConfig;
 import com.member.dto.MemberDto;
+import com.mybatis.db.SqlMapConfig;
 
 public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 

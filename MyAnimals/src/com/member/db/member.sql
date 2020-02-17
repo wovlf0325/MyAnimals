@@ -18,5 +18,8 @@ CREATE TABLE MEMBER(
 );
 
 INSERT INTO MEMBER VALUES('ADMIN', '1234', '관리자', '920325', 'zerg_kid@naver.com', 'M', '경기도 수원시 권선구 탑동', 'ADMIN', 'N', SYSDATE, '010-1234-5678', '관리자');
+INSERT INTO MEMBER VALUES('TEST', 'TEST', 'TEST', '200228', 'test@naver.com', 'F', '서울시 강남구 역삼동', 'USER', 'N', SYSDATE, '010-9876-5432', 'TEST');
+
+INSERT INTO MEMBER VALUES('TEST5', 'TEST5', 'TEST5', '200228', 'test@naver.com', 'F', '서울시 강남구 역삼동', 'USER', 'N', SYSDATE, '010-9876-5432', 'TEST5');
 
 SELECT * FROM MEMBER;
