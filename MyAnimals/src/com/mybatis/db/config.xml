@@ -2,11 +2,13 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
-	<properties resource="com/member/db/db.properties"></properties>
+	<properties resource="com/mybatis/db/db.properties"></properties>
 	
 	<typeAliases>
 		<typeAlias type="com.member.dto.MemberDto" alias="memberDto"/>
+		<typeAlias type="com.letter.dto.LetterDto" alias="letterDto"/>
 	</typeAliases>
+	
 
 	  <environments default="development">
 	    <environment id="development">
@@ -19,8 +21,13 @@
 	      </dataSource>
 	    </environment>
 	  </environments>
+	  
 	  <mappers>
 	    <mapper resource="com/member/db/mapper.xml"/>
+<<<<<<< HEAD:MyAnimals/src/com/member/db/config.xml
+=======
+	    <mapper resource="com/letter/db/mapper.xml"/>
+>>>>>>> d59d556ba8a1d8c90d64d2e4ebc97e2984277fea:MyAnimals/src/com/mybatis/db/config.xml
 	  </mappers>
 
 </configuration>

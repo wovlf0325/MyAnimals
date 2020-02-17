@@ -40,3 +40,4 @@ target/
 
 # End of https://www.gitignore.io/api/java,java-web,code-java
 #파이팅
+/build/
