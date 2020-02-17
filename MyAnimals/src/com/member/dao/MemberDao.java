@@ -14,7 +14,7 @@ public interface MemberDao {
 	// 센처장 검색
 	public List<MemberDto> selectCenter();
 	// 등급변경
-	public int updateRole(String id);
+	public int updateRole(String id,String role);
 	
 	// 회원 메뉴
 	// 내 정보
@@ -33,5 +33,5 @@ public interface MemberDao {
 	public MemberDto findId(String email);
 	// 비밀번호 찾기
 	public MemberDto findPw(String id, String email);
-
+    
 }

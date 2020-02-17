@@ -7,73 +7,72 @@ import com.member.dao.MemberDaoImpl;
 import com.member.dto.MemberDto;
 
 public class MemberBizImpl implements MemberBiz {
-	
-	private MemberDao dao = new MemberDaoImpl();
-
+   private MemberDao dao = new MemberDaoImpl();
 	@Override
 	public List<MemberDto> selectList() {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.selectList();
 	}
 
 	@Override
 	public List<MemberDto> selectUser() {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.selectUser();
 	}
 
 	@Override
 	public List<MemberDto> selectCenter() {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.selectCenter();
 	}
+	
 
 	@Override
-	public int updateRole(String id) {
+	public int updateRole(String id,String role) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateRole(id,role);
 	}
 
 	@Override
 	public MemberDto selectOne(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.selectOne(id);
 	}
 
 	@Override
 	public int updateInfo(MemberDto dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateInfo(dto);
 	}
 
 	@Override
 	public int delete(String id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(id);
 	}
 
 	@Override
 	public MemberDto login(String id, String pw) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.login(id, pw);
 	}
 
 	@Override
 	public int regist(MemberDto dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.regist(dto);
 	}
 
 	@Override
 	public MemberDto findId(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findId(email);
 	}
 
 	@Override
 	public MemberDto findPw(String id, String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findPw(id, email);
 	}
 
 }

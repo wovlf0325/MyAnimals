@@ -20,7 +20,7 @@
 	    </environment>
 	  </environments>
 	  <mappers>
-	    <mapper resource="org/mybatis/example/BlogMapper.xml"/>
+	    <mapper resource="com/member/db/mapper.xml"/>
 	  </mappers>
 
 </configuration>
