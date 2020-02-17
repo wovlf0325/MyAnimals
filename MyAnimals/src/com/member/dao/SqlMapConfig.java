@@ -1,7 +1,3 @@
-<<<<<<< HEAD:MyAnimals/src/com/member/dao/SqlMapConfig.java
-=======
-package com.mybatis.db;
->>>>>>> d59d556ba8a1d8c90d64d2e4ebc97e2984277fea:MyAnimals/src/com/mybatis/db/SqlMapConfig.java
 
 package com.member.dao;
 import java.io.IOException;
