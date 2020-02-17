@@ -52,7 +52,7 @@ public class MemberServlet extends HttpServlet {
 					session.setMaxInactiveInterval(10*60);
 					
 					if(dto.getMember_role().equals("ADMIN")) {
-						jsResponse("환영한다 닝겐이여"+id, "/Member/adminmain.jsp", response);
+						jsResponse("환영한다 닝겐이여"+id, "Member/adminmain.jsp", response);
 					}else if(dto.getMember_role().equals("USER")){
 						jsResponse("환영한다 닝겐이여"+id, "Member/loginmain.jsp", response);
 					}else if(dto.getMember_role().equals("CENTER")) {

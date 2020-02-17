@@ -165,22 +165,16 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 		map.put("id",id);
 		map.put("pw", pw);
 		
-	
-		
 		try {
 			session = getSqlSessionFactory().openSession();
 			dto = session.selectOne(namespace+"login",map);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			
+			e.printStackTrace();
 		}finally {
 			session.close();
 		}
-		System.out.println(dto.getMember_id());
-		System.out.println(dto.getMember_pw());
-		System.out.println(dto.getMember_nickname());
-		System.out.println(dto.getMember_role());	
 		return dto;
 	}
 	// 회원가입
