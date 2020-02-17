@@ -1,6 +1,6 @@
 package com.animalinfo.dto;
 
-public class animalinfoDto {
+public class AnimalinfoDto {
 	private int animalNo;					// 유기동물 번호
 	private String animalHappenPlace;		// 유기동물 발견장소
 	private String animalKindCd;			// 유기동물 종
@@ -43,7 +43,7 @@ public class animalinfoDto {
 	public void setAnimalAge(String animalAge) {
 		this.animalAge = animalAge;
 	}
-	public animalinfoDto(int animalNo, String animalHappenPlace, String animalKindCd, String animalHappenDt,
+	public AnimalinfoDto(int animalNo, String animalHappenPlace, String animalKindCd, String animalHappenDt,
 			String animalSexCd, String animalAge) {
 		super();
 		this.animalNo = animalNo;
@@ -53,7 +53,7 @@ public class animalinfoDto {
 		this.animalSexCd = animalSexCd;
 		this.animalAge = animalAge;
 	}
-	public animalinfoDto() {
+	public AnimalinfoDto() {
 		
 	}
 

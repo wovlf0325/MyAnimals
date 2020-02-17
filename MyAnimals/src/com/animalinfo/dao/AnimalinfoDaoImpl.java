@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 
-public class animalinfoDaoImpl implements animalinfoDao {
+public class AnimalinfoDaoImpl implements AnimalinfoDao {
 	@Override
 	public Map<String, Integer> selectLoactionAll() {
 

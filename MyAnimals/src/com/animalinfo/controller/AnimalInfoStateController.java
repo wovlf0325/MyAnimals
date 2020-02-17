@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.animalinfo.dao.animalinfoDao;
-import com.animalinfo.dao.animalinfoDaoImpl;
+import com.animalinfo.dao.AnimalinfoDao;
+import com.animalinfo.dao.AnimalinfoDaoImpl;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
@@ -27,7 +27,7 @@ public class AnimalInfoStateController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		animalinfoDao dao = new animalinfoDaoImpl();
+		AnimalinfoDao dao = new AnimalinfoDaoImpl();
 
 		String state = request.getParameter("state");
 		System.out.println("controller state : " + state);
