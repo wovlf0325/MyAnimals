@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyp">
+
+	<select id="selectList" parameterType="int" resultType="replyDto">
+	SELECT * FROM REPLY ORDER BY REPLY_SEQ DESC
+	</select>
+	<insert id="insert" parameterType="replyDto">
+	INSERT INTO REPLY VALUES(REPLY_SEQSEQ.NEXTVAL,#{board_seq},#{member_id},#{reply_content},SYSDATE)
+	</insert>
+
+</mapper>
