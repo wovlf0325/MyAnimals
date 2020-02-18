@@ -80,7 +80,7 @@ function idChkConfirm(){
          <tr>
             <td colspan="2">
                <input type="submit" value="회원가입">
-               <input type="button" value="취소" onclick="location.href='loginmain.jsp'">
+               <input type="button" value="취소" onclick="location.href='/MyAnimals/loginmain.jsp'">
             </td>
          </tr>
          
