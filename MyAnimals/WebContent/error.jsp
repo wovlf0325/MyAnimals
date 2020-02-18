@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<h1 style="color: red; font-weight: bold;" align="center">응 아니야</h1>
+	<h1 style="color: red; font-weight: bold;" align="center">에러났다</h1>
 
 </body>
 </html>

@@ -63,29 +63,16 @@ public class MemberBizImpl implements MemberBiz {
 		return dao.regist(dto);
 	}
 
-
 	@Override
-	public int findPw(String id, String email) {
-		// TODO Auto-generated method stub
-		return dao.findPw(id, email);
-	}
-
-	@Override
-	public int changePw(String id, String pw) {
-		// TODO Auto-generated method stub
-		return dao.changePw(id, pw);
-	}
-
-	@Override
-	public int findId(String email) {
+	public MemberDto findId(String email) {
 		// TODO Auto-generated method stub
 		return dao.findId(email);
 	}
 
 	@Override
-	public MemberDto getId(String email) {
+	public MemberDto findPw(String id, String email) {
 		// TODO Auto-generated method stub
-		return dao.getId(email);
+		return dao.findPw(id, email);
 	}
 
 }

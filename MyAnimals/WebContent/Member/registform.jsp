@@ -16,15 +16,6 @@ function idChkConfirm(){
 	   }
 	 }
 
-function emailChk(){
-	var doc = document.getElementsByName("email")[0];
-	if(doc.value.trim()==""||doc.value==null){
-		alert("이메일주소를 입력해 주세요");
-	}else{
-		open("/MyAnimals/emailchk.do?command=emailchk&email="+doc.value,"","width=600,height=400");
-	}
-}
-
 
 </script>
 </head>
@@ -75,7 +66,7 @@ function emailChk(){
             <th>이메일</th>
             <td>
                <input type="text" name="email" required="required" onclick="idChkConfirm()">
-               <input type="button" value="이메일확인" onclick="emailChk()">   
+               <input type="button" name="emailChk" value="이메일확인" required="required" onclick="">   
             </td>
          </tr>
          <tr>
@@ -88,8 +79,8 @@ function emailChk(){
          </tr>
          <tr>
             <td colspan="2">
-               <input type="submit" name="회원가입" style="display: none" value="회원가입">
-               <input type="button" value="취소" onclick="location.href='MyAnimals/loginmain.jsp'">
+               <input type="submit" value="회원가입">
+               <input type="button" value="취소" onclick="location.href='loginmain.jsp'">
             </td>
          </tr>
          

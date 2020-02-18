@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import com.mybatis.db.SqlMapConfig;
 
 import com.member.dto.MemberDto;
 
@@ -200,88 +201,15 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 	}
 	// 아이디 찾기
 	@Override
-	public int findId(String email) {
-		int res = 0;
-		System.out.println(email);
-		SqlSession session = null;
-		try {
-			session = getSqlSessionFactory().openSession();
-			res = session.selectOne(namespace + "selectOneFindId",email);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("[error] : selectOneFindId");
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		
-		return res;
+	public MemberDto findId(String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	// 비밀번호 찾기
 	@Override
-	public int findPw(String id, String email) {
-		int res = 0;
-		
-		Map<String, String> map = new HashMap<>();
-		map.put("id", id);
-		map.put("email", email);
-		SqlSession session = null;
-		try {
-			session = getSqlSessionFactory().openSession();
-			res = session.selectOne(namespace + "selectOneFindPw",map);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("[error] : selectOneFindPw");
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		
-		return res;
-		
+	public MemberDto findPw(String id, String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	// 비밀번호 변경
-	@Override
-	public int changePw(String id, String pw) {
-		int res = 0;
-		
-		Map<String, String> map = new HashMap<>();
-		map.put("id", id);
-		map.put("pw", pw);
-		System.out.println("임시비번 : "+pw);
-		SqlSession session = null;
-		try {
-			session = getSqlSessionFactory().openSession();
-			res = session.update(namespace + "changePw",map);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("[error] : changePw");
-			e.printStackTrace();
-		} finally {
-			session.commit();
-			session.close();
-		}
-		return res;
-	}
-	// 아이디 가져오기
-	@Override
-	public MemberDto getId(String email) {
-		MemberDto dto = null;
-		SqlSession session = null;
-		try {
-			session = getSqlSessionFactory().openSession();
-			dto = session.selectOne(namespace + "getId",email);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("[error] : getId");
-			e.printStackTrace();
-		} finally {
-			session.commit();
-			session.close();
-		}
-		return dto;
-	}
-	
 
 }

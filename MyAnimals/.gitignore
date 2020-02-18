@@ -1,4 +1,4 @@
-
+﻿
 # Created by https://www.gitignore.io/api/java,java-web,code-java
 # Edit at https://www.gitignore.io/?templates=java,java-web,code-java
 
@@ -23,7 +23,6 @@ factoryConfiguration.json
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear

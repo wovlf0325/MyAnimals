@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.plan.db.SqlMapConfig;
+import com.mybatis.db.SqlMapConfig;
 import com.plan.dto.planDto;
 
 public class planDaoImpl extends SqlMapConfig implements planDao {
