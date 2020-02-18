@@ -22,6 +22,7 @@ import org.xml.sax.InputSource;
 
 
 public class AnimalinfoDaoImpl implements AnimalinfoDao {
+	// 시도 별 유기동물수
 	@Override
 	public Map<String, Integer> selectLoactionAll() {
 
@@ -77,7 +78,7 @@ public class AnimalinfoDaoImpl implements AnimalinfoDao {
 		}
 		return map;
 	}
-
+	// 구군 별 유기동물 수
 	@Override
 	public Map<String, Integer> selectLocation(String sido) {
 
@@ -133,7 +134,7 @@ public class AnimalinfoDaoImpl implements AnimalinfoDao {
 		}
 		return map;
 	}
-
+	// 종 별 유기동물 수
 	@Override
 	public Map<String, Integer> selectKindAll() {
 		BufferedReader br = null;
@@ -193,6 +194,7 @@ public class AnimalinfoDaoImpl implements AnimalinfoDao {
 		return map;
 	}
 
+	// 고양이 / 개 / 기타 별 유기동물 수
 	@Override
 	public Map<String, Integer> selectKindAnimal(String kind) {
 		int upkind = LocationData.getKindUp(kind);
@@ -251,6 +253,7 @@ public class AnimalinfoDaoImpl implements AnimalinfoDao {
 		return map;
 	}
 
+	// 유기 상태 별 동물 수
 	@Override
 	public Map<String, Integer> selectState() {
 		Map<String, Integer> map = new HashMap<>();
