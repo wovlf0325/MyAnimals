@@ -16,6 +16,7 @@
 	      <td>
 	       	<input type="button" value="로그인" onclick="location.href='/MyAnimals/member.do?command=loginform'">
 	       	<input type="button" value="회원가입" onclick="location.href='/MyAnimals/member.do?command=registselectres'">
+	       	<input type="button" value="아이디/비밀번호 찾기" onclick="location.href='/MyAnimals/emailchk.do?command=forgot'">
 	      </td>
 	   </tr>
       </c:when>
