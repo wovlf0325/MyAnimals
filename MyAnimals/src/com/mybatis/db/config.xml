@@ -2,10 +2,12 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
+	<properties resource="com/mybatis/db/db.properties"></properties>
+	
 	<typeAliases>
-		<typeAlias type="com.plan.dto.planDto" alias="planDto"/>
 		<typeAlias type="com.member.dto.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.letter.dto.LetterDto" alias="letterDto"/>
+		<typeAlias type="com.plan.dto.planDto" alias="planDto"/>
 	</typeAliases>
 	
 
@@ -22,9 +24,9 @@
 	  </environments>
 	  
 	  <mappers>
-		<mapper resource="com/plan/db/mapper.xml"/>
 	    <mapper resource="com/member/db/mapper.xml"/>
 	    <mapper resource="com/letter/db/mapper.xml"/>
+	    <mapper resource="com/plan/db/mapper.xml"/>
 	  </mappers>
 
 </configuration>

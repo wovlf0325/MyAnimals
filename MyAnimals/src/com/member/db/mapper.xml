@@ -46,25 +46,4 @@
 	<update id="delete" parameterType="String">
 	   UPDATE MEMBER SET MEMBER_DELFLAG = 'Y' WHERE MEMBER_ID = #{member_id}
 	</update>
-	
-	<!-- 비밀번호 찾기 -->
-	<select id="selectOneFindPw" parameterType="map" resultType="int">
-		select * from member where member_id = #{id} and member_email = #{email}
-	</select>
-	
-	
-	<!-- 비밀번호 변경 -->
-	<update id="changePw" parameterType="map">
-		update member set member_pw = #{pw} where member_id = #{id}
-	</update>
-	
-	
-	<!-- 아이디 찾기 -->
-	<select id="selectOneFindPw" parameterType="String" resultType="int">
-		select * from member where member_id = #{id}
-	</select>
-	<!-- 아이디 가젹오기 -->
-	<select id="getId" parameterType="String" resultType="memberDto">
-		select * from member where member_email = #{email}
-	</select>
 </mapper>

@@ -31,16 +31,9 @@ public interface MemberBiz {
 	// 회원가입
 	public int regist(MemberDto dto);
 	// 아이디 찾기
-	public int findId(String email);
+	public MemberDto findId(String email);
 	// 비밀번호 찾기
-	public int findPw(String id, String email);
-	// 비밀번호 변경
-	public int changePw(String id, String pw);
-	
-	public MemberDto getId(String email);
-	
-	
-	
-	
+	public MemberDto findPw(String id, String email);
+
 
 }
