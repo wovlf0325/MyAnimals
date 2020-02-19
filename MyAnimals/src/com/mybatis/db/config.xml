@@ -7,6 +7,7 @@
 	<typeAliases>
 		<typeAlias type="com.member.dto.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.letter.dto.LetterDto" alias="letterDto"/>
+		<typeAlias type="com.plan.dto.planDto" alias="planDto"/>
 	</typeAliases>
 	
 
@@ -25,6 +26,10 @@
 	  <mappers>
 	    <mapper resource="com/member/db/mapper.xml"/>
 	    <mapper resource="com/letter/db/mapper.xml"/>
+<<<<<<< HEAD
+=======
+	    <mapper resource="com/plan/db/mapper.xml"/>
+>>>>>>> 85b6f79a47ef685c68fc9315c252b2a20f8df44f
 	  </mappers>
 
 </configuration>
