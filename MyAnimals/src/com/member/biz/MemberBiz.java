@@ -34,6 +34,14 @@ public interface MemberBiz {
 	public MemberDto findId(String email);
 	// 비밀번호 찾기
 	public MemberDto findPw(String id, String email);
+	
+	// 중복체크
+	// 아이디
+	public MemberDto idChk(String id);
+	// 닉네임
+	public MemberDto nicknameChk(String nickname);
+	// 이메일
+	public MemberDto emailChk(String email);
 
 
 }

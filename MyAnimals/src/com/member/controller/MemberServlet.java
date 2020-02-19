@@ -271,6 +271,23 @@ public class MemberServlet extends HttpServlet {
 		}else if(command.equals("logout")) {
 			session.invalidate();
 			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
+			
+		} else if(command.equals("idChk")) {
+			String id = request.getParameter("id");
+			MemberDto dto = biz.idChk(id);
+			JSONObject obj = new JSONObject();
+			if(dto == null || dto.getId().equals(null) || dto.getId() == null) {
+				obj.put("idchk", "false");				
+			} else if(dto.getId() == id || dto.getId().equals(id))  {
+				obj.put("idchk", "true");
+			}
+			
+			String res = obj.toJSONString();
+			System.out.println("servlet에서 만들어짐" + res);
+			
+			PrintWriter out = response.getWriter();
+			out.print(res);
+			
 		}
 		
 		

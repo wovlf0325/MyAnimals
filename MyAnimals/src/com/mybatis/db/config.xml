@@ -24,10 +24,7 @@
 	  
 	  <mappers>
 	    <mapper resource="com/member/db/mapper.xml"/>
-<<<<<<< HEAD:MyAnimals/src/com/member/db/config.xml
-=======
 	    <mapper resource="com/letter/db/mapper.xml"/>
->>>>>>> d59d556ba8a1d8c90d64d2e4ebc97e2984277fea:MyAnimals/src/com/mybatis/db/config.xml
 	  </mappers>
 
 </configuration>

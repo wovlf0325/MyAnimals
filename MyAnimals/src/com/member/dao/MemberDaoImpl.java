@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.member.dto.MemberDto;
+import com.mybatis.db.SqlMapConfig;
 
 public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 	
