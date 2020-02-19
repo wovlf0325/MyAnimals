@@ -1,4 +1,4 @@
-
+﻿
 # Created by https://www.gitignore.io/api/java,java-web,code-java
 # Edit at https://www.gitignore.io/?templates=java,java-web,code-java
 
@@ -6,7 +6,6 @@
 # Language Support for Java(TM) by Red Hat extension for Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=redhat.java
 
 .project
-.classpath
 factoryConfiguration.json
 
 ### Java ###
@@ -23,7 +22,6 @@ factoryConfiguration.json
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
