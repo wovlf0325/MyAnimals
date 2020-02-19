@@ -29,9 +29,15 @@ public interface MemberDao {
 	public MemberDto login(String id, String pw);
 	// 회원가입
 	public int regist(MemberDto dto);
+
 	// 아이디 찾기
-	public MemberDto findId(String email);
+	public int findId(String email);
 	// 비밀번호 찾기
-	public MemberDto findPw(String id, String email);
+	public int findPw(String id, String email);
+	// 비밀번호 변경
+	public int changePw(String id, String pw);
+	
+	public MemberDto getId(String email);
+
     
 }
