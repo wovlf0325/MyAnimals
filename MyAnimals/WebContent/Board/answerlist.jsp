@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@page import="com.board.dto.PagingDto"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -12,6 +12,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+PagingDto pdto = (PagingDto)request.getAttribute("pdto");
+
+int pagegroup = (int)Math.ceil((double)pdto.getPage()/pdto.getPagescale());
+int startpage = pdto.getPagescale()*(pagegroup-1)+1;
+int endpage=pdto.getPagescale()*pagegroup;
+int totalpage = pdto.getTotalpage();
+
+%>
 <body>
 
 	<h1>글 목록</h1>
@@ -80,6 +89,23 @@
 			</td>
 		</tr>
 	</table>
+	<div align="center">
+	<%
+	if(pagegroup>1){
+	%>
+	<a href="answer.do?commmand=list&page=<%=startpage-1%>">&lt;&lt;prev</a>
+	<%} %>
+	<%
+	for(int pagenum=startpage;pagenum<=((endpage<totalpage)?endpage:totalpage);pagenum++){
+	%>
+	<a href="answer.do?command=list&page=<%=pagenum%>"><%=pagenum %></a>
+	<%} %>
+	
+	<%
+	if(endpage<pdto.getTotalpage()){ 
+	%>
+	<a href="answer.do?command=list&page=<%=endpage+1%>">next&gt;&gt;</a>
+	<%} %>
 
 </body>
 </html>
