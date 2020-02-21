@@ -24,7 +24,7 @@ int totalpage = pdto.getTotalpage();
 <body>
 
 	<h1>글 목록</h1>
-	<table border="1">
+	<table border="1" style="margin-left: auto; margin-right: auto;">
 		<col width="100"/>
 		<col width="300"/>
 		<col width="100"/>
