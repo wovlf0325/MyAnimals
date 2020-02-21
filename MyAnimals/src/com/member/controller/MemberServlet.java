@@ -45,7 +45,7 @@ public class MemberServlet extends HttpServlet {
 			
 			if(dto != null) {
 				if(dto.getMember_delflag().equals("Y")) {
-					jsResponse("탈퇴한 회원입니다", "MyAnimals/member.do?command=loginform", response);
+					jsResponse("탈퇴한 회원입니다", "Member/loginpage.jsp", response);
 					
 				} else if(dto.getMember_delflag().equals("N")) {
 					session.setAttribute("dto", dto);
@@ -59,10 +59,7 @@ public class MemberServlet extends HttpServlet {
 						jsResponse("환영합니다"+id, "Member/loginmain.jsp", response);
 					}
 					else {
-						String msg = "아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ";
-						String url = "Member/index.jsp";
-						
-						jsResponse(msg, url, response);
+						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "Member/loginpage.jsp", response);
 					}
 				}
 				
@@ -96,30 +93,29 @@ public class MemberServlet extends HttpServlet {
 		}else if(command.equals("updaterole")) {
 			String id = request.getParameter("id");
 			String role = request.getParameter("role");
+			System.out.println(id);
+			System.out.println(role);
+			MemberDto dto = biz.selectOne(id);
+			dto.setMember_id(id);
+			dto.setMember_role(role);
+			request.setAttribute("dto", dto);
 			
-			int res = biz.updateRole(id, role);
-			
-			if(res > 0) {
-				jsResponse("등급조정 성공", "Member/member.do?command=adminmainform", response);
-			}else {
-				jsResponse("등급 조정 실패", "Member/member.do?command=adminmainform", response);
-			}
-			
-			
-		}else if(command.equals("updateroleres")) {
+			dispatch("Member/realupdaterolepage.jsp", request, response);
+		}else if(command.equals("updaterolepopup")) {
 			String id = request.getParameter("id");
-			String role = request.getParameter("role");
-			
+			String role = request.getParameter("selectrole");
 			MemberDto dto = new MemberDto();
-			
 			dto.setMember_id(id);
 			dto.setMember_role(role);
 			
-			request.setAttribute("dto", dto);
+			int res = biz.updateRole(id, role);
+			if(res > 0) {
+				jsResponse("등급이 변경되었습니다.", "Member/updaterolepage.jsp", response);
+			}else {
+				jsResponse("등급 조정 실패", "Member/updaterolepage.jsp", response);
+			}
 			
-			dispatch("Member/role.jsp", request, response);
-			
-		}else if(command.equals("loginform")) {
+	}else if(command.equals("loginform")) {
 			response.sendRedirect("Member/loginpage.jsp");
 			
 		}else if(command.equals("registselectres")) {
@@ -168,7 +164,7 @@ public class MemberServlet extends HttpServlet {
 				
 				jsResponse(msg, url, response);
 			}else {
-				historyBack(response);
+				jsResponse("실패", "Member/registselect.jsp", response);
 			}
 			
 			
@@ -246,7 +242,7 @@ public class MemberServlet extends HttpServlet {
 			
 			if(res > 0) {
 
-				jsResponse("수정 되셨다", "Member/member.do?command=myinfo", response);
+				jsResponse("수정 되셨다", "Member/myinfoform.jsp", response);
 			}else {
 				historyBack(response);
 			}
@@ -263,14 +259,14 @@ public class MemberServlet extends HttpServlet {
 			
 			
 			if(res > 0) {
-				jsResponse("계정삭제완료", "Member/member.do?command=loginform", response);
+				jsResponse("계정삭제완료", "Member/loginmain.jsp", response);
 			}else {
 				historyBack(response);
 			}
 			
 		}else if(command.equals("logout")) {
 			session.invalidate();
-			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
+			jsResponse("로그아웃됬다", "Member/loginmain.jsp", response);
 		}
 		
 		

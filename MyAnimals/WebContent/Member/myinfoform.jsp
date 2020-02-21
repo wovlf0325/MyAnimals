@@ -12,6 +12,7 @@
    <h1>내 정보</h1>
    
    <table border="1">
+   
    	  <tr>
    	     <th>아이디</th>
    	     <td><jsp:getProperty property="member_id" name="dto"/></td>

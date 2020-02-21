@@ -30,7 +30,6 @@
 	<div id="checkid" style="display: none">
 		<form action="emailchk.do">
 			<input type="hidden" id="chk" name="command" value="forgotid">
-			이름 : <input type="text" name="name" value="" required="required"><br>
 			이메일 : <input type="text" name="email" value="" required="required"><br>
 			<input type="submit" value="찾기">
 		</form>
@@ -40,7 +39,6 @@
 		<form action="emailchk.do">
 			<input type="hidden" id="chk" name="command" value="forgotpw">
 			아이디 : <input type="text" name="id" value="" required="required"><br>
-			이름 : <input type="text" name="name" value="" required="required"><br>
 			이메일 : <input type="text" name="email" value="" required="required"><br>
 			<input type="submit" value="찾기">
 		</form>
