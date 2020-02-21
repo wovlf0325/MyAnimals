@@ -76,7 +76,8 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 		MemberDto dto = new MemberDto();
 		dto.setMember_id(id);
 		dto.setMember_role(role);
-		
+		System.out.println(id);
+		System.out.println(role);
 		try {
 			session = getSqlSessionFactory().openSession();
 			res = session.update(namespace+"updateRole",dto);
@@ -85,7 +86,7 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 				session.commit();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("error");
 		}finally {
 			session.close();
@@ -161,7 +162,7 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 	@Override
 	public MemberDto login(String id, String pw) {
 		SqlSession session = null;
-		MemberDto dto = new MemberDto();
+		MemberDto dto = null;
 		Map<String, String> map = new HashMap<>();
 		map.put("id",id);
 		map.put("pw", pw);
@@ -171,11 +172,12 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 			dto = session.selectOne(namespace+"login",map);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("[error] : login");
 			e.printStackTrace();
 		}finally {
 			session.close();
 		}
+		System.out.println(dto.getMember_role());
 		return dto;
 	}
 	// 회원가입
@@ -201,15 +203,66 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 	}
 	// 아이디 찾기
 	@Override
-	public MemberDto findId(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public String findId(String email) {
+		SqlSession session = null;
+		String id = "";
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			 id = session.selectOne(namespace+"selectOneFindId",email);
+			System.out.println(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		System.out.println("dao 아이디 :" +id);
+		return id;
 	}
 	// 비밀번호 찾기
 	@Override
-	public MemberDto findPw(String id, String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public int findPw(String id, String email) {
+		SqlSession session = null;
+		int res = 0;
+		Map<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("email", email);
+		System.out.println(id);
+		System.out.println(email);
+		try {
+			session = getSqlSessionFactory().openSession();
+			res = session.selectOne(namespace+"selectOneFindPw",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return res;
+	}
+	@Override
+	public int changePw(String id, String pw) {
+		int res = 0;
+		SqlSession session = null;
+		Map<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("pw", pw);
+		
+		System.out.println("임시비번"+pw);
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			res = session.update(namespace+"changePw",map);
+			
+			if(res>0) {
+				session.commit();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return res;
 	}
 
 }

@@ -4,7 +4,7 @@
 
 	<!-- 회원전체정보 -->
 	<select id="selectList" resultType="memberDto">
-	   SELECT * FROM MEMBER ORDER BY MEMBER_DELFLAG,MEMBER_ROLE,MEMBER_ID
+	   SELECT * FROM MEMBER ORDER BY MEMBER_DELFLAG, MEMBER_ROLE, MEMBER_ID
 	</select>
 	
 	<!-- 등급이  user 인 회원 검색 -->
@@ -18,7 +18,7 @@
 	</select>
 	
 	<!-- 등급 조절 -->
-	<update id="updateRole" parameterType="memberDto" >
+	<update id="updateRole" parameterType="memberDto"  >
 	   UPDATE MEMBER SET MEMBER_ROLE = #{member_role} WHERE MEMBER_ID = #{member_id} 
 	</update>
 	
@@ -45,5 +45,18 @@
 	<!-- 계정 탈퇴 -->
 	<update id="delete" parameterType="String">
 	   UPDATE MEMBER SET MEMBER_DELFLAG = 'Y' WHERE MEMBER_ID = #{member_id}
+	</update>
+	
+	<select id="selectOneFindId" resultType="String">
+	   SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_EMAIL = #{member_email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="selectOneFindPw" resultType="int" parameterType="map">
+	   SELECT MEMBER_PW FROM MEMBER WHERE MEMBER_ID = #{id} AND MEMBER_EMAIL = #{email} 
+	</select>
+	
+	<update id="changePw" parameterType="map" >
+	   UPDATE MEMBER SET MEMBER_PW = #{pw} WHERE MEMBER_ID = #{id}
 	</update>
 </mapper>
