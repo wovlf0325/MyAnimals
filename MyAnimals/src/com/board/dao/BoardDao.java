@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.board.dto.BoardDto;
+import com.mybatis.db.SqlMapConfig;
 
 public class BoardDao extends SqlMapConfig{
 	
