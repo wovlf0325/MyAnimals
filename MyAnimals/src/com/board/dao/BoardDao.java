@@ -22,7 +22,7 @@ public class BoardDao extends SqlMapConfig{
 
 		try {
 			session = getSqlSessionFactory().openSession();
-			list = session.selectList(namespace + "selectList");
+			list = session.selectList(namespace + "selectList",map);
 		} catch (Exception e) {
 			System.out.println("error:selectList");
 			e.printStackTrace();

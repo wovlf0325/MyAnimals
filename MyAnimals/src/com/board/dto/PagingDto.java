@@ -1,4 +1,4 @@
-package com.paging.dto;
+package com.board.dto;
 
 public class PagingDto {
 	
