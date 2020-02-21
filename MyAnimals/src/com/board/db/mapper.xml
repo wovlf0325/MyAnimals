@@ -8,7 +8,7 @@
 	<select id="selectList" resultType="boardDto" parameterType="map">
 	SELECT B.*
 		FROM (SELECT A.*, ROWNUM AS RNUM
-		FROM (SELECT * FROM PAGEBOARD ORDER BY SEQ DESC)A)B
+		FROM (SELECT * FROM PAGEBOARD ORDER BY BOARD_SEQ DESC)A)B
 		WHERE RNUM BETWEEN #{to} AND #{from}
 	</select>
 	
@@ -44,7 +44,7 @@
 	       (SELECT BOARD_TITLETAB FROM BOARD WHERE BOARD_SEQ = #{board_seq}) + 1, 
 	      'N',0)
 	</insert>
-	
+	<!-- 조회수 증가 -->
 	<update id="updateHit" parameterType="int">
 	UPDATE BOARD
     SET BOARD_VIEWS = BOARD_VIEWS + 1

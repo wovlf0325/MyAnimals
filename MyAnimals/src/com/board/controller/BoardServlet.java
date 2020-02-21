@@ -47,9 +47,9 @@ public class BoardServlet extends HttpServlet {
 			pdto.setPage(page);
 			pdto.setRows(10);
 			pdto.setPagescale(3);
-			pdto.setTotalpage();
-			List<BoardDto> list = biz.selectList();
-			request.setAttribute();
+			pdto.setTotalpage(biz.totalPage(pdto.getRows()));
+			List<BoardDto> list = biz.selectList(pdto);
+			request.setAttribute("pdto",pdto);
 			request.setAttribute("list", list);
 			dispatch("Board/answerlist.jsp", request, response);
 		} else if (command.equals("writeform")) {
