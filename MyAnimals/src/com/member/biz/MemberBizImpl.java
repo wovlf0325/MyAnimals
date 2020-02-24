@@ -69,10 +69,16 @@ public class MemberBizImpl implements MemberBiz {
 		return dao.findId(email);
 	}
 
+//	@Override
+//	public int findPw(String id, String email) {
+//		// TODO Auto-generated method stub
+//		return dao.findPw(id, email);
+//	}
+
 	@Override
 	public int findPw(String id, String email) {
 		// TODO Auto-generated method stub
-		return dao.findPw(id, email);
+		return 0;
 	}
 
 	@Override
@@ -91,7 +97,12 @@ public class MemberBizImpl implements MemberBiz {
 	public MemberDto emailChk(String email) {
 		// TODO Auto-generated method stub
 		return null;
-
 	}
+	
+
+
+
+
+	
 
 }

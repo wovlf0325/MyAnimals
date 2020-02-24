@@ -51,14 +51,14 @@ public class MemberServlet extends HttpServlet {
 					
 				} else if(dto.getMember_delflag().equals("N")) {
 					session.setAttribute("dto", dto);
-					session.setMaxInactiveInterval(10*60);
+					session.setMaxInactiveInterval(10*6000);
 					
 					if(dto.getMember_role().equals("ADMIN")) {
-						jsResponse("환영한다 닝겐이여"+id, "Member/adminmain.jsp", response);
+						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
 					}else if(dto.getMember_role().equals("USER")){
-						jsResponse("환영한다 닝겐이여"+id, "Member/loginmain.jsp", response);
+						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
 					}else if(dto.getMember_role().equals("CENTER")) {
-						jsResponse("환영합니다"+id, "Member/loginmain.jsp", response);
+						jsResponse("환영합니다"+id, "main.jsp", response);
 					}
 					else {
 						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "Member/loginpage.jsp", response);

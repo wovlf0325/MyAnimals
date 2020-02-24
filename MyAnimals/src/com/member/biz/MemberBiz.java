@@ -44,4 +44,5 @@ public interface MemberBiz {
 	public MemberDto emailChk(String email);
 
 
+
 }
