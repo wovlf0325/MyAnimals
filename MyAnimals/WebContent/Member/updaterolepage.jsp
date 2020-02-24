@@ -11,8 +11,8 @@
 
 <script type="text/javascript">
 
-	function popUp(id, role){
-		open("/MyAnimals/member.do?command=updaterole&id="+id+"&role="+role," ","width=200px, height=2300px");	
+	function popUp(id,role){
+	  var newpage=open("/MyAnimals/member.do?command=updaterole&id="+id+"&role="+role," ","width=500px, height=500px");	
 	}
 
 </script>
@@ -56,7 +56,7 @@
 						<td>${dto.member_email }</td>
 						<td>${dto.member_address }</td>
 						<td>${dto.member_regdate }</td>
-						<td><input type="button" value="등급조정" onclick="popUp(${dto.member_id },${dto.member_role });"/></td>
+						<td><input type="button" value="등급조정" onclick="popUp('${dto.member_id }','${dto.member_role }');"/></td>
 					</tr>
 					
 					
@@ -65,8 +65,7 @@
          </c:choose>
          <tr>
             <td>
-               <input type="submit" value="수정">
-               <input type="button" value="취소" onclick="location.href='/MyAnimals/member.do?command=adminmain'">
+               <input type="button" value="메인" onclick="location.href='Member/adminmain.jsp'">
             </td>
          </tr>
       </table>

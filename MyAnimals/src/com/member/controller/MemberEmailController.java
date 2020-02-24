@@ -2,6 +2,7 @@ package com.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -25,7 +26,7 @@ import com.member.dto.MemberDto;
 
 
 
-@WebServlet("/emailchk")
+@WebServlet("/emailchk.do")
 public class MemberEmailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -48,7 +49,9 @@ public class MemberEmailController extends HttpServlet {
 			final String user = "sasumpi1234"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
 			final String password = "test123**"; // 패스워드
 			String emailChkText = Util.emailConfirm(8);
-
+			
+			System.out.println(email);
+			
 			// SMTP 서버 정보를 설정한다.
 			Properties prop = new Properties();
 			prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -105,9 +108,10 @@ public class MemberEmailController extends HttpServlet {
 				dispatch("Member/emailChk.jsp", request, response);
 			}
 		}
-		if (command.equals("forgot")) {
+		else if (command.equals("forgotinfo")) {
 			dispatch("Member/forgotinfo.jsp", request, response);
 		}else if(command.equals("forgotid")) {
+<<<<<<< HEAD
 			String email = (String)request.getParameter("email");
 			int res = 0; 
 					//biz.findId(email);
@@ -121,6 +125,12 @@ public class MemberEmailController extends HttpServlet {
 				
 			}
 		
+=======
+			String email = request.getParameter("email");
+			String id = biz.findId(email);
+			
+			jsResponse("당신의 아이디는 :"+id+"입니다.", "", response);
+>>>>>>> b62005a3028178082ce05d7ae2af1c6478bde60b
 		}else if (command.equals("forgotpw")) {
 			String id = (String) request.getParameter("id");
 			String email = (String) request.getParameter("email");
@@ -133,7 +143,7 @@ public class MemberEmailController extends HttpServlet {
 				//biz.changePw(id, tppw);
 				if (result > 0) {
 					request.setAttribute("tppw", tppw);
-					request.setAttribute("mbemail", email);
+					request.setAttribute("email", email);
 
 					final String user = "sasumpi1234"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
 					final String password = "test123**"; // 패스워드
@@ -180,7 +190,7 @@ public class MemberEmailController extends HttpServlet {
 					out.println("self.close()");
 					out.println("</script>");
 				} else {
-					jsResponse("비밀번호 변경 실패", "MyAnimals/emailchk.do?command=forgotpw", response);
+					jsResponse("비밀번호 변경 실패", "/MyAnimals/emailchk.do?command=forgotpw", response);
 				}
 			} else {
 				System.out.println("틀림");
@@ -190,6 +200,14 @@ public class MemberEmailController extends HttpServlet {
 				out.println("self.close()");
 				out.println("</script>");
 			}
+		}else if(command.equals("emailchk")) {
+			String email = request.getParameter("email");
+			
+			MemberDto dto = new MemberDto();
+			
+			dto.setMember_email(email);
+			
+			dispatch("Member/emailChk.jsp", request, response);
 		}
 
 	}

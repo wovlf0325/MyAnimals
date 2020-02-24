@@ -4,28 +4,37 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardb">
 	
-	
-	<select id="selectList" resultType="boardDto">
-	SELECT * FROM BOARD ORDER BY BOARD_REGROUP DESC, BOARD_RESTEP
+	<!-- 페이징 list -->
+	<select id="selectList" resultType="boardDto" parameterType="map">
+	SELECT B.*
+		FROM (SELECT A.*, ROWNUM AS RNUM
+		FROM (SELECT * FROM PAGEBOARD ORDER BY BOARD_SEQ DESC)A)B
+		WHERE RNUM BETWEEN #{to} AND #{from}
 	</select>
+	
 	<select id="selectOne" parameterType="int" resultType="boardDto">
 	SELECT * FROM BOARD	WHERE BOARD_SEQ = #{board_seq}
 	</select>
+	
 	<insert id="insert" parameterType="boardDto">
 	INSERT INTO BOARD VALUES(BOARD_SEQSEQ.NEXTVAL,#{member_nickname},#{board_title},#{board_content},SYSDATE,BOARD_REGROUPSEQ.NEXTVAL,1,0,'N',0)
 	</insert>
+	
 	<update id="update" parameterType="boardDto">
 	UPDATE BOARD SET BOARD_TITLE = #{board_title} ,BOARD_CONTENT= #{board_content}  WHERE BOARD_SEQ = #{board_seq}
-	</update>	
+	</update>
+		
 	<delete id="delete" parameterType="int">
 	DELETE FROM BOARD WHERE BOARD_SEQ = #{board_seq} 
 	</delete>
+	
 	<update id="answerUpdate" parameterType="int">
 	UPDATE BOARD 
 	SET BOARD_RESTEP = BOARD_RESTEP + 1 
 	WHERE BOARD_REGROUP = (SELECT BOARD_REGROUP FROM BOARD WHERE BOARD_SEQ = #{board_seq} ) 
 	  AND BOARD_RESTEP >(SELECT BOARD_RESTEP FROM BOARD WHERE BOARD_SEQ = #{board_seq} )
 	</update>
+	
 	<insert id="answerInsert" parameterType="boardDto">
 	INSERT INTO BOARD
 	VALUES(
@@ -34,13 +43,16 @@
 	       (SELECT BOARD_RESTEP FROM BOARD WHERE BOARD_SEQ = #{board_seq} )+ 1, 
 	       (SELECT BOARD_TITLETAB FROM BOARD WHERE BOARD_SEQ = #{board_seq}) + 1, 
 	      'N',0)
-	      
-	      
-	      
 	</insert>
+	<!-- 조회수 증가 -->
 	<update id="updateHit" parameterType="int">
 	UPDATE BOARD
     SET BOARD_VIEWS = BOARD_VIEWS + 1
     WHERE BOARD_SEQ =#{board_seq}
 	</update>
+	
+	<!-- 페이징처리(게시물 총개수) -->
+	<select id="totalPage" resultType="int">
+	SELECT COUNT(*) AS TOTALPAGE FROM BOARD
+	</select>
 </mapper>

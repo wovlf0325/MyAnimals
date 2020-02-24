@@ -10,10 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.board.biz.BoardBiz;
 import com.board.dto.BoardDto;
+import com.board.dto.PagingDto;
 
 @WebServlet("/answer.do")
 public class BoardServlet extends HttpServlet {
@@ -36,7 +36,14 @@ public class BoardServlet extends HttpServlet {
 		BoardBiz biz = new BoardBiz();
 
 		if (command.equals("list")) {
-			List<BoardDto> list = biz.selectList();
+			int page = Integer.parseInt(request.getParameter("page"));
+			PagingDto pdto = new PagingDto();
+			pdto.setPage(page);
+			pdto.setRows(10);
+			pdto.setPagescale(3);
+			pdto.setTotalpage(biz.totalPage(pdto.getRows()));
+			List<BoardDto> list = biz.selectList(pdto);
+			request.setAttribute("pdto",pdto);
 			request.setAttribute("list", list);
 			dispatch("Board/answerlist.jsp", request, response);
 		} else if (command.equals("writeform")) {
