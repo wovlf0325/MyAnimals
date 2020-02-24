@@ -54,7 +54,7 @@ public class MemberServlet extends HttpServlet {
 					session.setMaxInactiveInterval(10*6000);
 					
 					if(dto.getMember_role().equals("ADMIN")) {
-						jsResponse("환영한다 닝겐이여"+id, "Member/adminmain.jsp", response);
+						jsResponse("환영한다 닝겐이여"+id, "realindex.jsp", response);
 					}else if(dto.getMember_role().equals("USER")){
 						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
 					}else if(dto.getMember_role().equals("CENTER")) {
@@ -268,7 +268,7 @@ public class MemberServlet extends HttpServlet {
 			
 		}else if(command.equals("logout")) {
 			session.invalidate();
-			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
+			jsResponse("로그아웃됬다", "realindex.jsp", response);
 			
 		} else if(command.equals("idChk")) {
 			String id = request.getParameter("id");

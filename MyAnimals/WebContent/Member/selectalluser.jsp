@@ -6,12 +6,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/MyAnimals/assets/css/main.css" />
 </head>
-<body>
 
-	<h1>전체회원정보(탈퇴한 회원 포함)</h1>
+<body class="is-preload">
 
-	<table border="1">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+<%@ include file="../form/header.jsp" %>
+				<!-- Header -->
+<!-- 				<header id="header">
+					<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a>
+						</li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+					</ul>
+				</header> -->
+
+
+				<!-- Section -->
+				<section>
+					<header class="major">
+						<h2>전체 회원 조회</h2>
+					</header>
+					<div class="features">
+							<table border="1">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
 		<tr>
 			<th>탈퇴여부</th>
 			<th>등급</th>
@@ -53,10 +92,32 @@
 		</c:choose>
 		<tr>
 		   <td>
-		      <input type="button" value="목록" onclick="/MyAnimals/location.href='/MyAnimals/member.do?command=selectall'">
+		      <input type="button" value="목록" onclick="location.href='/MyAnimals/member.do?command=selectall'">
 		   </td>
 		</tr>
 	</table>
+						
+					</div>
+				</section>
+
+				<!-- Section -->
+
+
+			</div>
+		</div>
+
+<!-- 사이드바 시작  -->
+<%@ include file="/form/footer.jsp" %>
+	
+<!-- 사이드바 끝 -->
+</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
 </body>
 </html>
