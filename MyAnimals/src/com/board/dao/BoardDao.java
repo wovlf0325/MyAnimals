@@ -7,17 +7,34 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.board.dto.BoardDto;
 import com.mybatis.db.SqlMapConfig;
+<<<<<<< HEAD
 
-public class BoardDao extends SqlMapConfig{
-	
+public class BoardDao extends SqlMapConfig {
+=======
+
+
+public class BoardDao extends SqlMapConfig {
+
+
+>>>>>>> d95267cc398948786377966f9f630706c9d11913
+
 	private String namespace = "boardb.";
 
 	public List<BoardDto> selectList(int to, int from) {
 
 		List<BoardDto> list = null;
+<<<<<<< HEAD
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("to",to);
 		map.put("from",from);
+=======
+
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("to",to);
+		map.put("from",from);
+
+>>>>>>> d95267cc398948786377966f9f630706c9d11913
 		SqlSession session = null;
 
 		try {
@@ -47,7 +64,6 @@ public class BoardDao extends SqlMapConfig{
 		} finally {
 			session.close();
 		}
-
 		return dto;
 	}
 
@@ -75,11 +91,11 @@ public class BoardDao extends SqlMapConfig{
 		int res = 0;
 		SqlSession session = null;
 
-		//System.out.println(dto.getContent()); 오류 잡는 방법
+		// System.out.println(dto.getContent()); 오류 잡는 방법
 		try {
 			session = getSqlSessionFactory().openSession(false);
 			res = session.update(namespace + "update", dto);
-			if(res > 0) {
+			if (res > 0) {
 				session.commit();
 			}
 		} catch (Exception e) {
@@ -88,7 +104,7 @@ public class BoardDao extends SqlMapConfig{
 		} finally {
 			session.close();
 		}
-		//System.out.println(res); 오류 잡는 방법
+		// System.out.println(res); 오류 잡는 방법
 		return res;
 	}
 
@@ -108,7 +124,6 @@ public class BoardDao extends SqlMapConfig{
 		} finally {
 			session.close();
 		}
-
 		return res;
 	}
 
@@ -128,25 +143,23 @@ public class BoardDao extends SqlMapConfig{
 		} finally {
 			session.close();
 		}
-
 		return res;
 	}
 
 	public int answerInsert(BoardDto dto) {
 		int res = 0;
 		SqlSession session = null;
-		
+
 		try {
-			session=getSqlSessionFactory().openSession(false);
-			res=session.insert(namespace+"answerInsert", dto);
-			
-			if(res>0) {
+			session = getSqlSessionFactory().openSession(false);
+			res = session.insert(namespace + "answerInsert", dto);
+			if (res > 0) {
 				session.commit();
 			}
 		} catch (Exception e) {
 			System.out.println("error:answerInsert");
 			e.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
 		return res;
@@ -154,24 +167,26 @@ public class BoardDao extends SqlMapConfig{
 
 	public int updateHit(int boardno) {
 		int res = 0;
-		SqlSession session=null;
-		
+		SqlSession session = null;
+
 		try {
-			session=getSqlSessionFactory().openSession(false);
-			res = session.update(namespace+"updateHit", boardno);
-			
-			if (res>0) {
+			session = getSqlSessionFactory().openSession(false);
+			res = session.update(namespace + "updateHit", boardno);
+
+			if (res > 0) {
 				session.commit();
 			}
 		} catch (Exception e) {
 			System.out.println("error:updateHit");
 			e.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
-		
+
 		return res;
 	}
+	
+	
 
 	public int totalPage() {
 		

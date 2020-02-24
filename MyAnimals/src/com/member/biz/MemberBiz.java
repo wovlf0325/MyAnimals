@@ -33,6 +33,10 @@ public interface MemberBiz {
 	// 아이디 찾기
 	public String findId(String email);
 	// 비밀번호 찾기
+<<<<<<< HEAD
+=======
+	public int findPw(String id, String email);
+>>>>>>> 900fcf90cf534b8115cb6248ea8a4a8397bfb578
 	
 	// 중복체크
 	// 아이디
@@ -41,9 +45,14 @@ public interface MemberBiz {
 	public MemberDto nicknameChk(String nickname);
 	// 이메일 
 	public MemberDto emailChk(String email);
+<<<<<<< HEAD
 	
 	public int findPw(String id, String email);
 	// 비밀번호 확인 찾기
 	public int changePw(String id, String pw);
+=======
+
+>>>>>>> 900fcf90cf534b8115cb6248ea8a4a8397bfb578
+
 
 }
