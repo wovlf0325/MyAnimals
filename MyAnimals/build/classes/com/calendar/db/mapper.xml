@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="calendar">
+
+
+
+	<select id="getCalView" resultType="calendarDto" parameterType="String">
+		SELECT * FROM VOLUNTEER WHERE MEMBER_ID=#{user}
+	</select>
+	
+	<insert id="insertCalBoard" parameterType="CalendarDto">
+		INSERT INTO VOUNTEER VALUES(#{member_id}, #{volunteer_title}, #{volunteer_content}, #{volunteer_mdate}, 0, SYSDATE)
+	</insert>
+	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+
+	<!-- 회원전체정보 -->
+	<select id="selectList" resultType="memberDto">
+	   SELECT * FROM MEMBER ORDER BY MEMBER_DELFLAG,MEMBER_ROLE,MEMBER_ID
+	</select>
+	
+	<!-- 등급이  user 인 회원 검색 -->
+	<select id="selectUser" resultType="memberDto">
+	   SELECT * FROM MEMBER WHERE MEMBER_ROLE = 'USER'
+	</select>
+	
+	<!-- 등급이 center 인 회원 검색 -->
+	<select id="selectCenter" resultType="memberDto">
+	   SELECT * FROM MEMBER WHERE MEMBER_ROLE = 'CENTER'
+	</select>
+	
+	<!-- 등급 조절 -->
+	<update id="updateRole" parameterType="memberDto" >
+	   UPDATE MEMBER SET MEMBER_ROLE = #{member_role} WHERE MEMBER_ID = #{member_id} 
+	</update>
+	
+    <!-- 로그인 -->
+	<select id="login" parameterType="map" resultType="memberDto">
+		SELECT MEMBER_ID,MEMBER_PW,MEMBER_NAME,MEMBER_BIRTH,MEMBER_EMAIL,MEMBER_GENDER,MEMBER_ADDRESS,MEMBER_ROLE,MEMBER_DELFLAG,MEMBER_REGDATE,MEMBER_PHONE,MEMBER_NICKNAME FROM MEMBER WHERE MEMBER_ID = #{id} AND MEMBER_PW = #{pw}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="regist" parameterType="memberDto">
+	   INSERT INTO MEMBER VALUES(#{member_id},#{member_pw},#{member_name},#{member_birth},#{member_email},#{member_gender},#{member_address},#{member_role},'N',SYSDATE,#{member_phone},#{member_nickname})
+	</insert>
+	
+	<!-- 내정보 -->
+	<select id="selectOne" resultType="memberDto">
+	   SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<!-- 내정보 수정 -->
+	<update id="updateInfo" parameterType="memberDto">
+	   UPDATE MEMBER SET MEMBER_PW = #{member_pw}, MEMBER_NICKNAME = #{member_nickname}, MEMBER_ADDRESS = #{member_address}, MEMBER_PHONE = #{member_phone} WHERE MEMBER_ID = #{member_id}
+	</update>
+	
+	<!-- 계정 탈퇴 -->
+	<update id="delete" parameterType="String">
+	   UPDATE MEMBER SET MEMBER_DELFLAG = 'Y' WHERE MEMBER_ID = #{member_id}
+	</update>
+</mapper>
