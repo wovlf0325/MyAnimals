@@ -123,7 +123,7 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
-						<li><a href="index.html">Homepage</a></li>
+						<li><a href="main.jsp">Homepage</a></li>
 						<li><a href="shop.do?command=selectList">shop</a></li>
 						<li><a href="elements.html">Elements</a></li>
 						<li><span class="opener">Submenu</span>
