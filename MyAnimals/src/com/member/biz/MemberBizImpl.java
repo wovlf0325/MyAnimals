@@ -76,13 +76,12 @@ public class MemberBizImpl implements MemberBiz {
 //	}
 
 	@Override
-	public MemberDto findPw(String id, String email) {
+	public int findPw(String id, String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
-	
-	@Override
 
+	@Override
 	public MemberDto idChk(String id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -98,8 +97,11 @@ public class MemberBizImpl implements MemberBiz {
 	public MemberDto emailChk(String email) {
 		// TODO Auto-generated method stub
 		return null;
-
 	}
+	
+
+
+
 
 	
 
