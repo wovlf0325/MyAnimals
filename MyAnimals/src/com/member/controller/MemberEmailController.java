@@ -118,11 +118,11 @@ public class MemberEmailController extends HttpServlet {
 		}else if (command.equals("forgotpw")) {
 			String id = (String) request.getParameter("id");
 			String email = (String) request.getParameter("email");
-			int res = biz.findPw(id, email);
+			int res = 0;//biz.findPw(id, email);
 			if(res>0) {
 				System.out.println("존재하는 회원");
 				String tppw = Util.madePassword(10);
-				int result = biz.changePw(id, tppw);
+				int result = 0; //biz.changePw(id, tppw);
 				if (result > 0) {
 					request.setAttribute("tppw", tppw);
 					request.setAttribute("email", email);

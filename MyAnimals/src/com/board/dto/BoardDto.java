@@ -16,8 +16,9 @@ public class BoardDto {
 	private String board_delflag;
 	private int board_views;
 	
+	
 	public BoardDto() {}
-
+	
 	public BoardDto(int board_seq, String member_nickname, String board_title, String board_content, Date board_regdate,
 			int board_regroup, int board_restep, int board_titletab, String board_delflag, int board_views) {
 		super();
