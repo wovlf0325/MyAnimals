@@ -1,7 +1,7 @@
-package com.alarm.dao;
+package com.alarm.biz;
 
 import java.util.List;
 
-public interface AlarmDao {
+public interface AlarmBiz {
 	public List<Integer> getDate(String date);
 }

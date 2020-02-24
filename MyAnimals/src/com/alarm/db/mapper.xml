@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="alarm">
 
-	<select id="getDate" resultType="int" parameterType="String">
-		SELECT trunc(TO_DATE(ALARM_DATE,'yyyymmdd'))-trunc(TO_DATE(#{date},'yyyymmdd')) FROM alarm;
+	<select id="getDate" resultType="alarmDto" parameterType="String">
+		SELECT * FROM alarm where trunc(TO_DATE(ALARM_DATE,'yyyymmdd')) - trunc(TO_DATE(#{date},'yyyymmdd')) <![CDATA[<=]]> 7
 	</select>
 </mapper>

@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alarm.dao.AlarmDao;
-import com.alarm.dto.AlarmDto;
+import com.alarm.biz.AlarmBiz;
+import com.alarm.biz.AlarmBizImpl;
+
 
 
 @WebServlet("/alarm.do")
@@ -27,13 +28,9 @@ public class AlarmController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String date = request.getParameter("date");
 		System.out.println("alarm controller 날짜: "+date);
-		AlarmDao dao = new AlarmDao();
-		List<Integer> list = dao.getDate(date);
-		for(int i=0; i<list.size(); i++) {
-			if(list.get(i)<=7) {
-				
-			}
-		}
+		AlarmBiz biz = new AlarmBizImpl();
+		List<Integer> list = biz.getDate(date);
+
 		
 		
 	}

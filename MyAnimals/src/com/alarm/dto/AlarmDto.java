@@ -1,19 +1,19 @@
 package com.alarm.dto;
 
-import java.util.Date;
+
 
 public class AlarmDto {
-	private Date date;
+	private String date;
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
-	public AlarmDto(Date date) {
+	public AlarmDto(String date) {
 		super();
 		this.date = date;
 	}
