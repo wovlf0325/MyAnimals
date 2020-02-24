@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.board.dao.SqlMapConfig;
+import com.mybatis.db.SqlMapConfig;
 import com.reply.dto.ReplyDto;
 
 public class ReplyDao extends SqlMapConfig{

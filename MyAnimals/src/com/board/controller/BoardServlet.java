@@ -15,25 +15,19 @@ import javax.servlet.http.HttpSession;
 import com.board.biz.BoardBiz;
 import com.board.dto.BoardDto;
 
-
 @WebServlet("/answer.do")
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
-    public BoardServlet() {
-       
-    }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
 		doPost(request, response);
-	
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -70,7 +64,6 @@ public class BoardServlet extends HttpServlet {
 //
 //			response.sendRedirect("Board/detail.jsp");
 			System.out.println("board Servlet 도착");
-			
 			request.setAttribute("dto", dto);
 			dispatch("reply.do?command=list", request, response);
 
@@ -102,12 +95,11 @@ public class BoardServlet extends HttpServlet {
 			} else {
 				jsResponse("글 삭제 실패", "answer.do?command=detail&boardno=" + boardno, response);
 			}
-		} else if (command.equals("answer")) {
+		}else if (command.equals("answer")) {
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
 			BoardDto dto = biz.selectOne(boardno);
 			request.setAttribute("dto", dto);
 			dispatch("Board/answerform.jsp", request, response);
-
 		} else if (command.equals("answerres")) {
 			int parentboardno = Integer.parseInt(request.getParameter("parentboardno"));
 			String writer = request.getParameter("nickname");
@@ -119,15 +111,14 @@ public class BoardServlet extends HttpServlet {
 			dto.setBoard_title(title);
 			dto.setBoard_content(content);
 			int res = biz.insert_answer(dto);
-
 			if (res > 0) {
 				jsResponse("답변 작성 성공", "answer.do?command=list", response);
 			} else {
 				jsResponse("답변 작성 실패", "answer.do?command=answer&boardno=" + parentboardno, response);
 			}
 		}
-		// doGet(request, response);
 	}
+
 	private void jsResponse(String msg, String url, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		out.println("<script type='text/javascript'>");
@@ -143,5 +134,4 @@ public class BoardServlet extends HttpServlet {
 		dispatch.forward(request, response);
 
 	}
-
 }
