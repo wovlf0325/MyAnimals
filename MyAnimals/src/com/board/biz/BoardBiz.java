@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.board.dao.BoardDao;
 import com.board.dto.BoardDto;
+import com.board.dto.PagingDto;
 
 public class BoardBiz {
 
@@ -11,8 +12,14 @@ public class BoardBiz {
 	
 	private BoardDao dao = new BoardDao();
 
-	public List<BoardDto> selectList() {
-		return dao.selectList();
+	public List<BoardDto> selectList(PagingDto dto) {
+		
+		int page = dto.getPage();
+		int rows = dto.getRows();
+		
+		int to = rows*(page-1)+1;
+		int from = rows*page;
+		return dao.selectList(to,from);
 	}
 
 	public BoardDto selectOne(int boardno) {
@@ -47,6 +54,13 @@ public class BoardBiz {
 	public int updateHit(int boardno) {
 
 		return dao.updateHit(boardno);
+	}
+	
+	public int totalPage(int rows) {
+		
+		int totalpage= (int)Math.ceil((double)dao.totalPage()/rows);
+		
+		return totalpage;
 	}
 
 }

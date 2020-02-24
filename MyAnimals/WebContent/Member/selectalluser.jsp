@@ -51,7 +51,11 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-
+		<tr>
+		   <td>
+		      <input type="button" value="목록" onclick="/MyAnimals/location.href='/MyAnimals/member.do?command=selectall'">
+		   </td>
+		</tr>
 	</table>
 
 </body>

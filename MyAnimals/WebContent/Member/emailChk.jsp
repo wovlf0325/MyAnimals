@@ -15,7 +15,7 @@ function emailChkRes(){
 	var emailChkText = document.getElementsByName("emailChkText")[0].value;
 	if(inputEmailChkText===emailChkText){
 		alert('인증되었습니다');
-		opener.document.getElementsByName("회원가입")[0].style.display="";
+		opener.document.getElementsByName("regist")[0].style.display="";
 		self.close();
 	}else{
 		alert('인증문자를 확인해주세요');
@@ -24,12 +24,14 @@ function emailChkRes(){
 </script>
 </head>
 <body>
+
 	<h3>인증번호를 입력해주세요</h3>
+
 	<input type="hidden" name="emailChkText" value="<%=emailChkText%>">
 		<input type="text" name="inputEmailChkText" value="">
 		
 		<input type="button" value="확인" onclick="emailChkRes()">
-	
+
 </body>
 </html>
 

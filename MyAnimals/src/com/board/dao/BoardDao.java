@@ -1,5 +1,6 @@
 package com.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,15 +12,17 @@ public class BoardDao extends SqlMapConfig{
 	
 	private String namespace = "boardb.";
 
-	public List<BoardDto> selectList() {
+	public List<BoardDto> selectList(int to, int from) {
 
 		List<BoardDto> list = null;
-
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("to",to);
+		map.put("from",from);
 		SqlSession session = null;
 
 		try {
 			session = getSqlSessionFactory().openSession();
-			list = session.selectList(namespace + "selectList");
+			list = session.selectList(namespace + "selectList",map);
 		} catch (Exception e) {
 			System.out.println("error:selectList");
 			e.printStackTrace();
@@ -170,5 +173,22 @@ public class BoardDao extends SqlMapConfig{
 		return res;
 	}
 
+	public int totalPage() {
+		
+		int res = 0;
+		SqlSession session = null;
+		
+		try {
+			session=getSqlSessionFactory().openSession();
+			res = session.selectOne(namespace+"totalPage");
+		} catch (Exception e) {
+			System.out.println("error:totalPage");
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return res;
+	}
 
 }
