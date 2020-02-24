@@ -9,6 +9,7 @@
 
 	onsubmit=function(){
 		opener.location.href="letter.jsp";
+		opener.close();
 		self.close();
 	} 
 

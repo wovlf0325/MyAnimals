@@ -76,9 +76,27 @@ public class MemberBizImpl implements MemberBiz {
 	}
 
 	@Override
+<<<<<<< HEAD
+	public MemberDto idChk(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberDto nicknameChk(String nickname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberDto emailChk(String email) {
+		// TODO Auto-generated method stub
+		return null;
+=======
 	public int changePw(String id, String pw) {
 		// TODO Auto-generated method stub
 		return dao.changePw(id, pw);
+>>>>>>> afe6fec46afecc7d23cd490b4b5fd43afbe07408
 	}
 
 }
