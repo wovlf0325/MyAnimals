@@ -7,23 +7,23 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.board.dto.BoardDto;
 import com.mybatis.db.SqlMapConfig;
-<<<<<<< HEAD
+
 
 public class BoardDao extends SqlMapConfig {
-=======
->>>>>>> b62005a3028178082ce05d7ae2af1c6478bde60b
+
+
 
 	private String namespace = "boardb.";
 
 	public List<BoardDto> selectList(int to, int from) {
 
 		List<BoardDto> list = null;
-<<<<<<< HEAD
-=======
+
+
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("to",to);
 		map.put("from",from);
->>>>>>> b62005a3028178082ce05d7ae2af1c6478bde60b
+
 		SqlSession session = null;
 
 		try {

@@ -30,7 +30,7 @@
 	    <mapper resource="com/member/db/mapper.xml"/>
 	    <mapper resource="com/letter/db/mapper.xml"/>
 	    <mapper resource="com/plan/db/mapper.xml"/>
-	    <mapper resource="com/alarm/db.mapper.xml"/>
+	    <mapper resource="com/alarm/db/mapper.xml"/>
 	  </mappers>
 
 </configuration>

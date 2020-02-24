@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <!--
 	Editorial by HTML5 UP
@@ -45,7 +46,6 @@
 
 
 <body class="is-preload">
-
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -56,39 +56,53 @@
 				<!-- Header -->
 				<header id="header">
 					<a href="index.html" class="logo"><strong>MyAnimals</strong></a>
-					<ul class="icons">
-						<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost" style="position: relative;"><span
-									class="nav-counter" style="display: none;"></span></a>
-						</li>
-						<input type="button" onclick="location.href='Member/loginpage.jsp'" value="로그인">
-						<input type="button" onclick="location.href='Member/registselect.jsp'" value="회원가입">
-						<input type="button" onclick="location.href='#'" value="내정보" style="display: none;">
-					</ul>
+					<c:choose>
+						<c:when test="${empty dto }">
+							<ul class="icons">
+								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
+										style="position: relative;"><span class="nav-counter"
+											style="display: none;"></span></a></li>
+								<input type="button" onclick="location.href='Member/loginpage.jsp'" value="로그인">
+								<input type="button" onclick="location.href='Member/registselect.jsp'" value="회원가입">
+							</ul>
+						</c:when>
+						<c:otherwise>
+							<ul class="icons">
+								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
+										style="position: relative;"><span class="nav-counter" style="display: none;"></span></a></li>
+								<input type="button" onclick="location.href='/MyAnimals/member.do?command=myinfo'" value="내정보">
+							</ul>
+						</c:otherwise>
+					</c:choose>
 				</header>
 
 
 				<script type="text/javascript">
 					$("#alarm").click(function () {
-						
+
 					})
-					$(document).ready(function () {
-						var currentDate = new Date();
-						var divClock = document.getElementById("timecheck");
-						var msg = currentDate.getFullYear() + "" + currentDate.getMonth() + "" + currentDate.getDate();
-						divClock.innerText = msg;
-						$.ajax({
-							url: "alarm.do",
-							type: "POST",
-							dataType: "String",
-							data: {
-								'date': msg
-							},
-							success: function (data) {
-							},
-							error: function (request, status, error) {
-							}
+					$(document).ready(
+						function () {
+							var currentDate = new Date();
+							var divClock = document
+								.getElementById("timecheck");
+							var msg = currentDate.getFullYear() + ""
+								+ currentDate.getMonth() + ""
+								+ currentDate.getDate();
+							divClock.innerText = msg;
+							$.ajax({
+								url: "alarm.do",
+								type: "POST",
+								dataType: "String",
+								data: {
+									'date': msg
+								},
+								success: function (data) {
+								},
+								error: function (request, status, error) {
+								}
+							});
 						});
-					}); 
 				</script>
 				<div id="timecheck"></div>
 
