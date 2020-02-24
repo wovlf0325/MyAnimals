@@ -10,16 +10,20 @@
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function(){
-		for(var i = 0; i < 2; i++){
-			$("#read").each(function(i){
-				if($(this).val() == 'N'){
-					console.log(this);
-					$(this).next().css("font-weight","bold");
-				}
-			});
+	function allChk(bool){
+		var chks = document.getElementsByName("chk");
+		for(var i = 0; i < chks.length; i++){
+			chks[i].checked = bool;
 		}
-	});
+	}
+	
+	function letter_open(){
+		var seq = $("#seq").title();
+		var id = "ADMIN" //${USER.id}
+		console.log(seq);
+		console.log(id);
+		open("/MyAnimals/letter.do?command=detail&seq="+seq+"&id="+id, "", "width=280px, height=460px, left=650px top=100px ");
+	}
 
 </script>
 </head>

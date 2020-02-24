@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 
 package com.mybatis.db;
 
-=======
-
-package com.mybatis.db;
->>>>>>> 85b6f79a47ef685c68fc9315c252b2a20f8df44f
 import java.io.IOException;
 import java.io.Reader;
 
