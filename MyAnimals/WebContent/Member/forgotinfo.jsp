@@ -28,7 +28,7 @@
 		}
 	</script>
 	<div id="checkid" style="display: none">
-		<form action="emailchk.do">
+		<form action="/MyAnimals/emailchk.do">
 			<input type="hidden" id="chk" name="command" value="forgotid">
 			이메일 : <input type="text" name="email" value="" required="required"><br>
 			<input type="submit" value="찾기">
@@ -36,7 +36,7 @@
 	</div>
 	
 	<div id="checkpw" style="display: none">
-		<form action="emailchk.do">
+		<form action="/MyAnimals/emailchk.do">
 			<input type="hidden" id="chk" name="command" value="forgotpw">
 			아이디 : <input type="text" name="id" value="" required="required"><br>
 			이메일 : <input type="text" name="email" value="" required="required"><br>
