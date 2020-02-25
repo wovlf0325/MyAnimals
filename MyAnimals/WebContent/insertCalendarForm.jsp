@@ -17,29 +17,32 @@ $(function(){
 
 </script>
 
-<%  CalendarDto dto = new CalendarDto(); %>
+<%  CalendarDto calendarDto = new CalendarDto(); %>
 <% int Center_seq = (int)(request.getAttribute("Center_seq")); %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
-		<h1>일정 작성</h1>
+		<h1>봉사일정 등록</h1>
 			<form action="calendar.do" method="post">
-				<input type="hidden" name="command" value=""/>
+				<input type="hidden" name="command" value="insert"/>
 			<table border="1">
 		<tr>
-			<th>작성자</th>
-			<td><input type="text" name="writer"/></td>
+			<th>일정명</th>
+			<td><input type="text" name="volunteer_title"/></td>
 		</tr>
 		<tr>
-			<th>일정 이름</th>
-			<td><input type="text" name="title"/></td>
+			<th>내용</th>
+			<td><input type="text" name="volunteer_content"/></td>
 		</tr>
-
+		<tr>
+			<th>최대인원</th>
+			<td><input type="text" name="volunteer_maxvolunteer"/></td>
+		</tr>
 		<tr>
 			<th>날짜</th>
-			<td><input type="text" name="date" id="date"/></td>
+			<td><input type="text" name="volunteer_date" id="date"/></td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -48,7 +51,6 @@ $(function(){
 			</td>
 		</tr>
 	</table>
-	
 	</form>	
 
 </body>

@@ -18,6 +18,7 @@ import com.calendar.dao.Util;
 import com.calendar.dao.calendarDao;
 import com.calendar.dao.calendarDaoImpl;
 import com.calendar.dto.CalendarDto;
+import com.calendar.dto.VolunteerDto;
 
 /**
  * Servlet implementation class calendarServlet
@@ -75,6 +76,37 @@ public class calendarServlet extends HttpServlet {
 			request.setAttribute("Center_seq", Center_seq);
 			
 			dispatch("insertCalendarForm.jsp", request, response);
+			
+		}else if(command.equals("insert")) {
+			
+			String volunteer_title = request.getParameter("volunteer_title");
+			String volunteer_content = request.getParameter("volunteer_content");
+			int volunteer_maxvolunteer = Integer.parseInt(request.getParameter("volunteer_maxvolunteer"));
+			String volunteer_date = request.getParameter("volunteer_date");
+			//int volunteer_date = Integer.parseInt(request.getParameter("volunteer_date"));
+		
+			System.out.println(volunteer_date);
+			
+			VolunteerDto volunteerDto = new VolunteerDto();
+			volunteerDto.setVolunteer_title(volunteer_title);
+			volunteerDto.setVolunteer_content(volunteer_content);
+			volunteerDto.setVolunteer_maxvolunteer(volunteer_maxvolunteer);
+			volunteerDto.setVolunteer_date(volunteer_date);
+			System.out.println("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+			System.out.println("여기는 캘린더 서블릿이지롱...");
+			System.out.println("성훈아 왜이리 화가나있니");
+			System.out.println("그거 알려주기로했짢아 숫자만 가져오는거!");
+			System.out.println("너는 디비 만든거 컬럼 알려달라고 시~벌탱");
+			
+			
+			int res = biz.insert(volunteerDto);
+			
+			if(res>0) {
+				jsResponse("입력성공", "", response);
+			}else{
+				jsResponse("입력실패", "", response);
+			}
+			
 		}
 		
 		

@@ -18,7 +18,7 @@ public class planDaoImpl extends SqlMapConfig implements planDao {
 
 	@Override
 	public planDto selectOne(int seq) {
-		String resource = "com/plan/db/config.xml";
+		String resource = "com/mybatis/db/config.xml";
 		InputStream inputStream = null;
 		
 		try {
