@@ -9,12 +9,17 @@
 		<typeAlias type="com.letter.dto.LetterDto" alias="letterDto"/>
 		<typeAlias type="com.plan.dto.planDto" alias="planDto"/>
 <<<<<<< HEAD
+		<typeAlias type="com.calendar.dto.CalendarDto" alias="calendarDto"/>
+		<typeAlias type="com.calendar.dto.VolunteerDto" alias="volunteerDto"/>
+=======
+<<<<<<< HEAD
 		<typeAlias type="com.board.dto.BoardDto" alias="boardDto"/>
 		<typeAlias type="com.reply.dto.ReplyDto" alias="replyDto"/>
 =======
 		<typeAlias type="com.shop.dto.ShopDto" alias="shopDto"/>
 		<typeAlias type="com.alarm.dto.AlarmDto" alias="alarmDto"/>
 >>>>>>> a7a019099e788969704323815a6416e80a06e1be
+>>>>>>> 372201e0ed2fcb2d9a1a65d8612706e24f1bcff3
 	</typeAliases>
 	
 
@@ -36,11 +41,15 @@
 	    <mapper resource="com/letter/db/mapper.xml"/>
 	    <mapper resource="com/plan/db/mapper.xml"/>
 <<<<<<< HEAD
+	    <mapper resource="com/calendar/db/mapper.xml"/>
+=======
+<<<<<<< HEAD
 	    <mapper resource="com/board/db/mapper.xml"/>
 	    <mapper resource="com/reply/db/mapper.xml"/>
 =======
 	    <mapper resource="com/alarm/db/mapper.xml"/>
 >>>>>>> a7a019099e788969704323815a6416e80a06e1be
+>>>>>>> 372201e0ed2fcb2d9a1a65d8612706e24f1bcff3
 	  </mappers>
 
 </configuration>
