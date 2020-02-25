@@ -31,9 +31,9 @@
 						<li><a href="generic.html">Generic</a></li>
 						<li><a href="elements.html">Elements</a></li>
 						<li>
-							<span class="opener">Submenu</span>
+							<span class="opener">커뮤니티</span>
 							<ul>
-								<li><a href="#">Lorem Dolor</a></li>
+								<li><a href="/MyAnimals/answer.do?command=list&page=1">커뮤니티 게시판</a></li>
 								<li><a href="#">Ipsum Adipiscing</a></li>
 								<li><a href="#">Tempus Magna</a></li>
 								<li><a href="#">Feugiat Veroeros</a></li>

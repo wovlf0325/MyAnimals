@@ -1,73 +1,145 @@
-<%
-	// 브라우저가 캐시에 화면(응답된 도큐먼트) 저장하지 않도록 설정
-	response.setHeader("Pragma", "no-cache");				// http 1.0
-	response.setHeader("Cache-control", "no-store");		// http 1.1
-	response.setHeader("Expires", "0");						// proxy server
-	// 회원명단에서 command=login으로 갈 때 세션이 캐시 영역에 자동으로 저장해두기 때문에 에러가 나지않고 이동할 수 있다.
-	// 하지만 우리는 그렇게 이동하지 않게 하기 위해 캐시를 지워주고 바로 adminmain.jsp로 이동시켰다.
-%>
-
+<%@page import="com.board.dto.PagingDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>
-<%
-	
-%>
-
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
+
+<% request.setCharacterEncoding("UTF-8");%>
+<% response.setContentType("text/html; charset=UTF-8");%>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<style type="text/css">
+   th{text-align: center !important}
+   table{margin: auto;width: 100%;}
+#update{
+background-color: #f56a6a !important;
+color: #ffffff !important;
+font-family: "Roboto Slab", serif;
+font-size: 0.8em;
+font-weight: 700;
+height: 3.5em;
+
+}
+#delete{
+background-color: #f56a6a !important;
+color: #ffffff !important;
+font-family: "Roboto Slab", serif;
+font-size: 0.8em;
+font-weight: 700;
+height: 3.5em;
+
+}
+#list{
+background-color: #f56a6a !important;
+color: #ffffff !important;
+font-family: "Roboto Slab", serif;
+font-size: 0.8em;
+font-weight: 700;
+height: 3.5em;
+
+}
+#answer{
+background-color: #f56a6a !important;
+color: #ffffff !important;
+font-family: "Roboto Slab", serif;
+font-size: 0.8em;
+font-weight: 700;
+height: 3.5em;
+
+}
+#insert{
+background-color: #f56a6a !important;
+color: #ffffff !important;
+font-family: "Roboto Slab", serif;
+font-size: 0.8em;
+font-weight: 700;
+height: 3.5em;
+
+}
+</style>
+	<title>Editorial by HTML5 UP</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+
 </head>
-<body>
 
-	<h1>글 상세 보기</h1>
+<body class="is-preload">
 
-	<table border="1">
-		<tr>
-			<th>작성자</th>
-			<td>${dto.member_nickname }</td>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td>${dto.board_title }</td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td><textarea rows="10" cols="60" readonly="readonly">${dto.board_content }</textarea></td>
-		</tr>
-		<tr>
-			<td colspan="2" align="right">
-				<input type="button" value="수정" onclick="location.href='answer.do?command=updateform&boardno=${dto.board_seq}'"/>
-				<input type="button" value="삭제" onclick="location.href='answer.do?command=delete&boardno=${dto.board_seq}'"/>
-				<input type="button" value="목록" onclick="location.href='answer.do?command=list'"/>
-				<input type="button" value="답변" onclick="location.href='answer.do?command=answer&boardno=${dto.board_seq}'"/>
-			</td>
-		</tr>
-	</table>
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+<%@ include file="../form/header.jsp" %>
+	
+
+				<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h1>글 상세보기</h1>
+						</header>
+						
+						
+					</div>
+					
+				</section>
+
+				<!-- Section -->
+				<section>
+					<div class="features">
+						<!-- 테이블 시작 -->
+						
+						<table border="1">
+							<tr>
+								<th>작성자</th>
+								<td>${boardDto.member_nickname }</td>
+							</tr>
+							<tr>
+								<th>제목</th>
+								<td>${boardDto.board_title }</td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td><textarea rows="10" cols="60" readonly="readonly">${boardDto.board_content }</textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="right">
+									<input type="button" value="update" onclick="location.href='answer.do?command=updateform&boardno=${boardDto.board_seq}'" id="update"/>
+									<input type="button" value="delete" onclick="location.href='answer.do?command=delete&boardno=${boardDto.board_seq}'" id="delete"/>
+									<input type="button" value="list"   onclick="location.href='answer.do?command=list&page=1'" id="list"/>
+									<input type="button" value="answer" onclick="location.href='answer.do?command=answer&boardno=${boardDto.board_seq}'" id="answer"/>
+								</td>
+							</tr>
+						</table>
 	<hr>
 	
 	<div class="container">
     <form action="reply.do"  method="post" >
     <input type="hidden" name="command" value="commentres">
-    <input type="hidden" name="boardseq" value="${dto.board_seq }">
+    <input type="hidden" name="boardseq" value="${boardDto.board_seq }">
     <br><br>
         <div>
             <div>
-                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+                <span><strong>Comments</strong></span> 
             </div>
             <div>
-                <table class="table">                    
+                <table class="table" style=" margin: auto; width: 100%">                    
                     <tr>
                         <td>
-                            <textarea style="width: 500px" rows="3" cols="30"  name="content" placeholder="댓글을 입력하세요"></textarea>
+                            <textarea placeholder="댓글을 입력하세요"></textarea>
                             <br>
                             <div align="right">
-                                <input type="submit"  value="등록">
+                                <input type="submit"  value="insert" id="insert">
                             </div>
                         </td>
                     </tr>
@@ -79,7 +151,7 @@
         
 	<!-- 댓글 리스트 -->
 	<h2>CommentList</h2>
-	<table border="1">
+	<table border="1" style="margin: auto;width: 100%">
 		<col width="100">
 		<col width="100">
 		<col width="200">
@@ -91,20 +163,22 @@
 			<th>작성일</th>
 		</tr>
 		<c:choose>
-			<c:when test="${empty list}">
+			<c:when test="${empty replyList}">
 			<tr>
 				<td colspan="4">----------작성된 글이 존재하지 않습니다.----------</td>
 			</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="dto">
+				<c:forEach items="${replyList }" var="replyDto">
 					
 						
 							<tr>
-								<td>${dto.reply_seq }</td>
-								<td>${dto.member_id }</td>
-								<td>${dto.reply_content }</td>
-								<td>${dto.reply_regdate }</td>
+								<td>${replyDto.reply_seq }</td>
+								<td>${replyDto.member_id }</td>
+								<td>${replyDto.reply_content }</td>
+								<td>
+								<fmt:formatDate value="${replyDto.reply_regdate }" pattern="YYYY/MM/dd" type="date"/>
+								</td>
 							</tr>
 						
 					
@@ -115,15 +189,30 @@
 	
     </form>
 </div>
-	
-	
-	
-	
+					
+						
+							
+					</div>
+				</section>
 
+			
+
+			</div>
+		</div>
+
+<!-- 사이드바 시작  -->
+<%@ include file="../form/footer.jsp" %>
+	
+<!-- 사이드바 끝 -->
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
 </body>
+
 </html>
-
-
-
-

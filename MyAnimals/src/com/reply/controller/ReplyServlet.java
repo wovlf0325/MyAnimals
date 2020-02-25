@@ -44,11 +44,12 @@ public class ReplyServlet extends HttpServlet {
 		
 		if(command.equals("list")) {
 			System.out.println("reply Servlet 도착");
-			BoardDto dto = (BoardDto)request.getAttribute("dto");
+			BoardDto dto = (BoardDto)request.getAttribute("boardDto");
 			int board_seq = dto.getBoard_seq();
 			List<ReplyDto> list = biz.selectList(board_seq);
-			request.setAttribute("list", list);
-			request.setAttribute("dto", dto);
+			
+			request.setAttribute("replyList", list);
+			request.setAttribute("boardDto", dto);
 			dispatch("Board/detail.jsp", request, response);
 					
 		}else if(command.equals("commentres")) {
