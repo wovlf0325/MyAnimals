@@ -8,6 +8,8 @@
 		<typeAlias type="com.member.dto.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.letter.dto.LetterDto" alias="letterDto"/>
 		<typeAlias type="com.plan.dto.planDto" alias="planDto"/>
+		<typeAlias type="com.board.dto.BoardDto" alias="boardDto"/>
+		<typeAlias type="com.reply.dto.ReplyDto" alias="replyDto"/>
 	</typeAliases>
 	
 
@@ -27,6 +29,8 @@
 	    <mapper resource="com/member/db/mapper.xml"/>
 	    <mapper resource="com/letter/db/mapper.xml"/>
 	    <mapper resource="com/plan/db/mapper.xml"/>
+	    <mapper resource="com/board/db/mapper.xml"/>
+	    <mapper resource="com/reply/db/mapper.xml"/>
 	  </mappers>
 
 </configuration>
