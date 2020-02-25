@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<th>보내는사람</th>
-				<td><input type="text" id="from" name="from" value="ADMIN" readonly="readonly"/></td>
+				<td><input type="text" id="from" name="from" value="${memberDto.member_id} }" readonly="readonly"/></td>
 			</tr>
 			<tr>
 				<th>제목</th>

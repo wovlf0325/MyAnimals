@@ -110,15 +110,17 @@ public class MemberEmailController extends HttpServlet {
 		}
 		else if (command.equals("forgotinfo")) {
 			dispatch("Member/forgotinfo.jsp", request, response);
+			
 		}else if(command.equals("forgotid")) {
 			String email = request.getParameter("email");
 			String id = biz.findId(email);
 			
-			jsResponse("당신의 아이디는 :"+id+"입니다.", "", response);
+			jsResponse("당신의 아이디는 :"+id+"입니다.", "Member/findidclose.jsp", response);
+
 		}else if (command.equals("forgotpw")) {
 			String id = (String) request.getParameter("id");
 			String email = (String) request.getParameter("email");
-			int res = 0;//biz.findPw(id, email);
+			int res = biz.findPw(id, email);
 			if(res>0) {
 				System.out.println("존재하는 회원");
 				String tppw = Util.madePassword(10);

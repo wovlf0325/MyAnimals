@@ -11,19 +11,19 @@
 	<table border="1">
 		<tr>
 			<th>보낸 사람</th>
-			<td>${dto.member_from }</td>
+			<td>${letterDto.member_from }</td>
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td>${dto.letter_title} </td>
+			<td>${letterDto.letter_title} </td>
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea cols="20" rows="20" readonly="readonly">${dto.letter_content }</textarea></td>
+			<td><textarea cols="20" rows="20" readonly="readonly">${letterDto.letter_content }</textarea></td>
 		</tr>
 		<tr>
 			<th>보낸시간</th>
-			<td>${dto.letter_regdate }</td>
+			<td>${letterDto.letter_regdate }</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="right">

@@ -11,7 +11,7 @@
 <table border="1">
    
    <c:choose>
-      <c:when test="${empty dto }" >
+      <c:when test="${empty memberDto }" >
 	   	<tr>
 	      <td>
 	       	<input type="button" value="로그인" onclick="location.href='/MyAnimals/member.do?command=loginform'">

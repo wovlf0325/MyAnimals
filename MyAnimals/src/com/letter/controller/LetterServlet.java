@@ -45,20 +45,20 @@ public class LetterServlet extends HttpServlet {
 		if(command.equals("sendList")) {
 			String id = request.getParameter("id");
 			List<LetterDto> list = biz.sendList(id);
-			request.setAttribute("list", list);
+			request.setAttribute("letterList", list);
 			dispatch("/Letter/sendList.jsp", request, response);
 			
 		}else if(command.equals("receiveList")) {
 			String id = request.getParameter("id");
 			List<LetterDto> list = biz.receiveList(id);
-			request.setAttribute("list", list);
+			request.setAttribute("letterList", list);
 			dispatch("/Letter/receiveList.jsp", request, response);
 			
 		} else if(command.equals("detail")) {
 			String id = request.getParameter("id");
 			int seq = Integer.parseInt(request.getParameter("seq"));
 			LetterDto dto = biz.selectOne(id, seq);
-			request.setAttribute("dto", dto);
+			request.setAttribute("letterDto", dto);
 			dispatch("/Letter/detail.jsp", request, response);
 			
 		} else if(command.equals("write")) {
