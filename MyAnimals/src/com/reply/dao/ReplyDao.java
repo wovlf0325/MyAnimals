@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.mybatis.db.SqlMapConfig;
+
 import com.reply.dto.ReplyDto;
 
 public class ReplyDao extends SqlMapConfig{
@@ -12,7 +13,7 @@ public class ReplyDao extends SqlMapConfig{
 	
 	private String namespace = "reply.";
 	public List<ReplyDto> selectList(int board_seq ) {
-
+		System.out.println(board_seq);
 		List<ReplyDto> list=null;
 		SqlSession session = null;
 		

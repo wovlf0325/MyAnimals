@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import com.member.dto.MemberDto;
 import com.member.biz.MemberBiz;
 import com.member.biz.MemberBizImpl;
@@ -41,25 +43,25 @@ public class MemberServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			
-			MemberDto dto = biz.login(id, pw);
+			MemberDto memberDto = biz.login(id, pw);
 			
-			if(dto != null) {
-				if(dto.getMember_delflag().equals("Y")) {
+			if(memberDto != null) {
+				if(memberDto.getMember_delflag().equals("Y")) {
 					jsResponse("탈퇴한 회원입니다", "Member/loginpage.jsp", response);
 					
-				} else if(dto.getMember_delflag().equals("N")) {
-					session.setAttribute("dto", dto);
-					session.setMaxInactiveInterval(10*60);
+				} else if(memberDto.getMember_delflag().equals("N")) {
+					session.setAttribute("memberDto", memberDto);
+					session.setMaxInactiveInterval(10*6000);
 					
-					if(dto.getMember_role().equals("ADMIN")) {
-						jsResponse("환영한다 닝겐이여"+id, "Member/adminmain.jsp", response);
-					}else if(dto.getMember_role().equals("USER")){
-						jsResponse("환영한다 닝겐이여"+id, "Member/loginmain.jsp", response);
-					}else if(dto.getMember_role().equals("CENTER")) {
-						jsResponse("환영합니다"+id, "Member/loginmain.jsp", response);
+					if(memberDto.getMember_role().equals("ADMIN")) {
+						jsResponse("환영한다 닝겐이여"+id, "realindex.jsp", response);
+					}else if(memberDto.getMember_role().equals("USER")){
+						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
+					}else if(memberDto.getMember_role().equals("CENTER")) {
+						jsResponse("환영합니다"+id, "realindex.jsp", response);
 					}
 					else {
-						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "Member/loginpage.jsp", response);
+						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "/MyAnimals/realindex.jsp", response);
 					}
 				}
 				
@@ -67,27 +69,27 @@ public class MemberServlet extends HttpServlet {
 			//유저전체정보
 		}else if(command.equals("selectall")) {
 			List<MemberDto> list = biz.selectList();
-			request.setAttribute("list", list);
+			request.setAttribute("memberList", list);
 			dispatch("Member/selectalluser.jsp", request, response);
 			
 			//등급이 USER인 회원정보
 		}else if(command.equals("volunteer")) {
-			List<MemberDto> list = biz.selectUser();
-			request.setAttribute("list", list);
+			List<MemberDto> memberList = biz.selectUser();
+			request.setAttribute("memberList", memberList);
 			
 			dispatch("Member/selectroleuser.jsp", request, response);
-			System.out.println(list);
+			System.out.println(memberList);
 			
 			//등급이 CENTER인 회원정보
 		}else if(command.equals("centerallinfo")) {
-			List<MemberDto> list = biz.selectCenter();
-			request.setAttribute("list", list);
+			List<MemberDto> memberList = biz.selectCenter();
+			request.setAttribute("memberList", memberList);
 			dispatch("Member/selectrolecenter.jsp", request, response);
-			System.out.println(list);
+			System.out.println(memberList);
 			
 		}else if(command.equals("updateroleform")) {
-			List<MemberDto> list = biz.selectList();
-			request.setAttribute("list", list);
+			List<MemberDto> memberList = biz.selectList();
+			request.setAttribute("memberList", memberList);
 			dispatch("Member/updaterolepage.jsp", request, response);
 		   	
 		}else if(command.equals("updaterole")) {
@@ -95,18 +97,18 @@ public class MemberServlet extends HttpServlet {
 			String role = request.getParameter("role");
 			System.out.println(id);
 			System.out.println(role);
-			MemberDto dto = biz.selectOne(id);
-			dto.setMember_id(id);
-			dto.setMember_role(role);
-			request.setAttribute("dto", dto);
+			MemberDto memberDto = biz.selectOne(id);
+			memberDto.setMember_id(id);
+			memberDto.setMember_role(role);
+			request.setAttribute("memberDto", memberDto);
 			
 			dispatch("Member/realupdaterolepage.jsp", request, response);
 		}else if(command.equals("updaterolepopup")) {
 			String id = request.getParameter("id");
 			String role = request.getParameter("selectrole");
-			MemberDto dto = new MemberDto();
-			dto.setMember_id(id);
-			dto.setMember_role(role);
+			MemberDto memberDto = new MemberDto();
+			memberDto.setMember_id(id);
+			memberDto.setMember_role(role);
 			
 			int res = biz.updateRole(id, role);
 			if(res > 0) {
@@ -119,7 +121,9 @@ public class MemberServlet extends HttpServlet {
 			response.sendRedirect("Member/loginpage.jsp");
 			
 		}else if(command.equals("registselectres")) {
-			response.sendRedirect("Member/registselect.jsp");
+			request.setAttribute("name", request.getAttribute("name"));
+			request.setAttribute("email", request.getAttribute("email"));
+			dispatch("Member/registselect.jsp", request, response);
 			
 		}else if(command.equals("registcenter")) {
 			response.sendRedirect("Member/registcenterform.jsp");
@@ -144,19 +148,19 @@ public class MemberServlet extends HttpServlet {
 			System.out.println(phone);
 			System.out.println(nickname);
 			
-			MemberDto dto = new MemberDto();
+			MemberDto memberDto = new MemberDto();
 			
-			dto.setMember_id(id);
-			dto.setMember_pw(pw);
-			dto.setMember_name(name);
-			dto.setMember_birth(birth);
-			dto.setMember_email(email);
-			dto.setMember_gender(gender);
-			dto.setMember_address(address);
-			dto.setMember_phone(phone);
-			dto.setMember_nickname(nickname);
-			dto.setMember_role("CENTER");
-			int res = biz.regist(dto);
+			memberDto.setMember_id(id);
+			memberDto.setMember_pw(pw);
+			memberDto.setMember_name(name);
+			memberDto.setMember_birth(birth);
+			memberDto.setMember_email(email);
+			memberDto.setMember_gender(gender);
+			memberDto.setMember_address(address);
+			memberDto.setMember_phone(phone);
+			memberDto.setMember_nickname(nickname);
+			memberDto.setMember_role("CENTER");
+			int res = biz.regist(memberDto);
 			
 			if(res>0) {
 				String msg = "가입 성공";
@@ -169,7 +173,16 @@ public class MemberServlet extends HttpServlet {
 			
 			
 		}else if(command.equals("registuser")) {
-			response.sendRedirect("Member/registform.jsp");
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			
+			System.out.println(name);
+			System.out.println(email);
+			
+			request.setAttribute("name", request.getAttribute("name"));
+			request.setAttribute("email", request.getAttribute("email"));
+			
+			dispatch("Member/registform.jsp", request, response);
 			
 			
 		}else if(command.equals("registres")) {
@@ -192,19 +205,19 @@ public class MemberServlet extends HttpServlet {
 			System.out.println(phone);
 			System.out.println(nickname);
 			
-			MemberDto dto = new MemberDto();
+			MemberDto memberDto = new MemberDto();
 			
-			dto.setMember_id(id);
-			dto.setMember_pw(pw);
-			dto.setMember_name(name);
-			dto.setMember_birth(birth);
-			dto.setMember_email(email);
-			dto.setMember_gender(gender);
-			dto.setMember_address(address);
-			dto.setMember_phone(phone);
-			dto.setMember_nickname(nickname);
-			dto.setMember_role("USER");
-			int res = biz.regist(dto);
+			memberDto.setMember_id(id);
+			memberDto.setMember_pw(pw);
+			memberDto.setMember_name(name);
+			memberDto.setMember_birth(birth);
+			memberDto.setMember_email(email);
+			memberDto.setMember_gender(gender);
+			memberDto.setMember_address(address);
+			memberDto.setMember_phone(phone);
+			memberDto.setMember_nickname(nickname);
+			memberDto.setMember_role("USER");
+			int res = biz.regist(memberDto);
 			
 			if(res>0) {
 				String msg = "가입 성공";
@@ -228,17 +241,17 @@ public class MemberServlet extends HttpServlet {
 			String phone = request.getParameter("phone");
 			String id = request.getParameter("id");
 			
-			MemberDto dto = new MemberDto();
+			MemberDto memberDto = new MemberDto();
 			
-			dto.setMember_pw(pw);
-			dto.setMember_nickname(nickname);
-			dto.setMember_address(address);
-			dto.setMember_phone(phone);
-			dto.setMember_id(id);
+			memberDto.setMember_pw(pw);
+			memberDto.setMember_nickname(nickname);
+			memberDto.setMember_address(address);
+			memberDto.setMember_phone(phone);
+			memberDto.setMember_id(id);
 			
-			int res = biz.updateInfo(dto);
-			dto = biz.login(id, pw);
-			session.setAttribute("dto", dto);
+			int res = biz.updateInfo(memberDto);
+			memberDto = biz.login(id, pw);
+			session.setAttribute("memberDto", memberDto);
 			
 			if(res > 0) {
 
@@ -252,14 +265,14 @@ public class MemberServlet extends HttpServlet {
 			
 		}else if(command.equals("userdeleteres")) {
 			String id = request.getParameter("id");
-			MemberDto dto = new MemberDto();
-			dto.setMember_id(id);
+			MemberDto memberDto = new MemberDto();
+			memberDto.setMember_id(id);
 			
 			int res = biz.delete(id);
 			
 			
 			if(res > 0) {
-				jsResponse("계정삭제완료", "Member/loginmain.jsp", response);
+				jsResponse("계정삭제완료", "/MyAnimals/realindex.jsp", response);
 			}else {
 				historyBack(response);
 			}
@@ -267,15 +280,19 @@ public class MemberServlet extends HttpServlet {
 		}else if(command.equals("logout")) {
 			session.invalidate();
 <<<<<<< HEAD
+
 			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
+=======
+			jsResponse("로그아웃됬다", "realindex.jsp", response);
+>>>>>>> 38c232f141cde892e5d7d6b55d4e8b98014b2256
 			
 		} else if(command.equals("idChk")) {
 			String id = request.getParameter("id");
-			MemberDto dto = biz.idChk(id);
+			MemberDto memberDto = biz.idChk(id);
 			JSONObject obj = new JSONObject();
-			if(dto == null || dto.getId().equals(null) || dto.getId() == null) {
+			if(memberDto == null || memberDto.getMember_id().equals(null) || memberDto.getMember_id() == null) {
 				obj.put("idchk", "false");				
-			} else if(dto.getId() == id || dto.getId().equals(id))  {
+			} else if(memberDto.getMember_id() == id || memberDto.getMember_id().equals(id))  {
 				obj.put("idchk", "true");
 			}
 			
@@ -284,10 +301,6 @@ public class MemberServlet extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.print(res);
-			
-=======
-			jsResponse("로그아웃됬다", "Member/loginmain.jsp", response);
->>>>>>> afe6fec46afecc7d23cd490b4b5fd43afbe07408
 		}
 		
 		

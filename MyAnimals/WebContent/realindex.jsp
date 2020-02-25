@@ -1,3 +1,4 @@
+<%@page import="com.board.dto.PagingDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -12,10 +13,33 @@
 <% response.setContentType("text/html; charset=UTF-8");%>
 
 <head>
+<style type="text/css">
+   th{text-align: center !important}
+   table{margin: auto;}
+#write{
+background-color: #f56a6a !important;
+color: #ffffff !important;
+font-family: "Roboto Slab", serif;
+font-size: 0.8em;
+font-weight: 700;
+height: 3.5em;
+
+}
+#cancle{
+background-color: #f56a6a !important;
+color: #ffffff !important;
+font-family: "Roboto Slab", serif;
+font-size: 0.8em;
+font-weight: 700;
+height: 3.5em;
+
+}
+</style>
 	<title>Editorial by HTML5 UP</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
+
 </head>
 
 <body class="is-preload">
@@ -26,150 +50,72 @@
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
-<%@ include file="form/header.jsp" %>
-				<!-- Header -->
-<!-- 				<header id="header">
-					<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a>
-						</li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-					</ul>
-				</header> -->
+			
+<%@ include file="../form/header.jsp" %>
+	
 
 				<!-- Banner -->
 				<section id="banner">
 					<div class="content">
 						<header>
-							<h1>MyAnimals<br/> 애니멀즈<br/>
-								by HTML5 UP</h1>
-							<p>A free and fully responsive site template</p>
+							<h1></h1>
 						</header>
-						<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante
-							interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet
-							egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas.
-							Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
-						<ul class="actions">
-							<li><a href="#" class="button big">Learn More</a></li>
-						</ul>
+						
+						
 					</div>
-					<span class="image object">
-						<img src="images/pic10.jpg" alt="" />
-					</span>
+					
 				</section>
 
 				<!-- Section -->
 				<section>
-					<header class="major">
-						<h2>Erat lacinia</h2>
-					</header>
 					<div class="features">
-						<article>
-							<span class="icon fa-gem"></span>
-							<div class="content">
-								<h3>Portitor ullamcorper</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-									facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							</div>
-						</article>
-						<article>
-							<span class="icon solid fa-paper-plane"></span>
-							<div class="content">
-								<h3>Sapien veroeros</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-									facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							</div>
-						</article>
-						<article>
-							<span class="icon solid fa-rocket"></span>
-							<div class="content">
-								<h3>Quam lorem ipsum</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-									facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							</div>
-						</article>
-						<article>
-							<span class="icon solid fa-signal"></span>
-							<div class="content">
-								<h3>Sed magna finibus</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-									facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							</div>
-						</article>
+						<!-- 테이블 시작 -->
+						
+					
+						
+							<form action="answer.do" method="post">
+								<input type="hidden" name="command" value="writeres"/>
+								<table border="1">
+									<tr>
+										<th>작성자</th>
+										<td><input type="text" name="nickname"/></td>
+									</tr>
+									<tr>
+										<th>제목</th>
+										<td><input type="text" name="title" /></td>
+									</tr>
+									<tr>
+										<th>내용</th>
+										<td><textarea rows="10" cols="60" name="content"></textarea></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="right">
+											<input type="submit" value="write" id="write"/>
+											<input type="button" value="cancle" onclick="location.href='answer.do?command=list'" id="cancle"/>
+										</td>
+									</tr>
+								</table>
+							</form>
 					</div>
 				</section>
 
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>Ipsum sed dolor</h2>
-					</header>
-					<div class="posts">
-						<article>
-							<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-							<h3>Interdum aenean</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-							<h3>Nulla amet dolore</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-							<h3>Tempus ullamcorper</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-							<h3>Sed etiam facilis</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-							<h3>Feugiat lorem aenean</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-							<h3>Amet varius aliquam</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-					</div>
-				</section>
+													<ul class="pagination" style="float: left; width: 100%; text-align: center;">
+														<li><span class="button">Prev</span></li>
+														<li><a href="#" class="page active">1</a></li>
+														<li><a href="#" class="page">2</a></li>
+														<li><a href="#" class="page">3</a></li>
+														<li><span>…</span></li>
+														<li><a href="#" class="page">8</a></li>
+														<li><a href="#" class="page">9</a></li>
+														<li><a href="#" class="page">10</a></li>
+														<li><a href="#" class="button">Next</a></li>
+		   								 			</ul>
 
 			</div>
 		</div>
 
 <!-- 사이드바 시작  -->
-<%@ include file="form/footer.jsp" %>
+<%@ include file="../form/footer.jsp" %>
 	
 <!-- 사이드바 끝 -->
 	</div>
