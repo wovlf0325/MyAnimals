@@ -121,7 +121,9 @@ public class MemberServlet extends HttpServlet {
 			response.sendRedirect("Member/loginpage.jsp");
 			
 		}else if(command.equals("registselectres")) {
-			response.sendRedirect("Member/registselect.jsp");
+			request.setAttribute("name", request.getAttribute("name"));
+			request.setAttribute("email", request.getAttribute("email"));
+			dispatch("Member/registselect.jsp", request, response);
 			
 		}else if(command.equals("registcenter")) {
 			response.sendRedirect("Member/registcenterform.jsp");
@@ -171,7 +173,16 @@ public class MemberServlet extends HttpServlet {
 			
 			
 		}else if(command.equals("registuser")) {
-			response.sendRedirect("Member/registform.jsp");
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			
+			System.out.println(name);
+			System.out.println(email);
+			
+			request.setAttribute("name", request.getAttribute("name"));
+			request.setAttribute("email", request.getAttribute("email"));
+			
+			dispatch("Member/registform.jsp", request, response);
 			
 			
 		}else if(command.equals("registres")) {
@@ -268,7 +279,12 @@ public class MemberServlet extends HttpServlet {
 			
 		}else if(command.equals("logout")) {
 			session.invalidate();
+<<<<<<< HEAD
+
+			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
+=======
 			jsResponse("로그아웃됬다", "realindex.jsp", response);
+>>>>>>> 38c232f141cde892e5d7d6b55d4e8b98014b2256
 			
 		} else if(command.equals("idChk")) {
 			String id = request.getParameter("id");

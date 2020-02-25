@@ -82,13 +82,13 @@
 				<th>작성일</th>
 			</tr>
 			<c:choose>
-				<c:when test="${empty list }">
+				<c:when test="${empty letterList }">
 					<tr >
 						<td colspan="5" align="center">- - - - - - - - - - 작성된 게시글이 없습니다. - - - - - - - - - -</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<c:forEach items="${list }" var="dto">
+					<c:forEach items="${letterList }" var="dto">
 					<input type="hidden" name="read" value="${dto.letter_read }"/>
 						<tr name="readChk">
 							<td align="center">

@@ -42,13 +42,13 @@
 			<th>작성일</th>
 		</tr>
 		<c:choose>
-			<c:when test="${empty list }">
+			<c:when test="${empty letterList }">
 				<tr>
 					<td colspan="4" align="center">- - - - - - - - - - 작성된 게시글이 없습니다. - - - - - - - - - -</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="dto">
+				<c:forEach items="${letterList }" var="dto">
 					<tr>
 						<td align="center">
 							<input type="checkbox" name="chk" value="${dto.letter_seq }"/>

@@ -40,9 +40,11 @@ public interface MemberBiz {
 	public MemberDto idChk(String id);
 	// 닉네임
 	public MemberDto nicknameChk(String nickname);
-	// 이메일
+	// 이메일 
 	public MemberDto emailChk(String email);
-
+	
+	// 비밀번호 확인 찾기
+	public int changePw(String id, String pw);
 
 
 }

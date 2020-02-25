@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="letter">
-	<select id="sendList" parameterType="string" resultType="letterDto">
+	<select id="receiveList" parameterType="string" resultType="letterDto">
 		SELECT * FROM LETTER WHERE MEMBER_TO = #{id} ORDER BY LETTER_SEQ DESC
 	</select>
 	
-	<select id="receiveList" parameterType="String" resultType="letterDto">
+	<select id="sendList" parameterType="String" resultType="letterDto">
 		SELECT * FROM LETTER WHERE MEMBER_FROM = #{id} ORDER BY LETTER_SEQ DESC
 	</select>
 	
