@@ -57,7 +57,7 @@
 				<header id="header">
 					<a href="index.html" class="logo"><strong>MyAnimals</strong></a>
 					<c:choose>
-						<c:when test="${empty dto }">
+						<c:when test="${empty memberDto }">
 							<ul class="icons">
 								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
 										style="position: relative;"><span class="nav-counter"
@@ -71,6 +71,7 @@
 								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
 										style="position: relative;"><span class="nav-counter" style="display: none;"></span></a></li>
 								<input type="button" onclick="location.href='/MyAnimals/member.do?command=myinfo'" value="내정보">
+								<input type="button" value="로그아웃" onclick="location.href='/MyAnimals/member.do?command=logout'">
 							</ul>
 						</c:otherwise>
 					</c:choose>
@@ -95,7 +96,7 @@
 								type: "POST",
 								dataType: "String",
 								data: {
-									'date': msg
+									'date': msg,
 								},
 								success: function (data) {
 								},
@@ -108,8 +109,8 @@
 
 
 				<section id="banner">
-					<span class="graph" style="display: block; margin: auto;"> <%@ include
-							file="./location.jsp"%></span>
+					<span class="graph" style="display: block; margin: auto;"> 
+					<%@ includefile="./location.jsp"%></span>
 				</section>
 			</div>
 		</div>

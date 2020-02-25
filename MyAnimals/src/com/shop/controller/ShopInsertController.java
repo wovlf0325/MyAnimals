@@ -2,7 +2,6 @@ package com.shop.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,10 +18,11 @@ import com.shop.biz.ShopBiz;
 import com.shop.biz.ShopBizImpl;
 import com.shop.dto.ShopDto;
 
-@WebServlet("/shop.do")
-public class ShopController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
+@WebServlet("/shopinsert.do")
+public class ShopInsertController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -34,33 +34,38 @@ public class ShopController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
 	
-      
+        String  uploadDir = "/Users/imseonghun/git/sunghunAnimals/MyAnimals/WebContent/image/ShopImg";
+        int maxSize = 1024 * 1024 * 100;
+        String encoding = "UTF-8";
+        MultipartRequest multipartRequest = new MultipartRequest(request, uploadDir, maxSize, encoding,
+	               new DefaultFileRenamePolicy());
+        
 		ShopBiz biz = new ShopBizImpl();
-		String command = request.getParameter("command");
+		String command = multipartRequest.getParameter("command");
 		
-		if (command.equals("selectList")) {
-			List<ShopDto> shopList = biz.selectShopList();
-			request.setAttribute("shopList", shopList);
-			dispatch("Shop/shopmain.jsp", request, response);
-
-		} else if (command.equals("detail")) {
-			int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
-			ShopDto shopDto = biz.selectShopOne(shop_seq);
+		if (command.equals("insertres")) {
+			ShopDto shopDto = new ShopDto();
 			MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");
-			request.setAttribute("shopDto", shopDto);
-			request.setAttribute("member_role", memberDto.getMember_role());
-			dispatch("Shop/shopdetail.jsp", request, response);
-		} else if (command.equals("insert")) {
-			response.sendRedirect("Shop/shopinsertform.jsp");
-		} else if (command.equals("search")) {
-			String searchTitle = request.getParameter("searchTitle");
-			String searchContent = request.getParameter("searchContent");
-			List<ShopDto> shopList = biz.search(searchTitle, searchContent);
-			request.setAttribute("shopList", shopList);
-			dispatch("Shop/shopmain.jsp", request, response);
+			shopDto.setShop_name(multipartRequest.getParameter("shop_name"));  
+			shopDto.setShop_kind(multipartRequest.getParameter("shop_kind"));
+			shopDto.setShop_price(Integer.parseInt(multipartRequest.getParameter("shop_price")));
+			shopDto.setShop_quantity(Integer.parseInt(multipartRequest.getParameter("shop_quantity")));
+			shopDto.setShop_content(multipartRequest.getParameter("shop_content")); 
+			shopDto.setShop_owner(memberDto.getMember_id());
+		    
+		    //String food_image_name = multipartRequest.getOriginalFileName("file");
+	        String food_image_realname = multipartRequest.getFilesystemName("file"); 
+	        shopDto.setShop_photo("/MyAnimals/image/ShopImg/"+food_image_realname);
+	        
+		    int res = biz.insertShopList(shopDto);
+		    if(res>0) {
+		    	jsResponse("물품을 등록하였습니다","shop.do?command=selectList", response);
+		    }else {
+		    	jsResponse("물품 등록에 실패하였습니다", "Shop/shopinsertform.jsp", response);
+		    }
 		}
 	}
-
+	
 	private void jsResponse(String msg, String url, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		out.println("<script type=\"text/javascript\">");
@@ -74,5 +79,5 @@ public class ShopController extends HttpServlet {
 		RequestDispatcher dispatch = request.getRequestDispatcher(url);
 		dispatch.forward(request, response);
 	}
-
+	
 }
