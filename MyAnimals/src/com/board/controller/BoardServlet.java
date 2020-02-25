@@ -59,7 +59,7 @@ public class BoardServlet extends HttpServlet {
 			
 		} else if (command.equals("writeform")) {
 
-			dispatch("Board/write.jsp", request, response);
+			response.sendRedirect("Board/write.jsp");
 			
 		} else if (command.equals("writeres")) {
 			String writer = request.getParameter("boardNickname");
