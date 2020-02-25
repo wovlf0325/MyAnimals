@@ -67,25 +67,25 @@
 
 
 							<c:choose>
-								<c:when test="${empty list }">
+								<c:when test="${empty memberList }">
 									<tr>
 										<td colspan="11">----------유저 정보가 없습니다----------</td>
 									</tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${list }" var="dto">
+									<c:forEach items="${memberList }" var="memberDto">
 										<tr>
-											<td>${dto.member_delflag }</td>
-											<td>${dto.member_role }</td>
-											<td>${dto.member_nickname }</td>
-											<td>${dto.member_id }</td>
-											<td>${dto.member_name }</td>
-											<td>${dto.member_birth }</td>
-											<td>${dto.member_gender }</td>
-											<td>${dto.member_phone }</td>
-											<td>${dto.member_email }</td>
-											<td>${dto.member_address }</td>
-											<td>${dto.member_regdate }</td>
+											<td>${memberDto.member_delflag }</td>
+											<td>${memberDto.member_role }</td>
+											<td>${memberDto.member_nickname }</td>
+											<td>${memberDto.member_id }</td>
+											<td>${memberDto.member_name }</td>
+											<td>${memberDto.member_birth }</td>
+											<td>${memberDto.member_gender }</td>
+											<td>${memberDto.member_phone }</td>
+											<td>${memberDto.member_email }</td>
+											<td>${memberDto.member_address }</td>
+											<td>${memberDto.member_regdate }</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

@@ -15,7 +15,7 @@
 		   alert("ID 중복체크를 먼저 해주세요");
 		   document.getElementsByName("id")[0].focus();
 	   }
-<<<<<<< HEAD
+
 	 };
 	 
 	 $(function(){
@@ -57,7 +57,7 @@
 				});
 			});
 		});
-=======
+
 	 }
 function emailChk(){
 	var doc = document.getElementsByName("email")[0];
@@ -67,7 +67,7 @@ function emailChk(){
 		open("/MyAnimals/emailchk.do?command=emailchk&email="+doc.value,"","width=600,height=400");
 	}
 }
->>>>>>> afe6fec46afecc7d23cd490b4b5fd43afbe07408
+
 
 
 </script>
