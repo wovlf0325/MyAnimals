@@ -21,7 +21,7 @@ public class BoardDao extends SqlMapConfig {
 	private String namespace = "boardb.";
 
 	public List<BoardDto> selectList(int to, int from) {
-
+		System.out.println(to);
 		List<BoardDto> list = null;
 <<<<<<< HEAD
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
