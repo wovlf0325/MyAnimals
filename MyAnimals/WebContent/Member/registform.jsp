@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/MyAnimals/js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 
 
@@ -15,7 +15,6 @@
 		   alert("ID 중복체크를 먼저 해주세요");
 		   document.getElementsByName("id")[0].focus();
 	   }
-<<<<<<< HEAD
 	 };
 	 
 	 $(function(){
@@ -57,17 +56,15 @@
 				});
 			});
 		});
-=======
-	 }
-function emailChk(){
-	var doc = document.getElementsByName("email")[0];
-	if(doc.value.trim()==""||doc.value==null){
-		alert("이메일주소를 입력해 주세요");
-	}else{
-		open("/MyAnimals/emailchk.do?command=emailchk&email="+doc.value,"","width=600,height=400");
-	}
-}
->>>>>>> afe6fec46afecc7d23cd490b4b5fd43afbe07408
+	 
+	function emailChk(){
+		var doc = document.getElementsByName("email")[0];
+		if(doc.value.trim()==""||doc.value==null){
+			alert("이메일주소를 입력해 주세요");
+		}else{
+			open("/MyAnimals/emailchk.do?command=emailchk&email="+doc.value,"","width=600,height=400");
+		}
+	};
 
 
 </script>
@@ -117,7 +114,7 @@ function emailChk(){
          </tr>
          <tr>
             <th>이름</th>
-            <td><input type="text" name="name" required="required" onclick="idChkConfirm()"></td>
+            <td><input type="text" name="name" required="required" onclick="idChkConfirm()" value="${name }"></td>
          </tr>
          <tr>
             <th>성별</th>
@@ -136,7 +133,7 @@ function emailChk(){
          <tr>
             <th>이메일</th>
             <td>
-               <input type="text" name="email" required="required" onclick="idChkConfirm()">
+               <input type="text" name="email" required="required" onclick="idChkConfirm()" value="${email }">
                <input type="button" value="이메일인증" required="required" onclick="emailChk()">  
             </td>
          </tr>
