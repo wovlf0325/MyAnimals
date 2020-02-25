@@ -15,6 +15,10 @@
 		   alert("ID 중복체크를 먼저 해주세요");
 		   document.getElementsByName("id")[0].focus();
 	   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 38c232f141cde892e5d7d6b55d4e8b98014b2256
 	 };
 	 
 	 $(function(){
@@ -56,6 +60,7 @@
 				});
 			});
 		});
+<<<<<<< HEAD
 	 
 	function emailChk(){
 		var doc = document.getElementsByName("email")[0];
@@ -65,6 +70,19 @@
 			open("/MyAnimals/emailchk.do?command=emailchk&email="+doc.value,"","width=600,height=400");
 		}
 	};
+=======
+
+	 }
+function emailChk(){
+	var doc = document.getElementsByName("email")[0];
+	if(doc.value.trim()==""||doc.value==null){
+		alert("이메일주소를 입력해 주세요");
+	}else{
+		open("/MyAnimals/emailchk.do?command=emailchk&email="+doc.value,"","width=600,height=400");
+	}
+}
+
+>>>>>>> 38c232f141cde892e5d7d6b55d4e8b98014b2256
 
 
 </script>

@@ -55,6 +55,7 @@ public class BoardBiz {
 	public int totalPage(int rows) {
 		
 		int totalpage= (int)Math.ceil((double)dao.totalPage()/rows);
+		System.out.println(totalpage);
 		
 		return totalpage;
 	}

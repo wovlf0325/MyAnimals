@@ -8,7 +8,7 @@
 	<select id="selectList" resultType="boardDto" parameterType="map">
 	SELECT B.*
 		FROM (SELECT A.*, ROWNUM AS RNUM
-		FROM (SELECT * FROM PAGEBOARD ORDER BY BOARD_SEQ DESC)A)B
+		FROM (SELECT * FROM BOARD ORDER BY BOARD_SEQ DESC)A)B
 		WHERE RNUM BETWEEN #{to} AND #{from}
 	</select>
 	

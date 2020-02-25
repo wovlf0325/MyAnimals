@@ -19,11 +19,22 @@ import com.board.dto.PagingDto;
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+<<<<<<< HEAD
+	public BoardServlet() {
+
+	}
+
+=======
+>>>>>>> a7a019099e788969704323815a6416e80a06e1be
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
 		doPost(request, response);
+<<<<<<< HEAD
+
+=======
+>>>>>>> a7a019099e788969704323815a6416e80a06e1be
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,22 +52,30 @@ public class BoardServlet extends HttpServlet {
 			pdto.setPage(page);
 			pdto.setRows(10);
 			pdto.setPagescale(3);
+		
 			pdto.setTotalpage(biz.totalPage(pdto.getRows()));
+
 			List<BoardDto> list = biz.selectList(pdto);
-			request.setAttribute("pdto",pdto);
-			request.setAttribute("list", list);
+			request.setAttribute("boardPdto", pdto);
+
+			request.setAttribute("boardList", list);
+			
+	
 			dispatch("Board/answerlist.jsp", request, response);
+			
 		} else if (command.equals("writeform")) {
-			response.sendRedirect("write.jsp");
+
+			response.sendRedirect("Board/write.jsp");
+			
 		} else if (command.equals("writeres")) {
-			String writer = request.getParameter("nickname");
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
+			String writer = request.getParameter("boardNickname");
+			String title = request.getParameter("boardTitle");
+			String content = request.getParameter("boardContent");
 			BoardDto dto = new BoardDto(writer, title, content);
 
 			int res = biz.insert(dto);
 			if (res > 0) {
-				jsResponse("글 작성 성공", "answer.do?command=list", response);
+				jsResponse("글 작성 성공", "answer.do?command=list&page=1", response);
 			} else {
 				jsResponse("글 작성 실패", "answer.do?command=writeform", response);
 			}
@@ -71,13 +90,20 @@ public class BoardServlet extends HttpServlet {
 //
 //			response.sendRedirect("Board/detail.jsp");
 			System.out.println("board Servlet 도착");
+<<<<<<< HEAD
+
+			request.setAttribute("boardDto", dto);
+=======
 			request.setAttribute("dto", dto);
+>>>>>>> a7a019099e788969704323815a6416e80a06e1be
 			dispatch("reply.do?command=list", request, response);
+			//response.sendRedirect("reply.do?command=list");
+			
 
 		} else if (command.equals("updateform")) {
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
 			BoardDto dto = biz.selectOne(boardno);
-			request.setAttribute("dto", dto);
+			request.setAttribute("boardDto", dto);
 			dispatch("Board/update.jsp", request, response);
 		} else if (command.equals("updateres")) {
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
@@ -98,14 +124,14 @@ public class BoardServlet extends HttpServlet {
 
 			int res = biz.delete(boardno);
 			if (res > 0) {
-				jsResponse("글 삭제 성공", "answer.do?command=list", response);
+				jsResponse("글 삭제 성공", "answer.do?command=list&page=1", response);
 			} else {
 				jsResponse("글 삭제 실패", "answer.do?command=detail&boardno=" + boardno, response);
 			}
 		}else if (command.equals("answer")) {
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
 			BoardDto dto = biz.selectOne(boardno);
-			request.setAttribute("dto", dto);
+			request.setAttribute("boardDto", dto);
 			dispatch("Board/answerform.jsp", request, response);
 		} else if (command.equals("answerres")) {
 			int parentboardno = Integer.parseInt(request.getParameter("parentboardno"));
@@ -119,7 +145,7 @@ public class BoardServlet extends HttpServlet {
 			dto.setBoard_content(content);
 			int res = biz.insert_answer(dto);
 			if (res > 0) {
-				jsResponse("답변 작성 성공", "answer.do?command=list", response);
+				jsResponse("답변 작성 성공", "answer.do?command=list&page=1", response);
 			} else {
 				jsResponse("답변 작성 실패", "answer.do?command=answer&boardno=" + parentboardno, response);
 			}

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <% request.setCharacterEncoding("UTF-8"); %>
     <% response.setContentType("text/html; charset=UTF-8"); %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +10,41 @@
 <title>Insert title here</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+<<<<<<< HEAD
+	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
+=======
+	<link rel="stylesheet" href="/assets/css/main.css" />
+>>>>>>> a7a019099e788969704323815a6416e80a06e1be
 </head>
 <body>
-
+				
  				<header id="header">
-					<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
-					<ul class="icons">
-						<li><a href="#">로그인</a></li>
-						<li><a href="#">회원가입</a></li>
+ 				<c:choose>
+				<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
+				   <ul class="icons">
+				      <li><a href="/MyAnimals/member.do?command=myinfo">내정보</a></li>
+				      <li><a href="#">쪽지함</a></li>
+				      <li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+				   </ul>
+				</c:when>
+				<c:when test="${memberDto.member_role eq 'ADMIN' }">
+				   <ul class="icons">
+				      <li><a href="/MyAnimals/member.do?command=selectall">회원전체조회</a></li>
+				      <li><a href="/MyAnimals/member.do?command=volunteer">User조회</a></li>
+				      <li><a href="/MyAnimals/member.do?command=centerallinfo">Center조회</a></li>
+				      <li><a href="/MyAnimals/member.do?command=updateroleform">등급조정</a></li>
+				      <li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+				   </ul>
+				</c:when>
+				<c:otherwise>
+				   <ul class="icons">
+						<li><a href="/MyAnimals/member.do?command=loginform">로그인</a></li>
+						<li><a href="/MyAnimals/member.do?command=registselectres">회원가입</a></li>
 					</ul>
+				</c:otherwise>
+				</c:choose>
 				</header>
+				
 
 </body>
 </html>
