@@ -11,6 +11,13 @@
 
 <title>Insert title here</title>
 
+    <link href='fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar/daygrid/main.css' rel='stylesheet' />
+
+    <script src='fullcalendar/core/main.js'></script>
+    <script src='fullcalendar/daygrid/main.js'></script>
+
+
 </head>
 <body>
 	<h1>보호소</h1>
@@ -56,7 +63,21 @@ marker.setMap(map);
 // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 // marker.setMap(null);    
 </script>
-	
+
+
+<script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'dayGrid' ]
+        });
+
+        calendar.render();
+      });
+
+</script>
 	
 	<table border="1">
 		<tr>
@@ -72,6 +93,8 @@ marker.setMap(map);
 			<td><%=dto.getCenter_phone() %></td>
 		</tr>
 	</table>
+	
+	<div id="calendar"></div>
 	
 	
 	

@@ -8,8 +8,13 @@
 		<typeAlias type="com.member.dto.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.letter.dto.LetterDto" alias="letterDto"/>
 		<typeAlias type="com.plan.dto.planDto" alias="planDto"/>
+<<<<<<< HEAD
 		<typeAlias type="com.board.dto.BoardDto" alias="boardDto"/>
 		<typeAlias type="com.reply.dto.ReplyDto" alias="replyDto"/>
+=======
+		<typeAlias type="com.shop.dto.ShopDto" alias="shopDto"/>
+		<typeAlias type="com.alarm.dto.AlarmDto" alias="alarmDto"/>
+>>>>>>> a7a019099e788969704323815a6416e80a06e1be
 	</typeAliases>
 	
 
@@ -26,11 +31,16 @@
 	  </environments>
 	  
 	  <mappers>
+	  	<mapper resource="com/shop/db/mapper.xml"/>
 	    <mapper resource="com/member/db/mapper.xml"/>
 	    <mapper resource="com/letter/db/mapper.xml"/>
 	    <mapper resource="com/plan/db/mapper.xml"/>
+<<<<<<< HEAD
 	    <mapper resource="com/board/db/mapper.xml"/>
 	    <mapper resource="com/reply/db/mapper.xml"/>
+=======
+	    <mapper resource="com/alarm/db/mapper.xml"/>
+>>>>>>> a7a019099e788969704323815a6416e80a06e1be
 	  </mappers>
 
 </configuration>

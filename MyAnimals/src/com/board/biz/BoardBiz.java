@@ -7,8 +7,6 @@ import com.board.dto.BoardDto;
 import com.board.dto.PagingDto;
 
 public class BoardBiz {
-
-	
 	
 	private BoardDao dao = new BoardDao();
 
@@ -23,9 +21,7 @@ public class BoardBiz {
 	}
 
 	public BoardDto selectOne(int boardno) {
-		
 		this.updateHit(boardno);
-
 		return dao.selectOne(boardno);
 	}
 
