@@ -20,14 +20,14 @@
 				
  				<header id="header">
  				<c:choose>
-				<c:when test="${dto.member_role eq 'USER' || dto.member_role eq 'CENTER'}">
+				<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
 				   <ul class="icons">
 				      <li><a href="/MyAnimals/member.do?command=myinfo">내정보</a></li>
 				      <li><a href="#">쪽지함</a></li>
 				      <li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
 				   </ul>
 				</c:when>
-				<c:when test="${dto.member_role eq 'ADMIN' }">
+				<c:when test="${memberDto.member_role eq 'ADMIN' }">
 				   <ul class="icons">
 				      <li><a href="/MyAnimals/member.do?command=selectall">회원전체조회</a></li>
 				      <li><a href="/MyAnimals/member.do?command=volunteer">User조회</a></li>

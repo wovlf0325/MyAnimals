@@ -98,6 +98,10 @@ public class MemberBizImpl implements MemberBiz {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public int changePw(String id, String pw) {
+		// TODO Auto-generated method stub
+		return dao.changePw(id, pw);
+	}
 	
 
 

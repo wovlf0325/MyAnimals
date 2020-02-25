@@ -133,9 +133,9 @@ public class planServlet extends HttpServlet {
 			
 			int seq = Integer.parseInt(request.getParameter("seq"));
 			System.out.println(seq);
-			planDto dto = biz.selectOne(seq);
+			planDto planDto = biz.selectOne(seq);
 			
-			request.setAttribute("dto", dto);
+			request.setAttribute("planDto", planDto);
 			
 			dispatch("detail.jsp", request, response);
 			

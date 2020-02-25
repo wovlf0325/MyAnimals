@@ -57,19 +57,19 @@
 					<div class="features">
 						<form action="/MyAnimals/member.do" method="post" id="popuprole">
 							<input type="hidden" name="command" value="updaterolepopup">
-							<input type="hidden" name="id" value="${dto.member_id }">
+							<input type="hidden" name="id" value="${memberDto.member_id }">
 							<table>
 								<tr>
 									<th>아이디</th>
-									<td>${dto.member_id }
+									<td>${memberDto.member_id }
 									<td>
 									<td><select name="selectrole">
 											<option value="USER"
-												${dto.member_role == "USER" ? "selected" : ""}>USER</option>
+												${memberDto.member_role == "USER" ? "selected" : ""}>USER</option>
 											<option value="CENTER"
-												${dto.member_role == "CENTER" ? "selected" : ""}>CENTER</option>
+												${memberDto.member_role == "CENTER" ? "selected" : ""}>CENTER</option>
 											<option value="ADMIN"
-												${dto.member_role == "ADMIN" ? "selected" : ""}>ADMIN</option>
+												${memberDto.member_role == "ADMIN" ? "selected" : ""}>ADMIN</option>
 									</select></td>
 								</tr>
 							</table>
