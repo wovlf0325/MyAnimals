@@ -21,7 +21,7 @@ th{text-align: center !important}
 
 .col{text-align: center !important}
 
-a{border-bottom: none !important}
+a{border-bottom: none !important;text-decoration: none !important;}
 #write{
 align:right;
 background-color: #f56a6a;
@@ -34,7 +34,7 @@ height: 3.5em;
 }
 li{list-style:none;}
 
- a{text-decoration: none !important}
+
  
  .pagination{
 display: block;
@@ -121,7 +121,6 @@ int totalpage = pdto.getTotalpage();
 												<c:when test="">
 														<tr>
 															<td  class="col">${boardDto.board_seq }</td>
-															
 															<td  class="col">${boardDto.member_nickname }</td>
 															<td  class="col">${boardDto.board_regdate }</td>
 														</tr>
@@ -131,7 +130,7 @@ int totalpage = pdto.getTotalpage();
 															<td  class="col">${boardDto.board_seq }</td>
 															<c:choose>
 																<c:when test="${boardDto.board_delflag eq 'Y' }">
-																	<td  class="col">
+																	<td ><!-- col -->
 																		<c:forEach begin="1" end="${boardDto.board_titletab }">
 																			&nbsp;&nbsp;
 																		</c:forEach>
@@ -139,7 +138,7 @@ int totalpage = pdto.getTotalpage();
 																	</td>
 																</c:when>									
 																<c:otherwise>
-																	<td  class="col">
+																	<td> <!-- col -->
 																		<c:forEach begin="1" end="${boardDto.board_titletab }">
 																			&nbsp;&nbsp;
 																		</c:forEach>

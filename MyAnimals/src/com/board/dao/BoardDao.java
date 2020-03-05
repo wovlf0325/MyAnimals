@@ -13,15 +13,18 @@ public class BoardDao extends SqlMapConfig {
 
 
 
+
 	private String namespace = "boardb.";
 
 	public List<BoardDto> selectList(int to, int from) {
-		System.out.println(to);
+		
 		List<BoardDto> list = null;
+
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("to",to);
 		map.put("from",from);
+
 
 		SqlSession session = null;
 
@@ -58,7 +61,7 @@ public class BoardDao extends SqlMapConfig {
 	public int insert(BoardDto dto) {
 		int res = 0;
 		SqlSession session = null;
-
+		System.out.println(dto.getBoard_title());
 		try {
 			session = getSqlSessionFactory().openSession(false);
 			res = session.insert(namespace + "insert", dto);
@@ -124,6 +127,8 @@ public class BoardDao extends SqlMapConfig {
 			res = session.update(namespace + "answerUpdate", parentboardno);
 			if (res > 0) {
 				session.commit();
+			}else {
+				session.rollback();
 			}
 		} catch (Exception e) {
 			System.out.println("error:answerUpdate");
@@ -143,6 +148,8 @@ public class BoardDao extends SqlMapConfig {
 			res = session.insert(namespace + "answerInsert", dto);
 			if (res > 0) {
 				session.commit();
+			}else {
+				session.rollback();
 			}
 		} catch (Exception e) {
 			System.out.println("error:answerInsert");

@@ -63,12 +63,14 @@ public class planServlet extends HttpServlet {
 		System.out.println("command : " + command);
 
 		if (command.equals("select")) {
-			response.sendRedirect("selectlocal.jsp");
+			response.sendRedirect("/MyAnimals/Plan/selectlocal.jsp");
+			
 		} else if (command.equals("showxml")) {
 
 			String sido = request.getParameter("sido");
 			String gugun = request.getParameter("gugun");
 			Document doc;
+			
 			try {
 				
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -122,7 +124,7 @@ public class planServlet extends HttpServlet {
 				}
 				*/
 				
-				dispatch("board.jsp", request, response);
+				dispatch("/Plan/planBoard.jsp", request, response);
 				
 				
 
@@ -133,11 +135,12 @@ public class planServlet extends HttpServlet {
 			
 			int seq = Integer.parseInt(request.getParameter("seq"));
 			System.out.println(seq);
+			
 			planDto planDto = biz.selectOne(seq);
 			
-			request.setAttribute("planDto", planDto);
+			session.setAttribute("planDto", planDto);
 			
-			dispatch("detail.jsp", request, response);
+			dispatch("/Plan/planDetail.jsp", request, response);
 			
 			
 		}
