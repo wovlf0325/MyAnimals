@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.calendar.dto.CalendarDto;
+import com.calendar.dto.VolunteerDto;
 import com.member.dto.MemberDto;
 import com.mybatis.db.SqlMapConfig;
 
@@ -24,24 +25,22 @@ public class calendarDaoImpl extends SqlMapConfig implements calendarDao {
 	}
 
 	@Override
-	public int insert(CalendarDto dto) {
+	public int insert(VolunteerDto dto) {
 		
 		
-		String resource = "com/mybatis/config.xml";
-		InputStream inputStream = null;
-		
+		SqlSession session = null;
+		int res = 0;
 		try {
-			inputStream = Resources.getResourceAsStream(resource);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			session = getSqlSessionFactory().openSession();
+			res = session.insert(namespace+"insert",dto);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("여기는 마이바티스");
 			e.printStackTrace();
+		}finally {
+			session.commit();
+			session.close();
 		}
-		
-		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		SqlSession session = sqlSessionFactory.openSession();
-		int res = session.insert("com.calendar.mapper.insert",dto);
-		session.commit();
-		session.close();
 		
 		return res;
 		
@@ -62,7 +61,7 @@ public class calendarDaoImpl extends SqlMapConfig implements calendarDao {
 	}
 	
 	@Override
-	public List<CalendarDto> getCalViewList(String member_id, String yyyyMM){
+	public List<VolunteerDto> getCalViewList(String member_id, String yyyyMM){
 		
 		/*
 		 * String resource = "com/mybatis/config.xml"; InputStream inputStream = null;
@@ -82,7 +81,7 @@ public class calendarDaoImpl extends SqlMapConfig implements calendarDao {
 		 */
 		
 		SqlSession session = null;
-		List<CalendarDto> list = null;
+		List<VolunteerDto> list = null;
 		String user = "ADMIN";
 		
 		try {

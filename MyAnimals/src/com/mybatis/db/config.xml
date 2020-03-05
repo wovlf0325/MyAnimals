@@ -34,7 +34,6 @@
 	    <mapper resource="com/member/db/mapper.xml"/>
 	    <mapper resource="com/letter/db/mapper.xml"/>
 	    <mapper resource="com/plan/db/mapper.xml"/>
-
 	    <mapper resource="com/calendar/db/mapper.xml"/>
 	    <mapper resource="com/board/db/mapper.xml"/>
 	    <mapper resource="com/reply/db/mapper.xml"/>

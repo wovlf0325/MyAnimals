@@ -281,6 +281,7 @@ public class MemberServlet extends HttpServlet {
 			session.invalidate();
 			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
 
+
 		} else if(command.equals("idChk")) {
 			String id = request.getParameter("id");
 			MemberDto memberDto = biz.idChk(id);

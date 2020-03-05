@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.calendar.dto.CalendarDto;
+import com.calendar.dto.VolunteerDto;
 
 public class Util {
 	
@@ -56,12 +57,12 @@ public class Util {
 		return (msg.length() <2)?"0"+msg:msg;
 	}
 	
-	public static String getCalView(int date, List<CalendarDto> clist) {
+	public static String getCalView(int date, List<VolunteerDto> clist) {
 		String d = isTwo(date+"");
 		String res = "";
 		
-		for(CalendarDto dto : clist) {
-			if(dto.getVolunteer_mdate().substring(6, 8).equals(d)) {
+		for(VolunteerDto dto : clist) {
+			if(dto.getVolunteer_date().substring(6, 8).equals(d)) {
 				res += "<p>"+
 							((dto.getVolunteer_title().length()>6)?
 									dto.getVolunteer_title().substring(0,6)+"...":
