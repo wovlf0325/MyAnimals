@@ -84,7 +84,6 @@ public class BoardServlet extends HttpServlet {
 
 			request.setAttribute("boardDto", dto);
 
-
 			dispatch("reply.do?command=list", request, response);
 			//response.sendRedirect("reply.do?command=list");
 			

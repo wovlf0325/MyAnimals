@@ -12,6 +12,7 @@ public class Util {
 	private String todates;
 	
 	public String getTodates() {
+		
 		return todates;
 	}
 	
@@ -57,6 +58,7 @@ public class Util {
 		return (msg.length() <2)?"0"+msg:msg;
 	}
 	
+	//삽입된 일정 띄워줌
 	public static String getCalView(int date, List<VolunteerDto> clist) {
 		String d = isTwo(date+"");
 		String res = "";
