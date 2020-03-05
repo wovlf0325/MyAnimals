@@ -147,7 +147,7 @@ height: 3.5em;
                 </table>
             </div>
         </div>
-        
+    </form>
         
         
 	<!-- 댓글 리스트 -->
@@ -193,7 +193,7 @@ height: 3.5em;
 		</c:choose>
 	</table>
 	
-    </form>
+    
 </div>
 					
 						
