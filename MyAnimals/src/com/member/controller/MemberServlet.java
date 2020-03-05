@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 
 import com.member.dto.MemberDto;
+
+import oracle.net.aso.r;
+
 import com.member.biz.MemberBiz;
 import com.member.biz.MemberBizImpl;
 
@@ -45,28 +48,30 @@ public class MemberServlet extends HttpServlet {
 			
 			MemberDto memberDto = biz.login(id, pw);
 			
-			if(memberDto != null) {
+			
+			
+		 if(memberDto != null) {
 				if(memberDto.getMember_delflag().equals("Y")) {
 					jsResponse("탈퇴한 회원입니다", "Member/loginpage.jsp", response);
 					
 				} else if(memberDto.getMember_delflag().equals("N")) {
 					session.setAttribute("memberDto", memberDto);
-					session.setMaxInactiveInterval(10*6000);
+					
 					
 					if(memberDto.getMember_role().equals("ADMIN")) {
-						jsResponse("환영한다 닝겐이여"+id, "realindex.jsp", response);
+						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
 					}else if(memberDto.getMember_role().equals("USER")){
 						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
 					}else if(memberDto.getMember_role().equals("CENTER")) {
-						jsResponse("환영합니다"+id, "realindex.jsp", response);
+						jsResponse("환영합니다"+id, "main.jsp", response);
+
 					}
-					else {
-						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "/MyAnimals/realindex.jsp", response);
-					}
+					
+			}else{
+						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
 				}
-				
 		}
-			//유저전체정보
+			//유저전체정보'0
 		}else if(command.equals("selectall")) {
 			List<MemberDto> list = biz.selectList();
 			request.setAttribute("memberList", list);
@@ -112,9 +117,9 @@ public class MemberServlet extends HttpServlet {
 			
 			int res = biz.updateRole(id, role);
 			if(res > 0) {
-				jsResponse("등급이 변경되었습니다.", "Member/updaterolepage.jsp", response);
+				jsResponse("등급이 변경되었습니다.", "Member/main.jsp", response);
 			}else {
-				jsResponse("등급 조정 실패", "Member/updaterolepage.jsp", response);
+				jsResponse("등급 조정 실패", "Member/main.jsp", response);
 			}
 			
 	}else if(command.equals("loginform")) {
@@ -229,10 +234,19 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 		}else if(command.equals("myinfo")) {
-			response.sendRedirect("Member/myinfoform.jsp");
+			String id = request.getParameter("id");
+			MemberDto one = biz.selectOne(id);
+			request.setAttribute("one", one);
+			dispatch("Member/myinfoform.jsp", request, response);
 			
 		}else if(command.equals("updateuserform")) {
-			response.sendRedirect("Member/updateuser.jsp");
+			String id = request.getParameter("id");
+			
+			MemberDto one = biz.selectOne(id);
+			
+			request.setAttribute("one", one);
+			
+			dispatch("Member/updateuser.jsp", request, response);
 			
 		}else if(command.equals("updateuserres")) {
 			String pw = request.getParameter("pw");
@@ -254,8 +268,7 @@ public class MemberServlet extends HttpServlet {
 			session.setAttribute("memberDto", memberDto);
 			
 			if(res > 0) {
-
-				jsResponse("수정 되셨다", "Member/myinfoform.jsp", response);
+				jsResponse("수정 되셨다", "main.jsp", response);
 			}else {
 				historyBack(response);
 			}
@@ -272,20 +285,18 @@ public class MemberServlet extends HttpServlet {
 			
 			
 			if(res > 0) {
-				jsResponse("계정삭제완료", "/MyAnimals/realindex.jsp", response);
+				jsResponse("계정삭제완료", "main.jsp", response);
 			}else {
 				historyBack(response);
 			}
 			
 		}else if(command.equals("logout")) {
 			session.invalidate();
-<<<<<<< HEAD
 
-			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
-=======
-			jsResponse("로그아웃됬다", "realindex.jsp", response);
->>>>>>> 38c232f141cde892e5d7d6b55d4e8b98014b2256
+			jsResponse("로그아웃됬다", "main.jsp", response);
+
 			
+
 		} else if(command.equals("idChk")) {
 			String id = request.getParameter("id");
 			MemberDto memberDto = biz.idChk(id);

@@ -16,7 +16,7 @@
 		if (confirm("정말 변경 하시겠습니까??") == true) { //확인
 			document.getElementById("popuprole").submit();
 
-			opener.location.href = 'realindex.jsp';
+			opener.location.href = 'main.jsp';
 			self.close();
 		} else { //취소
 

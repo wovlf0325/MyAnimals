@@ -1,7 +1,6 @@
 <%@page import="com.board.dto.PagingDto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <!--
@@ -17,8 +16,10 @@
 <head>
 <style type="text/css">
    th{text-align: center !important}
+   
    table{margin: auto;width: 100%;}
-#update{
+   
+   #update{
 background-color: #f56a6a !important;
 color: #ffffff !important;
 font-family: "Roboto Slab", serif;
@@ -152,6 +153,7 @@ height: 3.5em;
 	<!-- 댓글 리스트 -->
 	<h2>CommentList</h2>
 	<table border="1" style="margin: auto;width: 100%">
+	
 		<col width="100">
 		<col width="100">
 		<col width="200">
@@ -178,6 +180,10 @@ height: 3.5em;
 								<td>${replyDto.reply_content }</td>
 								<td>
 								<fmt:formatDate value="${replyDto.reply_regdate }" pattern="YYYY/MM/dd" type="date"/>
+								</td>
+								<td>
+									<input type="button" value="update" onclick="location.href='reply.do?command=update&replyno=${replyDto.reply_seq}'">
+								    <input type="button" value="delete" onclick="location.href='reply.do?command=delete&replyno=${replyDto.reply_seq}'">
 								</td>
 							</tr>
 						

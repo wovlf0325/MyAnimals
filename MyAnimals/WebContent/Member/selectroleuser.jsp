@@ -37,7 +37,7 @@
 				<section>
 					<header class="major">
 
-						<h1>전체회원정보(탈퇴한 회원 포함)</h1>
+						<h1>USER전체정보</h1>
 					</header>
 					<div class="features">
 						<table border="1">
