@@ -1,3 +1,4 @@
+<%@page import="com.member.dto.MemberDto"%>
 <%@page import="com.shop.dto.ShopDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,9 +13,10 @@
 </head>
 
 <body>
-	<%
-		List<ShopDto> list = (List<ShopDto>) request.getAttribute("list");
-	%>
+<%
+	ShopDto shopDto = (ShopDto)request.getAttribute("shopDto");
+%>
+	
 
 	<head>
 		<title>MyAnimals</title>
@@ -22,6 +24,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
+	<script type="text/javascript">
+		function inNumber() {
+			if (event.keyCode < 48 || event.keyCode > 57) {
+				event.returnValue = false;
+			}
+		}
+	</script>
 
 	<body class="is-preload">
 
@@ -34,46 +43,54 @@
 
 					<!-- Header -->
 					<header id="header">
-						<strong>후원물품</strong>
+						<a href="index.html" class="logo"><strong>후원물품</strong></a>
 						<ul class="icons">
-							<li><a href="shop.do?command=insert" class="button big">후원 등록하기</a></li>
 						</ul>
 					</header>
-					<input type="text" name="what">
-					<input type="button" value="검색" onclick="location.href='shop.do?command=search'"> 
-
-					<!-- Section -->
-					<section>
-						<c:choose>
-							<c:when test="${empty list }">
-								<div class="posts">
-									<article>
-										<p>------------상품이 존재하지 않습니다.----------------</p>
-									</article>
+					<section id="banner">
+						<form action="/MyAnimals/shopinsert.do" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="command" value="updateres">
+							<input type="hidden" name="shop_seq" value="<%=shopDto.getShop_seq()%>">
+							
+							<div class="row gtr-uniform">
+								<div class="col-12">
+									<span class="image object"> <img src="${shopDto.shop_photo}" style="width: 500px; height: 400px;"/></span>
 								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="posts">
-									<c:forEach items="${list }" var="dto">
-										<article>
-											<a href="shop.do?command=detail&shop_seq=${dto.shop_seq}" class="image"><img
-													src="images/pic01.jpg" alt="" /></a>
-											<h3>${dto.shop_name }</h3>
-
-											<p>${dto.shop_content }</p>
-											<ul class="actions">
-												<li>
-													${dto.shop_price }
-												</li>
-											</ul>
-										</article>
-									</c:forEach>
+								<div class="col-6 col-12-xsmall">
+									<input type="text" name="shop_name" id="demo-name" value="<%=shopDto.getShop_name() %>" placeholder="Name" required="required"/>
 								</div>
-							</c:otherwise>
-						</c:choose>
+								<div class="col-12">
+									<select name="shop_kind" id="demo-category" required="required">
+										<option>종류</option>
+										<option>Manufacturing</option>
+										<option>Shipping</option>
+										<option>Administration</option>
+										<option>Human Resources</option>
+									</select>
+									
+								</div>
+								<div class="col-6 col-12-xsmall">
+									<input type="text" name="shop_price" id="demo-email" value="<%=shopDto.getShop_price() %>" required="required" placeholder="가격" onkeypress="inNumber();" />
+								</div>
+								<div class="col-6 col-12-xsmall">
+									<input type="text" name="shop_quantity" required="required" id="demo-email" value="<%=shopDto.getShop_quantity() %>" placeholder="수량" onkeypress="inNumber();" />
+								</div>
+								<div class="col-12">
+									<textarea name="shop_content" id="demo-message" placeholder="제품 설명을 작성해 주세요" rows="6"><%=shopDto.getShop_content() %></textarea>
+								</div>
+								
+								
 
+								<ul class="actions">
+									<li><input type="submit" value="수정하기"></li>
+									<li>
+										<input type="file" name="file" accept=".png,.jsp"
+											class="button icon solid fa-download">
+									</li>
+								</ul>
+							</div>
+						</form>
 					</section>
-
 				</div>
 			</div>
 

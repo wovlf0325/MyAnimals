@@ -56,7 +56,7 @@ public class MemberServlet extends HttpServlet {
 					
 				} else if(memberDto.getMember_delflag().equals("N")) {
 					session.setAttribute("memberDto", memberDto);
-					session.setMaxInactiveInterval(10*6000);
+					
 					
 					if(memberDto.getMember_role().equals("ADMIN")) {
 						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
@@ -64,7 +64,9 @@ public class MemberServlet extends HttpServlet {
 						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
 					}else if(memberDto.getMember_role().equals("CENTER")) {
 						jsResponse("환영합니다"+id, "main.jsp", response);
+
 					}
+					
 			}else{
 						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
 				}
@@ -124,7 +126,9 @@ public class MemberServlet extends HttpServlet {
 			response.sendRedirect("Member/loginpage.jsp");
 			
 		}else if(command.equals("registselectres")) {
-			response.sendRedirect("Member/registselect.jsp");
+			request.setAttribute("name", request.getAttribute("name"));
+			request.setAttribute("email", request.getAttribute("email"));
+			dispatch("Member/registselect.jsp", request, response);
 			
 		}else if(command.equals("registcenter")) {
 			response.sendRedirect("Member/registcenterform.jsp");
@@ -174,7 +178,16 @@ public class MemberServlet extends HttpServlet {
 			
 			
 		}else if(command.equals("registuser")) {
-			response.sendRedirect("Member/registform.jsp");
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			
+			System.out.println(name);
+			System.out.println(email);
+			
+			request.setAttribute("name", request.getAttribute("name"));
+			request.setAttribute("email", request.getAttribute("email"));
+			
+			dispatch("Member/registform.jsp", request, response);
 			
 			
 		}else if(command.equals("registres")) {
@@ -281,6 +294,7 @@ public class MemberServlet extends HttpServlet {
 			session.invalidate();
 			jsResponse("로그아웃됬다", "main.jsp", response);
 			
+
 		} else if(command.equals("idChk")) {
 			String id = request.getParameter("id");
 			MemberDto memberDto = biz.idChk(id);

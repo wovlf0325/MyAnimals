@@ -45,7 +45,6 @@ public class ShopDaoImpl extends SqlMapConfig implements ShopDao {
 
 	@Override
 	public int insertShopList(ShopDto dto) {
-
 		int res = 0;
 		SqlSession session = null;
 
@@ -55,8 +54,8 @@ public class ShopDaoImpl extends SqlMapConfig implements ShopDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-			session.close();
 			session.commit();
+			session.close();
 		}
 		return res;
 	}
@@ -73,8 +72,8 @@ public class ShopDaoImpl extends SqlMapConfig implements ShopDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-			session.close();
 			session.commit();
+			session.close();
 		}
 		return res;
 	}
@@ -89,8 +88,8 @@ public class ShopDaoImpl extends SqlMapConfig implements ShopDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-			session.close();
 			session.commit();
+			session.close();
 		}
 		return res;
 
@@ -116,7 +115,7 @@ public class ShopDaoImpl extends SqlMapConfig implements ShopDao {
 			session.close();
 		}
 
-		System.out.println(list.get(0).getShop_content());
+		
 		return list;
 	}
 
