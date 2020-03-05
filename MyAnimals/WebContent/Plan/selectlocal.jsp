@@ -5,9 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<meta charset="utf=8"/>
+	<meta name="viewport" content="width=device-width, inital-scale=1, user-scalable-no"/>
+	<link rel="stylesheet" href="../assets/css/main.css">
+	
+	<style type="text/css">
+	
+	select{
+		display: inline !important;
+		width: 100px !important;
+	}
+	
+	</style>
+
 </head>
-<body>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<body class="is-preload">
+
+	<!-- Wapper -->
+	<div id="wrapper">
+	
+		<!-- main -->
+		<div id="main">
+			<div class="inner">
+
+
+<%@include file="../form/header.jsp" %>
+
+
+<section>
+<div class="features">
+
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
 		$('document').ready(
 			function () {
@@ -94,12 +124,29 @@
 
 			});
 	</script>
-	<form action="planServlet" method="post">
+	<form action="/MyAnimals/planServlet" method="post">
 		<input type="hidden" name="command" value="showxml">
 		<select name="sido" id="sido"></select>
-		<select name="gugun" id="gugun"></select>
+		<select name="gugun" id="gugun"> </select>
 		<input type="submit" value="검색">
 	</form>
+		</div>
+	</section>
+	
+	</div>
+		</div>
+	<!-- 사이드바 시작 -->
+	
+<%@ include file = "../form/footer.jsp" %>
 
+<!-- 사이드바 끝 -->	
+	</div>
+	
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/browser.min.js"></script>
+	<script src="../assets/js/breakpoints.min.js"></script>
+	<script src="../assets/js/util.js"></script>
+	<script src="../assets/js/main.js"></script>
+	
 </body>
 </html>

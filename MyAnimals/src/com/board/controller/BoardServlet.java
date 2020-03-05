@@ -19,7 +19,6 @@ import com.board.dto.PagingDto;
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -56,14 +55,14 @@ public class BoardServlet extends HttpServlet {
 			
 		} else if (command.equals("writeform")) {
 
-			response.sendRedirect("Board/write.jsp");
-			
+			//response.sendRedirect("Board/write.jsp");
+			dispatch("Board/write.jsp", request, response);
 		} else if (command.equals("writeres")) {
-			String writer = request.getParameter("boardNickname");
-			String title = request.getParameter("boardTitle");
-			String content = request.getParameter("boardContent");
+			String writer = request.getParameter("nickname");
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
 			BoardDto dto = new BoardDto(writer, title, content);
-
+            System.out.println(title);
 			int res = biz.insert(dto);
 			if (res > 0) {
 				jsResponse("글 작성 성공", "answer.do?command=list&page=1", response);
@@ -81,6 +80,7 @@ public class BoardServlet extends HttpServlet {
 //
 //			response.sendRedirect("Board/detail.jsp");
 			System.out.println("board Servlet 도착");
+
 
 			request.setAttribute("boardDto", dto);
 
@@ -121,17 +121,24 @@ public class BoardServlet extends HttpServlet {
 			BoardDto dto = biz.selectOne(boardno);
 			request.setAttribute("boardDto", dto);
 			dispatch("Board/answerform.jsp", request, response);
+			
 		} else if (command.equals("answerres")) {
+			
 			int parentboardno = Integer.parseInt(request.getParameter("parentboardno"));
+			
 			String writer = request.getParameter("nickname");
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
+			
 			BoardDto dto = new BoardDto();
+			
 			dto.setBoard_seq(parentboardno);
 			dto.setMember_nickname(writer);
 			dto.setBoard_title(title);
 			dto.setBoard_content(content);
+			
 			int res = biz.insert_answer(dto);
+			
 			if (res > 0) {
 				jsResponse("답변 작성 성공", "answer.do?command=list&page=1", response);
 			} else {

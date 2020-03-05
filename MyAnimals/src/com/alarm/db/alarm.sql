@@ -20,4 +20,8 @@ SELECT VOLUNTEER_title,volunteer_date FROM VOLUNTEER where volunteer_seq in (SEL
 
 select * from volunteer;
 select * from apply;
-insert into apply values(2,29,'a',123123,'a','a');
+insert into apply values(0,31,'ADMIN',123123,'ADMIN','ADMIN');
+
+select * from member;
+
+delete from apply where apply_seq = 2;
