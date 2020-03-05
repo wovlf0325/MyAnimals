@@ -108,10 +108,7 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-								<tr>
-									<td><input type="button" value="메인"
-										onclick="location.href='Member/adminmain.jsp'"></td>
-								</tr>
+								
 							</table>
 						</form>
 					</div>

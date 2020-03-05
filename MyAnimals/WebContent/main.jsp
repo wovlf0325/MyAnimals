@@ -10,38 +10,41 @@
 <html>
 <!--icon brands fa-snapchat-ghost-->
 <style>
-	.nav-counter {
-		position: absolute;
-		top: -1px;
-		right: 1px;
-		min-width: 8px;
-		height: 20px;
-		line-height: 20px;
-		margin-top: -11px;
-		padding: 0 6px;
-		font-weight: normal;
-		font-size: small;
-		color: white;
-		text-align: center;
-		text-shadow: 0 1px rgba(0, 0, 0, 0.2);
-		background: #e23442;
-		border: 1px solid #911f28;
-		border-radius: 11px;
-		background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
-		background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
-		background-image: -o-linear-gradient(top, #e8616c, #dd202f);
-		background-image: linear-gradient(to bottom, #e8616c, #dd202f);
-		-webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
-		box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
-	}
+.nav-counter {
+	position: absolute;
+	top: -1px;
+	right: 1px;
+	min-width: 8px;
+	height: 20px;
+	line-height: 20px;
+	margin-top: -11px;
+	padding: 0 6px;
+	font-weight: normal;
+	font-size: small;
+	color: white;
+	text-align: center;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+	background: #e23442;
+	border: 1px solid #911f28;
+	border-radius: 11px;
+	background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
+	background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
+	background-image: -o-linear-gradient(top, #e8616c, #dd202f);
+	background-image: linear-gradient(to bottom, #e8616c, #dd202f);
+	-webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px
+		rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px
+		rgba(0, 0, 0, 0.12);
+}
 </style>
 
 <head>
-	<title>MyAnimals</title>
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+<title>MyAnimals</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 
@@ -57,20 +60,42 @@
 				<header id="header">
 					<a href="index.html" class="logo"><strong>MyAnimals</strong></a>
 					<c:choose>
+						<c:when
+							test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
+							<ul class="icons">
+								<li><a href="/MyAnimals/member.do?command=myinfo">내정보</a></li>
+								<li><a href="#">쪽지함</a></li>
+								<li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+							</ul>
+						</c:when>
+						<c:when test="${memberDto.member_role eq 'ADMIN' }">
+							<ul class="icons">
+								<li><a href="/MyAnimals/member.do?command=selectall">회원전체조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=volunteer">User조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=centerallinfo">Center조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=updateroleform">등급조정</a></li>
+								<li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+							</ul>
+						</c:when>
 						<c:when test="${empty dto }">
 							<ul class="icons">
-								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
-										style="position: relative;"><span class="nav-counter"
-											style="display: none;"></span></a></li>
+								<li><a href="#" id="alarm"
+									class="icon brands fa-snapchat-ghost"
+									style="position: relative;"><span class="nav-counter"
+										style="display: none;"></span></a></li>
 								<input type="button" onclick="location.href='Member/loginpage.jsp'" value="로그인">
 								<input type="button" onclick="location.href='Member/registselect.jsp'" value="회원가입">
 							</ul>
 						</c:when>
 						<c:otherwise>
 							<ul class="icons">
-								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
-										style="position: relative;"><span class="nav-counter" style="display: none;"></span></a></li>
+								<li><a href="#" id="alarm"
+									class="icon brands fa-snapchat-ghost"
+									style="position: relative;"><span class="nav-counter"
+										style="display: none;"></span></a></li>
 								<input type="button" onclick="location.href='/MyAnimals/member.do?command=myinfo'" value="내정보">
+								<li><a href="#">쪽지함</a></li>
+								<li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
 							</ul>
 						</c:otherwise>
 					</c:choose>
@@ -78,31 +103,31 @@
 
 
 				<script type="text/javascript">
-					$("#alarm").click(function () {
+					$("#alarm").click(function() {
 
 					})
 					$(document).ready(
-						function () {
-							var currentDate = new Date();
-							var divClock = document
-								.getElementById("timecheck");
-							var msg = currentDate.getFullYear() + ""
-								+ currentDate.getMonth() + ""
-								+ currentDate.getDate();
-							divClock.innerText = msg;
-							$.ajax({
-								url: "alarm.do",
-								type: "POST",
-								dataType: "String",
-								data: {
-									'date': msg
-								},
-								success: function (data) {
-								},
-								error: function (request, status, error) {
-								}
+							function() {
+								var currentDate = new Date();
+								var divClock = document
+										.getElementById("timecheck");
+								var msg = currentDate.getFullYear() + ""
+										+ currentDate.getMonth() + ""
+										+ currentDate.getDate();
+								divClock.innerText = msg;
+								$.ajax({
+									url : "alarm.do",
+									type : "POST",
+									dataType : "String",
+									data : {
+										'date' : msg
+									},
+									success : function(data) {
+									},
+									error : function(request, status, error) {
+									}
+								});
 							});
-						});
 				</script>
 				<div id="timecheck"></div>
 
@@ -132,8 +157,7 @@
 								<li><a href="#">Ipsum Adipiscing</a></li>
 								<li><a href="#">Tempus Magna</a></li>
 								<li><a href="#">Feugiat Veroeros</a></li>
-							</ul>
-						</li>
+							</ul></li>
 					</ul>
 				</nav>
 
@@ -141,8 +165,9 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<p class="copyright">
-						&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>.
-						Design: <a href="https://html5up.net">HTML5 UP</a>.
+						&copy; Untitled. All rights reserved. Demo Images: <a
+							href="https://unsplash.com">Unsplash</a>. Design: <a
+							href="https://html5up.net">HTML5 UP</a>.
 					</p>
 				</footer>
 

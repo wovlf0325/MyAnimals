@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 function forgot(){
-	open("/MyAnimals/emailchk.do?command=forgotinfo","","width=600,height=400");
+	open("/MyAnimals/emailchk.do?command=forgotinfo","","width=300,height=300");
 }
 </script>
 </head>
