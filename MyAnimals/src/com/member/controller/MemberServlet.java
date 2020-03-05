@@ -65,9 +65,9 @@ public class MemberServlet extends HttpServlet {
 					}else if(memberDto.getMember_role().equals("CENTER")) {
 						jsResponse("환영합니다"+id, "main.jsp", response);
 					}
-			}else{
-						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
-				}
+			}
+		}else{
+			jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
 		}
 			//유저전체정보'0
 		}else if(command.equals("selectall")) {
