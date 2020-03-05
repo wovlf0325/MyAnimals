@@ -42,6 +42,8 @@ public class LetterServlet extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("letter : " + command);
 		
+		PrintWriter out = response.getWriter();
+		
 		if(command.equals("sendList")) {
 			String id = request.getParameter("id");
 			List<LetterDto> list = biz.sendList(id);
@@ -52,7 +54,7 @@ public class LetterServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			List<LetterDto> list = biz.receiveList(id);
 			request.setAttribute("letterList", list);
-			dispatch("/Letter/receiveList.jsp", request, response);
+			dispatch("/Letter/letter.jsp", request, response);
 			
 		} else if(command.equals("detail")) {
 			String id = request.getParameter("id");
@@ -78,7 +80,11 @@ public class LetterServlet extends HttpServlet {
 			
 			int res = biz.insert_letter(dto);
 			if(res > 0) {
-				System.out.println("작성 성공");
+				out.println("<script type='text/javascript'>");
+				out.println("alert('작성 성공');");
+				out.println("opener.location.reload();");
+				out.println("self.close();");
+				out.println("</script>");
 			} else {
 				System.out.println("작성 실패");
 				// jsResponse("작성 실패", "/Letter/letter.jsp", response);
@@ -90,9 +96,13 @@ public class LetterServlet extends HttpServlet {
 			
 			int res = biz.delete_letter(id, seq);
 			if(res > 0) {
-				jsResponse("삭제 성공", "/MyAnimals/letter.do?command=receiveList&id="+id, response);
+				out.println("<script type='text/javascript'>");
+				out.println("alert('삭제 성공');");
+				out.println("opener.location.reload();");
+				out.println("self.close();");
+				out.println("</script>");
 			} else {
-				jsResponse("삭제 실패", "/Letter/letter.jsp", response);
+				jsResponse("삭제 실패", "Letter/letter.jsp", response);
 			}
 			
 		}

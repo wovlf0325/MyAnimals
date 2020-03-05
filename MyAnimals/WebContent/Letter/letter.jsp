@@ -1,12 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Editorial by HTML5 UP</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+<title>Editorial by HTML5 UP</title>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<style type="text/css">
+table a {
+	text-decoration: none;
+}
+
+table a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+table a:hover {
+	color: red;
+}
+
+table{
+	display: block;
+}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		var reads = document.getElementsByName("read");
+		var readChks = document.getElementsByName("readChk");
+		console.log(reads);
+		console.log(readChks);
+		for (var i = 0; i < reads.length; i++) {
+			console.log(reads[i].value);
+			console.log(readChks[i]);
+			if (reads[i].value == 'N') {
+				readChks[i].style.fontWeight = "bold";
+				readChks[i].style.color = "#f66a78";
+			}
+		}
+	};
+
+	function allChk(bool) {
+		var chks = document.getElementsByName("chk");
+		for (var i = 0; i < chks.length; i++) {
+			chks[i].checked = bool;
+		}
+	}
+
+	function letter_open() {
+		var seq = $("#seq").title();
+		var id = "ADMIN" //${USER.id}
+		console.log(seq);
+		console.log(id);
+		open("/MyAnimals/letter.do?command=detail&seq=" + seq + "&id=" + id,
+				"", "width=280px, height=460px, left=650px top=100px ");
+	}
+
+	function letter_writer() {
+		open("/MyAnimals/letter.do?command=write", "",
+				"width=280px, height=460px, left=650px, top=100px ");
+	}
+</script>
 </head>
 
 <body class="is-preload">
@@ -17,9 +73,9 @@
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
-<%@ include file="/form/header.jsp" %>
+				<%@ include file="/form/header.jsp"%>
 				<!-- Header -->
-<!-- 				<header id="header">
+				<!-- 				<header id="header">
 					<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
 					<ul class="icons">
 						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
@@ -34,138 +90,71 @@
 				<!-- Banner -->
 				<section id="banner">
 					<div class="content">
-						<header>
-							<h1>MyAnimals<br/> 애니멀즈<br/>
-								by HTML5 UP</h1>
-							<p>A free and fully responsive site template</p>
-						</header>
-							<input type="button" value="받은쪽지함" onclick="location.href='/MyAnimals/letter.do?command=receiveList&id=ADMIN'"/>
-							<input type="button" value="보낸쪽지함" onclick="location.href='/MyAnimals/letter.do?command=sendList&id=ADMIN'"/>
-						
-						<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante
-							interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet
-							egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas.
-							Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
-						<ul class="actions">
-							<li><a href="#" class="button big">Learn More</a></li>
-						</ul>
-					</div>
-					<span class="image object">
-						<img src="images/pic10.jpg" alt="" />
-					</span>
-				</section>
+						<input type="button" value="받은쪽지함"
+							onclick="location.href='/MyAnimals/letter.do?command=receiveList&id=${memberDto.member_id}'" />
+						<input type="button" value="보낸쪽지함"
+							onclick="location.href='/MyAnimals/letter.do?command=sendList&id=${memberDto.member_id}'" />
+					
+					<form action="/MyAnimals/letter.do" method="post">
+						<input type="hidden" name="command" value="multidelete" /> <input
+							type="hidden" name="id" value="ADMIN" />
+						<table border="1" style="margin-left: auto; margin-right: auto;" >
+							<col width="75px">
+							<col width="100px">
+							<col width="150px">
+							<col width="250px">
+							<col width="200px">
+							<tr>
+								<th><input type="checkbox" name="all"
+									onclick="allChk(this.checked)" /></th>
+								<th>번호</th>
+								<th>보낸사람</th>
+								<th>제목</th>
+								<th>작성일</th>
+							</tr>
+							<c:choose>
+								<c:when test="${empty letterList }">
+									<tr>
+										<td colspan="5" align="center">- - - - - - - - - - 작성된
+											게시글이 없습니다. - - - - - - - - - -</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${letterList }" var="dto" >
+										<input type="hidden" name="read" value="${dto.letter_read }" />
+										<tr name="readChk">
+											<td align="center"><input type="checkbox" name="chk"
+												value="${dto.letter_seq }" /><label for="chk"></td>
+											<td align="center">${dto.letter_seq }</td>
+											<td align="center">${dto.member_from }</td>
+											<td><a
+												href="/MyAnimals/letter.do?command=detail&id=${dto.member_to }&seq=${dto.letter_seq }"
+												onclick="window.open(this.href, '','width=280px, height=480px, left=650px, top=100px ');return false;"
+												target="_blank">${dto.letter_title }</a></td>
+											<td align="center">${dto.letter_regdate }</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							<tr>
+								<td colspan="5" align="right">
+									<input type="submit" value="선택 삭제" /> 
+									<input type="button" value="쪽지 보내기" onclick="letter_writer()" />
+								</td>
+							</tr>
 
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>Erat lacinia</h2>
-					</header>
-					<div class="features">
-						<article>
-							<span class="icon fa-gem"></span>
-							<div class="content">
-								<h3>Portitor ullamcorper</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-									facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							</div>
-						</article>
-						<article>
-							<span class="icon solid fa-paper-plane"></span>
-							<div class="content">
-								<h3>Sapien veroeros</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-									facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							</div>
-						</article>
-						<article>
-							<span class="icon solid fa-rocket"></span>
-							<div class="content">
-								<h3>Quam lorem ipsum</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-									facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							</div>
-						</article>
-						<article>
-							<span class="icon solid fa-signal"></span>
-							<div class="content">
-								<h3>Sed magna finibus</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-									facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							</div>
-						</article>
-					</div>
-				</section>
-
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>Ipsum sed dolor</h2>
-					</header>
-					<div class="posts">
-						<article>
-							<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-							<h3>Interdum aenean</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-							<h3>Nulla amet dolore</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-							<h3>Tempus ullamcorper</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-							<h3>Sed etiam facilis</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-							<h3>Feugiat lorem aenean</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-							<h3>Amet varius aliquam</h3>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam
-								facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-					</div>
+						</table>
+					</form>
+				</div>
 				</section>
 
 			</div>
 		</div>
 
-<!-- 사이드바 시작  -->
-<%@ include file="/form/footer.jsp" %>
-	
-<!-- 사이드바 끝 -->
+		<!-- 사이드바 시작  -->
+		<%@ include file="/form/footer.jsp"%>
+
+		<!-- 사이드바 끝 -->
 	</div>
 
 	<!-- Scripts -->

@@ -10,15 +10,14 @@
 <title>Insert title here</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<<<<<<< HEAD
 	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
-=======
-	<link rel="stylesheet" href="/assets/css/main.css" />
->>>>>>> a7a019099e788969704323815a6416e80a06e1be
+
 </head>
 <body>
-				
+
+	
  				<header id="header">
+ 				<h2>MyAnimals</h2>
  				<c:choose>
 				<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
 				   <ul class="icons">
