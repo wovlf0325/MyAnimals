@@ -1,4 +1,5 @@
-<%@page import="com.calendar.dto.CalendarDto"%>
+<%@page import="com.plan.dto.planDto"%>
+<%@page import="com.calendar.dto.VolunteerDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.calendar.dao.Util"%>
 <%@page import="com.calendar.dao.calendarDaoImpl"%>
@@ -13,9 +14,62 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+
+	#calendar{
+		border-collapse: collapse;
+		border: 1px solid gray;
+	}
+	
+	#calendar th{
+		width: 80px;
+		border: 1px solid gray;
+	}
+	
+	#calendar td{
+		width: 80px;
+		height: 80px;
+		border: 1px solid gray;
+		text-align: left;
+		vertical-align: top;
+		position: relative;
+	}
+	a{
+	text-decoration: none;
+	color: black;
+	}
+	.clist > p {
+	font-size: 10px;
+	margin: 1px;
+	background-color: skyblue;
+	}
+	
+	.cpreview{
+		position: absolute;
+		top: -30px;
+		left: 10px;
+		background-color: skyblue;
+		width: 40px;
+		height: 40px;
+		text-align: center;
+		line-height: 49px;
+		border-radius: 40px 40px 40px 1px;
+	}
+	
+	
+
+</style>
 </head>
 <body>
 
+<script type="text/javascript">
+
+var planDto = '<% planDto planDto = (planDto)session.getAttribute("planDto"); %>';
+
+</script>
+
+	
 <%
 	Calendar cal = Calendar.getInstance(); //Singlton이라서 객체 생성 new연산자 사용 x / 한번 만들면 만들어진 애가 계속 리턴된다.
 	int year = cal.get(Calendar.YEAR);
@@ -53,7 +107,7 @@
  	//달력에 일정 표현
 	calendarDao dao = new calendarDaoImpl();
 	String yyyyMM = year +Util.isTwo(String.valueOf(month));
-	List<CalendarDto> clist = dao.getCalViewList("kh", yyyyMM); 
+	List<VolunteerDto> clist = dao.getCalViewList("ADMIN", yyyyMM); 
 	
 	
 
@@ -61,14 +115,14 @@
 	
 	<table id="calendar">
 		<caption>
-			<a href="calendar.jsp?year=<%=year-1%>&month=<%=month%>">◁</a>
-			<a href="calendar.jsp?year=<%=year%>&month=<%=month-1%>">◀</a>
+			<a href="calendar.jsp?&year=<%=year-1%>&month=<%=month%>">◁</a>
+			<a href="calendar.jsp?&year=<%=year%>&month=<%=month-1%>">◀</a>
 			
 			<span class="y"><%=year %></span>년
 			<span class="m"><%=month %></span>월
 			
-			<a href="calendar.jsp?year=<%=year%>&month=<%=month+1%>">▶</a>
-			<a href="calendar.jsp?year=<%=year+1%>&month=<%=month%>">▷</a>
+			<a href="calendar.jsp?&year=<%=year%>&month=<%=month+1%>">▶</a>
+			<a href="calendar.jsp?&year=<%=year+1%>&month=<%=month%>">▷</a>
 		</caption>
 		
 		<tr>
@@ -84,10 +138,7 @@
 %>
 	<td>
 		<a class="countview" href="calendar.do?command=list&year=<%=year%>&month=<%=month%>&date=<%=i%>" style="color:<%=Util.fontColor(i,dayOfWeek)%>"><%=i %></a>
-		<a href="insertcalboard.jsp?year=<%=year%>&month=<%=month%>&date=<%=i%>&lastday=<%=lastDay%>">
-			<img alt="일정추가" src="img/pen.png" style="width: 10px;" height="10px;">	
-		</a>
-		<div class="clist">
+		<div class="clist" onclick="location.href='calendar.do?command=volunteerApply&year=<%=year%>&month=<%=month%>&date=<%=i%>'">
 			<%=Util.getCalView(i, clist) %>
 		</div>
 	</td>
@@ -108,11 +159,7 @@
 		</tr>
 
 	</table>
-	
-	<div id="al">
-		<img alt="아이콘" src="">
-	</div>
-	
+
 
 </body>
 </html>

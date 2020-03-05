@@ -5,10 +5,14 @@
 <mapper namespace="reply">
 
 	<select id="selectList" parameterType="int" resultType="replyDto">
-	SELECT * FROM REPLY ORDER BY REPLY_SEQ DESC
+	SELECT * FROM REPLY WHERE BOARD_SEQ = #{board_seq} ORDER BY REPLY_SEQ DESC
 	</select>
 	<insert id="insert" parameterType="replyDto">
 	INSERT INTO REPLY VALUES(REPLY_SEQSEQ.NEXTVAL,#{board_seq},#{member_id},#{reply_content},SYSDATE)
 	</insert>
+	
+	<update id="update" parameterType="replyDto">
+	UPDATE REPLY SEQ REPLY_CONTENT = #{reply_content} WHERE REPLY_SEQ = #{reply_seq}
+	</update>
 
 </mapper>

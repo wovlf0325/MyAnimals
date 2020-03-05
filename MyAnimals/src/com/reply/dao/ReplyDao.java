@@ -12,9 +12,10 @@ public class ReplyDao extends SqlMapConfig{
 
 	
 	private String namespace = "reply.";
+	
 	public List<ReplyDto> selectList(int board_seq ) {
 		System.out.println(board_seq);
-		List<ReplyDto> list=null;
+		List<ReplyDto> list = null;
 		SqlSession session = null;
 		
 		try {
@@ -31,11 +32,7 @@ public class ReplyDao extends SqlMapConfig{
 		
 	}
 
-	public ReplyDto selectOne(int reply_seq) {
-
-		return null;
-
-	}
+	
 
 	public int insert(ReplyDto dto) {
 

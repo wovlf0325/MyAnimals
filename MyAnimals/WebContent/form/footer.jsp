@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="js/weatherajax.js"></script>
 </head>
 <body>
 
@@ -48,18 +50,69 @@
 						<h2>Ante interdum</h2>
 					</header>
 					<div class="mini-posts">
-						<article>
-							<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
-							<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-						</article>
+						 <table border="1">
+						    	<tr>
+						    		<td colspan="8" bgcolor="skyblue"><b>지      역</b></td>
+						    	</tr>
+						    	<tr>
+						    		<td colspan="3">주소를 선택하세요
+						    			<select id="address"> 
+						    				<option value="1168064000">서울시 강남구 역삼1동</option>
+						    				<option value="1135064000">서울시 노원구 상계2동</option>
+						    				<option value="4221056000">강원도 속초시 교동</option>
+						    				<option value=""> </option>
+						    			</select>	    		
+						    	     </td>
+						    	     <td>
+						    	     	<input type="button" id="weaview" value="날씨보기">
+						    	     </td>
+						    	</tr>
+						    	<tr>
+						    		<td>좌표</td>
+						    		<td colspan="3">
+						    		위도:<input type="text" id="x" readonly="readonly">
+						    		경도:<input type="text" id="y" readonly="readonly">
+						    		</td>
+						    	</tr>
+						    	<tr>
+						    		<td colspan="4" bgcolor="skyblue"><b>현재날씨</b></td>
+						    	</tr>
+						    	<tr>
+						    		<td>기준시간</td>
+						    		<td colspan="2" >
+						    			<input type="text" id="pubDate" size="50%" readonly="readonly">
+						    		</td>
+						    		<td rowspan="5" align="center">
+						    			<img alt="날씨정보" src="" id="weather_img"  width="150" height="150">
+						    		</td>
+						    	</tr>
+						    	<tr>
+						    		<td>날씨</td>
+						    		<td colspan="2">
+						    			<input type="text" id="wfKor" readonly="readonly">
+						    		</td>
+						    	</tr>
+						    	<tr>
+						    		<td>기온</td>
+						    		<td colspan="2">
+						    			<input type="text" id="temp" readonly="readonly">
+						    		</td>
+						    	</tr>
+						    	<tr>
+						    		<td>습도</td>
+						    		<td colspan="2">
+						    			<input type="text" id="reh" readonly="readonly">
+						    		</td>
+						    	</tr>
+						    	<tr>
+						    		<td>강수확률</td>
+						    		<td colspan="2">
+						    			<input type="text" id="pop" readonly="readonly">
+						    		</td>
+						    	</tr>
+						    </table>
+						
+						
 					</div>
 					<ul class="actions">
 						<li><a href="#" class="button">More</a></li>

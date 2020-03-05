@@ -63,6 +63,9 @@ public class ReplyServlet extends HttpServlet {
 				jsResponse("댓글 실패", "board.do?command=detail", response);
 			}
 			
+		}else if(command.equals("update")) {
+			int reply_seq = Integer.parseInt(request.getParameter("replyno"));
+		
 		}
 	}
 	

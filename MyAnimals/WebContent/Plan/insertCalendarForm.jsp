@@ -18,7 +18,7 @@ $(function(){
 </script>
 
 <%  CalendarDto calendarDto = new CalendarDto(); %>
-<% int Center_seq = (int)(request.getAttribute("Center_seq")); %>
+<% String Member_id = (String)(request.getAttribute("Member_id")); %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -27,6 +27,7 @@ $(function(){
 		<h1>봉사일정 등록</h1>
 			<form action="calendar.do" method="post">
 				<input type="hidden" name="command" value="insert"/>
+				<input type="hidden" name="Member_id" value="<%=Member_id%>"/>
 			<table border="1">
 		<tr>
 			<th>일정명</th>
@@ -47,7 +48,7 @@ $(function(){
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="일정 작성"/>
-				<input type="button" value="취소" onclick="calendar.do?command=detail&Center_seq=<%=Center_seq%>"/>
+				<input type="button" value="취소" onclick="self.close()"/>
 			</td>
 		</tr>
 	</table>
