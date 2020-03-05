@@ -78,7 +78,12 @@ public class MemberBizImpl implements MemberBiz {
 	@Override
 	public int findPw(String id, String email) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.findPw(id, email);
+	}
+	@Override
+	public int changePw(String id, String pw) {
+		// TODO Auto-generated method stub
+		return dao.changePw(id, pw);
 	}
 
 	@Override

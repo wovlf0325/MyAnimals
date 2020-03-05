@@ -10,6 +10,7 @@
 <html>
 <!--icon brands fa-snapchat-ghost-->
 <style>
+
 	.nav-counter {
 		position: absolute;
 		top: -1px;
@@ -73,11 +74,12 @@
 </style>
 
 <head>
-	<title>MyAnimals</title>
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+<title>MyAnimals</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 
@@ -93,17 +95,38 @@
 				<header id="header">
 					<a href="index.html" class="logo"><strong>MyAnimals</strong></a>
 					<c:choose>
-						<c:when test="${empty memberDto }">
+
+						<c:when
+							test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
 							<ul class="icons">
-								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
-										style="position: relative; display: none;"><span class="nav-counter"
-											style="display: none;"></span></a></li>
+								<li><a href="/MyAnimals/member.do?command=myinfo">내정보</a></li>
+								<li><a href="#">쪽지함</a></li>
+								<li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+							</ul>
+						</c:when>
+						<c:when test="${memberDto.member_role eq 'ADMIN' }">
+							<ul class="icons">
+								<li><a href="/MyAnimals/member.do?command=selectall">회원전체조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=volunteer">User조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=centerallinfo">Center조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=updateroleform">등급조정</a></li>
+								<li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+							</ul>
+						</c:when>
+						<c:when test="${empty dto }">
+							<ul class="icons">
+								<li><a href="#" id="alarm"
+									class="icon brands fa-snapchat-ghost"
+									style="position: relative;"><span class="nav-counter"
+										style="display: none;"></span></a></li>
+
 								<input type="button" onclick="location.href='Member/loginpage.jsp'" value="로그인">
 								<input type="button" onclick="location.href='Member/registselect.jsp'" value="회원가입">
 							</ul>
 						</c:when>
 						<c:otherwise>
 							<ul class="icons">
+
 								<div class="chat-bubble">
           							<div class="chat-bubble-arrow-border"></div>
           							<div class="chat-bubble-arrow"></div>
@@ -112,6 +135,7 @@
 										style="position: relative;">1<span class="nav-counter" style="display: none;"></span></a></li>
 								<input type="button" onclick="location.href='/MyAnimals/member.do?command=myinfo'" value="내정보">
 								<input type="button" value="로그아웃" onclick="location.href='/MyAnimals/member.do?command=logout'">
+
 							</ul>
 						</c:otherwise>
 					</c:choose>
@@ -119,7 +143,7 @@
 
 
 				<script type="text/javascript">
-					$("#alarm").click(function () {
+					$("#alarm").click(function() {
 
 					})
 					$(document).ready(
@@ -148,7 +172,6 @@
 								error: function (request, status, error) {
 								}
 							});
-						});
 				</script>
 				<div id="timecheck"></div>
 
@@ -178,8 +201,7 @@
 								<li><a href="#">Ipsum Adipiscing</a></li>
 								<li><a href="#">Tempus Magna</a></li>
 								<li><a href="#">Feugiat Veroeros</a></li>
-							</ul>
-						</li>
+							</ul></li>
 					</ul>
 				</nav>
 
@@ -187,8 +209,9 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<p class="copyright">
-						&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>.
-						Design: <a href="https://html5up.net">HTML5 UP</a>.
+						&copy; Untitled. All rights reserved. Demo Images: <a
+							href="https://unsplash.com">Unsplash</a>. Design: <a
+							href="https://html5up.net">HTML5 UP</a>.
 					</p>
 				</footer>
 
