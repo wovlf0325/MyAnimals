@@ -4,8 +4,8 @@
 
 
 
-	<select id="getCalView" resultType="volunteerDto" parameterType="String">
-		SELECT * FROM VOLUNTEER WHERE MEMBER_ID=#{user}
+	<select id="getCalView" resultType="volunteerDto" parameterType="map">
+		SELECT * FROM VOLUNTEER WHERE MEMBER_ID=#{member_id} AND SUBSTR(VOLUNTEER_DATE,1,6)= #{yyyyMM}
 	</select>
 	
 	<insert id="insertCalBoard" parameterType="calendarDto">

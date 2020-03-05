@@ -26,16 +26,15 @@ public class AlarmBizImpl implements AlarmBiz {
 			try {
 				for (int i = 0; i < datelist.size(); i++) {
 					Date today = sdFormat.parse(date);
-					String[] res = datelist.get(i).getVolunteer_date().split(" ");
-					String vDate = res[0].replace("-","");
-					Date volunteer_date = sdFormat.parse(vDate);
+					Date volunteer_date = sdFormat.parse(datelist.get(i).getVolunteer_date());
 					long dayLeft = (volunteer_date.getTime()-today.getTime())/(24*60*60*1000);
-					
 					if(dayLeft<=1000||dayLeft>=0) {
 						AlarmDateDto dto = new AlarmDateDto();
 						dto.setVolunteer_title(datelist.get(i).getVolunteer_title());
 						dto.setVolunteer_dayLeft((int)dayLeft);
 						list.add(dto);
+						System.out.println("alarm biz volunteer_date : "+volunteer_date);
+						System.out.println("alarm biz dayLeft : "+dayLeft);
 					}
 				}
 			} catch (ParseException e) {
