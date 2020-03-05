@@ -16,8 +16,6 @@ import org.json.simple.JSONObject;
 
 import com.member.dto.MemberDto;
 
-import oracle.net.aso.r;
-
 import com.member.biz.MemberBiz;
 import com.member.biz.MemberBizImpl;
 
@@ -48,6 +46,7 @@ public class MemberServlet extends HttpServlet {
 			
 			MemberDto memberDto = biz.login(id, pw);
 			
+
 				 if(memberDto != null) {
 						if(memberDto.getMember_delflag().equals("Y")) {
 							jsResponse("탈퇴한 회원입니다", "Member/loginpage.jsp", response);
@@ -68,7 +67,7 @@ public class MemberServlet extends HttpServlet {
 						}else{
 							jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
 						}
-				}
+				}	
 			//유저전체정보'0
 		}else if(command.equals("selectall")) {
 			List<MemberDto> list = biz.selectList();
