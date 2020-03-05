@@ -93,7 +93,7 @@
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>MyAnimals</strong></a>
+					<a href="main.jsp" class="logo"><strong>MyAnimals</strong></a>
 					<c:choose>
 
 						<c:when
@@ -193,8 +193,8 @@
 					</header>
 					<ul>
 						<li><a href="main.jsp">Homepage</a></li>
+						<li><a href="planServlet?command=select">봉사 일정</a></li>
 						<li><a href="shop.do?command=selectList">shop</a></li>
-						<li><a href="elements.html">Elements</a></li>
 						<li><span class="opener">Submenu</span>
 							<ul>
 								<li><a href="#">Lorem Dolor</a></li>
