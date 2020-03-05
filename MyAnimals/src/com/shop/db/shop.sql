@@ -14,10 +14,11 @@ CREATE TABLE shop (
 drop table shop;
 drop sequence shopseq;
 
-insert into shop values(shopseq.nextval ,'test', 'test', 1000, 1000, 'test', '');
+insert into shop values(shopseq.nextval ,'ADMIN', 'test', 'test', 1000, 1000, 'test', '');
 
 
 select * from shop where shop_name like'%he%';
 
 select * from shop;
 
+select * from member;

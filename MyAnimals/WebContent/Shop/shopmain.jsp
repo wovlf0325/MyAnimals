@@ -67,7 +67,7 @@
 				<!-- Section -->
 				<section>
 					<c:choose>
-						<c:when test="${empty list }">
+						<c:when test="${empty shopList }">
 							<div class="posts">
 								<article>
 									<h3 style="text-align: right;">상품이 존재하지 않습니다.</h3>
@@ -76,13 +76,13 @@
 						</c:when>
 						<c:otherwise>
 							<div class="posts">
-								<c:forEach items="${list }" var="shopDto">
+								<c:forEach items="${shopList }" var="shopDto">
 									<c:choose>
 										<c:when test="${shopDto.shop_quantity eq 0 }">
 											<article>
 												<div class="image">
 													<img src="${shopDto.shop_photo}" alt=""
-														style="width: 400px; height: 400px;" />
+														style="width: 400px; height: 400px; opacity: 0.2;" />
 												</div>
 												<h3>품절</h3>
 												<ul class="actions">
@@ -129,7 +129,7 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
-						<li><a href="index.html">Homepage</a></li>
+						<li><a href="main.jsp">Homepage</a></li>
 						<li><a href="generic.html">Generic</a></li>
 						<li><a href="elements.html">Elements</a></li>
 						<li><span class="opener">Submenu</span>
