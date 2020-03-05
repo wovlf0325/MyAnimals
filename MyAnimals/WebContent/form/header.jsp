@@ -10,8 +10,18 @@
 <title>Insert title here</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<<<<<<< HEAD
 	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
 
+=======
+
+
+	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
+
+	<link rel="stylesheet" href="/MyAnimals/assets/css/main.css" />
+
+
+>>>>>>> 3f334e29ce6c368cc6d64ed8a1a30cc87a98efbb
 </head>
 <body>
 
@@ -21,24 +31,24 @@
  				<c:choose>
 				<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
 				   <ul class="icons">
-				      <li><a href="/MyAnimals/member.do?command=myinfo">내정보</a></li>
-				      <li><a href="#">쪽지함</a></li>
-				      <li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+				      <li><button onclick="location.href='/MyAnimals/member.do?command=myinfo'">내정보</button></li>
+				      <li><button onclick="#">쪽지함</button></li>
+				      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
 				   </ul>
 				</c:when>
 				<c:when test="${memberDto.member_role eq 'ADMIN' }">
 				   <ul class="icons">
-				      <li><a href="/MyAnimals/member.do?command=selectall">회원전체조회</a></li>
-				      <li><a href="/MyAnimals/member.do?command=volunteer">User조회</a></li>
-				      <li><a href="/MyAnimals/member.do?command=centerallinfo">Center조회</a></li>
-				      <li><a href="/MyAnimals/member.do?command=updateroleform">등급조정</a></li>
-				      <li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+				      <li><button onclick="location.href='/MyAnimals/member.do?command=selectall'">회원전체조회</button></li>
+				      <li><button onclick="location.href='/MyAnimals/member.do?command=volunteer'">User조회</button></li>
+				      <li><button onclick="location.href='/MyAnimals/member.do?command=centerallinfo'">Center조회</button></li>
+				      <li><button onclick="location.href='/MyAnimals/member.do?command=updateroleform'">등급조정</button></li>
+				      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
 				   </ul>
 				</c:when>
 				<c:otherwise>
 				   <ul class="icons">
-						<li><a href="/MyAnimals/member.do?command=loginform">로그인</a></li>
-						<li><a href="/MyAnimals/member.do?command=registselectres">회원가입</a></li>
+						<li><button onclick="location.href='/MyAnimals/member.do?command=loginform'">로그인</button></li>
+						<li><button onclick="location.href='/MyAnimals/member.do?command=registselectres'">회원가입</button></li>
 					</ul>
 				</c:otherwise>
 				</c:choose>

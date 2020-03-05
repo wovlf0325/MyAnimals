@@ -4,12 +4,16 @@
 
 
 
-	<select id="getCalView" resultType="calendarDto" parameterType="String">
-		SELECT * FROM VOLUNTEER WHERE MEMBER_ID=#{user}
+	<select id="getCalView" resultType="volunteerDto" parameterType="map">
+		SELECT * FROM VOLUNTEER WHERE MEMBER_ID=#{member_id} AND SUBSTR(VOLUNTEER_DATE,1,6)= #{yyyyMM}
 	</select>
 	
-	<insert id="insertCalBoard" parameterType="CalendarDto">
+	<insert id="insertCalBoard" parameterType="calendarDto">
 		INSERT INTO VOUNTEER VALUES(#{member_id}, #{volunteer_title}, #{volunteer_content}, #{volunteer_mdate}, 0, SYSDATE)
+	</insert>
+	
+	<insert id="insert" parameterType="volunteerDto">
+		INSERT INTO VOLUNTEER VALUES(VOLUNTEER_SEQUENCE.NEXTVAL, 'ADMIN', #{volunteer_title}, #{volunteer_content}, #{volunteer_maxvolunteer}, 2, #{volunteer_date})
 	</insert>
 	
 </mapper>

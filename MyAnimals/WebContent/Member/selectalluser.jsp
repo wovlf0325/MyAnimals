@@ -52,6 +52,7 @@
 							<col width="auto">
 							<col width="auto">
 							<col width="auto">
+							
 							<tr>
 								<th>탈퇴여부</th>
 								<th>등급</th>
@@ -91,11 +92,7 @@
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
-							<tr>
-								<td><input type="button" value="목록"
-									onclick="location.href='/MyAnimals/member.do?command=selectall'">
-								</td>
-							</tr>
+						
 						</table>
 
 					</div>

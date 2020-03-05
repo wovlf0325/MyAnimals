@@ -3,6 +3,7 @@ package com.shop.dto;
 public class ShopDto {
 
 	private int shop_seq;
+	private String shop_owner;
 	private String shop_name;
 	private String shop_kind;
 	private int shop_price;
@@ -51,10 +52,12 @@ public class ShopDto {
 	public void setShop_photo(String shop_photo) {
 		this.shop_photo = shop_photo;
 	}
-	public ShopDto(int shop_seq, String shop_name, String shop_kind, int shop_price, int shop_quantity,
-			String shop_content, String shop_photo) {
+	
+	public ShopDto(int shop_seq, String shop_owner, String shop_name, String shop_kind, int shop_price,
+			int shop_quantity, String shop_content, String shop_photo) {
 		super();
 		this.shop_seq = shop_seq;
+		this.shop_owner = shop_owner;
 		this.shop_name = shop_name;
 		this.shop_kind = shop_kind;
 		this.shop_price = shop_price;
@@ -62,6 +65,13 @@ public class ShopDto {
 		this.shop_content = shop_content;
 		this.shop_photo = shop_photo;
 	}
+	public String getShop_owner() {
+		return shop_owner;
+	}
+	public void setShop_owner(String shop_owner) {
+		this.shop_owner = shop_owner;
+	}
+	
 	
 	
 	public ShopDto() {}
