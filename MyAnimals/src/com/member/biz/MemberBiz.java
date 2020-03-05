@@ -35,7 +35,6 @@ public interface MemberBiz {
 	// 비밀번호 찾기
 	public int findPw(String id, String email);
 	
-	public int changePw(String id, String pw);
 	// 중복체크
 	// 아이디
 	public MemberDto idChk(String id);

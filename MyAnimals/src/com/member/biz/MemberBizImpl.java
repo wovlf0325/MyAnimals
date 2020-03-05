@@ -80,11 +80,6 @@ public class MemberBizImpl implements MemberBiz {
 		// TODO Auto-generated method stub
 		return dao.findPw(id, email);
 	}
-	@Override
-	public int changePw(String id, String pw) {
-		// TODO Auto-generated method stub
-		return dao.changePw(id, pw);
-	}
 
 	@Override
 	public MemberDto idChk(String id) {
