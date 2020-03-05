@@ -11,15 +11,15 @@
 	</select>
 	
 	<insert id="insertShop" parameterType="shopDto">
-		insert into shop values (shopseq.nextval, #{shop_name}, #{shop_kind}, #{shop_price}, #{shop_quantity}, #{shop_content}, #{shop_photo})
+		insert into shop values (shopseq.nextval, #{shop_owner}, #{shop_name}, #{shop_kind}, #{shop_price}, #{shop_quantity}, #{shop_content}, #{shop_photo})
 	</insert>
 	
 	<delete id="deleteShop">
 		delete from shop where shop_seq = #{shop_seq}
 	</delete>
 	
-	<update id="updateShop">
-		update shop set shop_name = #{shop_name}, shop_kind = #{shop_kind}, shop_price=#{shop_price}, shop_quantity=#{shop_quantity}, shop_content=#{shop_content}, shop_photo= #{shop_photo}
+	<update id="updateShop" parameterType="shopDto">
+		update shop set shop_name = #{shop_name}, shop_kind = #{shop_kind}, shop_price=#{shop_price}, shop_quantity=#{shop_quantity}, shop_content=#{shop_content}, shop_photo= #{shop_photo} where shop_seq = #{shop_seq}
 	</update>
 
 	<select id="searchName" parameterType="String" resultType="shopDto">

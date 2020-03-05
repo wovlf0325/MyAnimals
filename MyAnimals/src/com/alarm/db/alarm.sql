@@ -1,8 +1,9 @@
-
+drop table alarm;
 create table alarm 
 (
 	alarm_date date
 );
+
 
 insert into alarm values (SYSDATE);
 SELECT * FROM alarm where trunc(TO_DATE(ALARM_DATE,'yyyymmdd')) - trunc(TO_DATE('20190228','yyyymmdd')) <=7
@@ -10,10 +11,13 @@ SELECT * FROM alarm where trunc(TO_DATE(ALARM_DATE,'yyyymmdd')) - trunc(TO_DATE(
 select * from alarm;
 select * from member;
 
-insert into member values (
-'a', 'a', 'a', '10', 'sasumpi123@naver.com', 'M', '경', 'USER', 'N', SYSDATE, '010-4871-5771', '성훈'
-);
 
 
 
 select * from VOLUNTEER;
+
+SELECT VOLUNTEER_title,volunteer_date FROM VOLUNTEER where volunteer_seq in (SELECT volunteer_seq FROM apply WHERE MEMBER_ID = 'a');
+
+select * from volunteer;
+select * from apply;
+insert into apply values(2,29,'a',123123,'a','a');
