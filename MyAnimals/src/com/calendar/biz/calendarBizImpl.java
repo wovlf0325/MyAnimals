@@ -5,6 +5,7 @@ import java.util.List;
 import com.calendar.dao.calendarDao;
 import com.calendar.dao.calendarDaoImpl;
 import com.calendar.dto.CalendarDto;
+import com.calendar.dto.VolunteerDto;
 
 public class calendarBizImpl implements calendarBiz {
 	
@@ -17,7 +18,7 @@ public class calendarBizImpl implements calendarBiz {
 	}
 
 	@Override
-	public int insert(CalendarDto dto) {
+	public int insert(VolunteerDto dto) {
 		// TODO Auto-generated method stub
 		return dao.insert(dto);
 	}
@@ -34,7 +35,7 @@ public class calendarBizImpl implements calendarBiz {
 		return 0;
 	}
 	
-	public List<CalendarDto> getCalViewList(String member_id, String yyyyMM){
+	public List<VolunteerDto> getCalViewList(String member_id, String yyyyMM){
 		return dao.getCalViewList(member_id, yyyyMM);
 	}
 	
