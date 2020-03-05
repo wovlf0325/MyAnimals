@@ -25,6 +25,7 @@ public class BoardServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
 		doPost(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -81,11 +82,7 @@ public class BoardServlet extends HttpServlet {
 //			response.sendRedirect("Board/detail.jsp");
 			System.out.println("board Servlet 도착");
 
-
 			request.setAttribute("boardDto", dto);
-
-			request.setAttribute("dto", dto);
-
 			dispatch("reply.do?command=list", request, response);
 			//response.sendRedirect("reply.do?command=list");
 			
