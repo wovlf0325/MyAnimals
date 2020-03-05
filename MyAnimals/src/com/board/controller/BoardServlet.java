@@ -10,14 +10,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.board.biz.BoardBiz;
 import com.board.dto.BoardDto;
 import com.board.dto.PagingDto;
+import com.member.dto.MemberDto;
+import com.reply.biz.ReplyBiz;
+import com.reply.dto.ReplyDto;
 
 @WebServlet("/answer.do")
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -80,8 +85,6 @@ public class BoardServlet extends HttpServlet {
 //
 //			response.sendRedirect("Board/detail.jsp");
 			System.out.println("board Servlet 도착");
-
-
 			request.setAttribute("boardDto", dto);
 
 			dispatch("reply.do?command=list", request, response);
@@ -144,6 +147,35 @@ public class BoardServlet extends HttpServlet {
 			} else {
 				jsResponse("답변 작성 실패", "answer.do?command=answer&boardno=" + parentboardno, response);
 			}
+		}else if(command.equals("commentres")) {
+			ReplyDto rdto = new ReplyDto();
+		    HttpSession session = request.getSession();
+		    
+			MemberDto mdto = (MemberDto)session.getAttribute("memberDto");
+		    int boardseq = Integer.parseInt(request.getParameter("boardseq"));
+			String content = request.getParameter("rcontent");
+			
+			if(mdto == null) {
+				jsResponse("로그인을 해주세요", "Member/loginpage.jsp", response);
+			} else {
+				rdto.setMember_id(mdto.getMember_id());
+			    System.out.println(mdto.getMember_id());
+				rdto.setBoard_seq(boardseq);
+				System.out.println(boardseq);
+				rdto.setReply_content(content);
+				System.out.println(content);
+				// String userid=(String)session.getAttribute("userid");
+		        //dto.setReplyer(userid);
+				
+				ReplyBiz rbiz = new ReplyBiz();
+				int res = rbiz.insert(rdto);
+				if (res > 0) {
+					jsResponse("댓글 성공", "/MyAnimals/answer.do?command=detail&boardno="+boardseq, response);
+				} else {
+					jsResponse("댓글 등록 실패", "/MyAnimals/answer.do?command=list&page=1", response);
+				}
+			}
+
 		}
 	}
 

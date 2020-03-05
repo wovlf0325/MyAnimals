@@ -178,7 +178,6 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 		}finally {
 			session.close();
 		}
-		System.out.println(dto.getMember_role());
 		return dto;
 	}
 	// 회원가입
