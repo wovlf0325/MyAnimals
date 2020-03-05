@@ -10,18 +10,11 @@
 <title>Insert title here</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<<<<<<< HEAD
 	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
-
-=======
-
-
-	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
-
 	<link rel="stylesheet" href="/MyAnimals/assets/css/main.css" />
 
 
->>>>>>> 3f334e29ce6c368cc6d64ed8a1a30cc87a98efbb
+
 </head>
 <body>
 

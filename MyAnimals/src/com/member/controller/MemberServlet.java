@@ -236,12 +236,9 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 		}else if(command.equals("myinfo")) {
-<<<<<<< HEAD
-=======
 			String id = request.getParameter("id");
 			MemberDto one = biz.selectOne(id);
 			request.setAttribute("one", one);
->>>>>>> 3f334e29ce6c368cc6d64ed8a1a30cc87a98efbb
 			dispatch("Member/myinfoform.jsp", request, response);
 			
 		}else if(command.equals("updateuserform")) {
@@ -298,11 +295,8 @@ public class MemberServlet extends HttpServlet {
 		}else if(command.equals("logout")) {
 			session.invalidate();
 
-<<<<<<< HEAD
-			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
-=======
 			jsResponse("로그아웃됬다", "main.jsp", response);
->>>>>>> 3f334e29ce6c368cc6d64ed8a1a30cc87a98efbb
+
 
 			
 
