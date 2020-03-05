@@ -10,6 +10,7 @@
 <html>
 <!--icon brands fa-snapchat-ghost-->
 <style>
+
 	.nav-counter {
 		position: absolute;
 		top: -1px;
@@ -34,14 +35,51 @@
 		-webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
 		box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
 	}
+	.chat-bubble {
+    background-color: #ededed;
+    border: 2px solid #666;
+    font-size: 15px;
+    line-height: 1.3em;
+    margin: 10px auto;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    width: 200px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    font-family: 'Bangers', arial, serif; 
+}
+.chat-bubble-arrow-border {
+    border-color: #666 transparent transparent transparent;
+    border-style: solid;
+    border-width: 20px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -42px;
+    left: 30px;
+}
+.chat-bubble-arrow {
+    border-color: #ededed transparent transparent transparent;
+    border-style: solid;
+    border-width: 20px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -39px;
+    left: 30px;
+}
 </style>
 
 <head>
-	<title>MyAnimals</title>
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+<title>MyAnimals</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 
@@ -57,21 +95,47 @@
 				<header id="header">
 					<a href="index.html" class="logo"><strong>MyAnimals</strong></a>
 					<c:choose>
-						<c:when test="${empty memberDto }">
+
+						<c:when
+							test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
 							<ul class="icons">
-								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
-										style="position: relative;"><span class="nav-counter"
-											style="display: none;"></span></a></li>
+								<li><a href="/MyAnimals/member.do?command=myinfo">내정보</a></li>
+								<li><a href="#">쪽지함</a></li>
+								<li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+							</ul>
+						</c:when>
+						<c:when test="${memberDto.member_role eq 'ADMIN' }">
+							<ul class="icons">
+								<li><a href="/MyAnimals/member.do?command=selectall">회원전체조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=volunteer">User조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=centerallinfo">Center조회</a></li>
+								<li><a href="/MyAnimals/member.do?command=updateroleform">등급조정</a></li>
+								<li><a href="/MyAnimals/member.do?command=logout">로그아웃</a></li>
+							</ul>
+						</c:when>
+						<c:when test="${empty dto }">
+							<ul class="icons">
+								<li><a href="#" id="alarm"
+									class="icon brands fa-snapchat-ghost"
+									style="position: relative;"><span class="nav-counter"
+										style="display: none;"></span></a></li>
+
 								<input type="button" onclick="location.href='Member/loginpage.jsp'" value="로그인">
 								<input type="button" onclick="location.href='Member/registselect.jsp'" value="회원가입">
 							</ul>
 						</c:when>
 						<c:otherwise>
 							<ul class="icons">
+
+								<div class="chat-bubble">
+          							<div class="chat-bubble-arrow-border"></div>
+          							<div class="chat-bubble-arrow"></div>
+        						</div>
 								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
-										style="position: relative;"><span class="nav-counter" style="display: none;"></span></a></li>
+										style="position: relative;">1<span class="nav-counter" style="display: none;"></span></a></li>
 								<input type="button" onclick="location.href='/MyAnimals/member.do?command=myinfo'" value="내정보">
 								<input type="button" value="로그아웃" onclick="location.href='/MyAnimals/member.do?command=logout'">
+
 							</ul>
 						</c:otherwise>
 					</c:choose>
@@ -79,31 +143,35 @@
 
 
 				<script type="text/javascript">
-					$("#alarm").click(function () {
+					$("#alarm").click(function() {
 
 					})
 					$(document).ready(
 						function () {
 							var currentDate = new Date();
-							var divClock = document
-								.getElementById("timecheck");
-							var msg = currentDate.getFullYear() + ""
-								+ currentDate.getMonth() + ""
-								+ currentDate.getDate();
-							divClock.innerText = msg;
+							var divClock = document.getElementById("timecheck");
+							var year = currentDate.getFullYear();
+							var month = currentDate.getMonth();
+							var date = currentDate.getDate();
 							$.ajax({
 								url: "alarm.do",
 								type: "POST",
-								dataType: "String",
+								dataType: "json",
 								data: {
-									'date': msg,
+									'year': year,
+									'month': month,
+									'date': date
 								},
-								success: function (data) {
+								success: function(data, textStatus, xhr) {
+							         $.each(data, function(key, val){
+							             console.log('key:' + key + ' / ' + 'value:' + val['volunteer_title']);
+							             console.log(val['volunteer_dayLeft']);
+							             $('.chat-bubble').append('D-day : '+val['volunteer_dayLeft'] +val['volunteer_title']+'<br>');
+							         });
 								},
 								error: function (request, status, error) {
 								}
 							});
-						});
 				</script>
 				<div id="timecheck"></div>
 
@@ -133,8 +201,7 @@
 								<li><a href="#">Ipsum Adipiscing</a></li>
 								<li><a href="#">Tempus Magna</a></li>
 								<li><a href="#">Feugiat Veroeros</a></li>
-							</ul>
-						</li>
+							</ul></li>
 					</ul>
 				</nav>
 
@@ -142,8 +209,9 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<p class="copyright">
-						&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>.
-						Design: <a href="https://html5up.net">HTML5 UP</a>.
+						&copy; Untitled. All rights reserved. Demo Images: <a
+							href="https://unsplash.com">Unsplash</a>. Design: <a
+							href="https://html5up.net">HTML5 UP</a>.
 					</p>
 				</footer>
 

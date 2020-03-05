@@ -36,7 +36,7 @@
 				<!-- Section -->
 				<section>
 					<header class="major">
-						<h2>전체 회원 조회</h2>
+						<h2>회원정보 수정</h2>
 					</header>
 					<div class="features">
 						<form action="/MyAnimals/member.do" method="post">
@@ -71,7 +71,7 @@
 								</tr>
 								<tr>
 									<th>비밀번호 확인</th>
-									<td><input type="password" name="pwpw"
+									<td><input type="text" name="pwpw"
 										value="${memberDto.member_pw }"></td>
 								</tr>
 								<tr>

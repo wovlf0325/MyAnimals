@@ -20,12 +20,6 @@ import com.reply.dto.ReplyDto;
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
-	public BoardServlet() {
-
-	}
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -88,6 +82,7 @@ public class BoardServlet extends HttpServlet {
 //			response.sendRedirect("Board/detail.jsp");
 			System.out.println("board Servlet 도착");
 			request.setAttribute("boardDto", dto);
+
 			dispatch("reply.do?command=list", request, response);
 			//response.sendRedirect("reply.do?command=list");
 			
