@@ -37,10 +37,26 @@ function forgot(){
 </script>
 </head>
 <body>
-   <form action="/MyAnimals/member.do" method="post">
+   
+
+</body>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+			
+<%@ include file="/form/header.jsp" %>
+	
+
+				<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<form action="/MyAnimals/member.do" method="post">
    <input type="hidden" name="command" value="login">
-      <fieldset>
-         <legend>로그인</legend>
          <table border="1">
            <col width="200">
 	       <col width="200">
@@ -53,7 +69,7 @@ function forgot(){
                <td><input type="password" name="pw"></td>
             </tr>
             <tr>
-               <td colspan="4">
+               <td colspan="4" align="center">
                   <input type="submit" value="로그인">
                   <input type="button" value="회원가입" onclick="location.href='/MyAnimals/member.do?command=registselectres'">
                   <input type="button" value="아이디·비밀번호찾기" onclick="forgot()">
@@ -62,17 +78,12 @@ function forgot(){
                </td>
             </tr>
             <tr>
-            	<td>
+            	<td colspan="4" align="center">
             		<a id="kakao-login-btn"></a>
-            	</td>
-            </tr>
-            <tr>
-            	<td>
             		<a href="<%=apiURL%>"><img height="50" src="/MyAnimals/image/naver.PNG"/></a>
             	</td>
             </tr>
          </table>
-      </fieldset>
    </form>
 
 
@@ -96,10 +107,10 @@ function forgot(){
             console.log(JSON.stringify(res.kakao_account.email));
             console.log(JSON.stringify(res.kakao_account.birthday))
             
-            var nickname = "&nickname="+res.properties.nickname;
+            var name = "&name="+res.properties.nickname;
             var email = "&email="+res.kakao_account.email;
             
-            location.href='/MyAnimals/member.do?command=registuser'+nickname+email;
+            location.href='/MyAnimals/member.do?command=registkakao'+name+email;
 
           },
           fail: function(error) {
@@ -115,7 +126,7 @@ function forgot(){
   
 </script>
 
-<input type="button" value="카카오톡 로그아웃" onclick="logout();"/>
+<!-- <input type="button" value="카카오톡 로그아웃" onclick="logout();"/>
 <script type="text/javascript">
 
 	function logout(){
@@ -126,7 +137,71 @@ function forgot(){
 		});
 	};
 
-</script>
+</script> -->
+					</div>
+					
+				</section>
+
+				<!-- Section -->
+				<!-- <section>
+					<div class="features">
+						테이블 시작
+						
+					
+						
+							<form action="answer.do" method="post">
+								<input type="hidden" name="command" value="writeres"/>
+								<table border="1">
+									<tr>
+										<th>작성자</th>
+										<td><input type="text" name="nickname"/></td>
+									</tr>
+									<tr>
+										<th>제목</th>
+										<td><input type="text" name="title" /></td>
+									</tr>
+									<tr>
+										<th>내용</th>
+										<td><textarea rows="10" cols="60" name="content"></textarea></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="right">
+											<input type="submit" value="write" id="write"/>
+											<input type="button" value="cancle" onclick="location.href='answer.do?command=list'" id="cancle"/>
+										</td>
+									</tr>
+								</table>
+							</form>
+					</div>
+				</section>
+
+													<ul class="pagination" style="float: left; width: 100%; text-align: center;">
+														<li><span class="button">Prev</span></li>
+														<li><a href="#" class="page active">1</a></li>
+														<li><a href="#" class="page">2</a></li>
+														<li><a href="#" class="page">3</a></li>
+														<li><span>…</span></li>
+														<li><a href="#" class="page">8</a></li>
+														<li><a href="#" class="page">9</a></li>
+														<li><a href="#" class="page">10</a></li>
+														<li><a href="#" class="button">Next</a></li>
+		   								 			</ul> -->
+
+			</div>
+		</div>
+
+<!-- 사이드바 시작  -->
+<%@ include file="/form/footer.jsp" %>
+	
+<!-- 사이드바 끝 -->
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
 </body>
 </html>

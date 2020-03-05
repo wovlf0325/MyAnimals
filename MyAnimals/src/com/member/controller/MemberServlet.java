@@ -120,15 +120,20 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 	}else if(command.equals("loginform")) {
-			response.sendRedirect("Member/loginpage.jsp");
+			dispatch("Member/loginpage.jsp", request, response);
 			
 		}else if(command.equals("registselectres")) {
 			request.setAttribute("name", request.getAttribute("name"));
 			request.setAttribute("email", request.getAttribute("email"));
 			dispatch("Member/registselect.jsp", request, response);
 			
+		}else if(command.equals("registkakao")){
+			request.setAttribute("name", request.getParameter("name"));
+			request.setAttribute("email", request.getParameter("email"));
+			dispatch("Member/registselect.jsp", request, response);
+			
 		}else if(command.equals("registcenter")) {
-			response.sendRedirect("Member/registcenterform.jsp");
+			dispatch("Member/registcenterform.jsp", request, response);
 			
 		}else if(command.equals("registcenterres")) {
 			String id = request.getParameter("id");
@@ -181,8 +186,8 @@ public class MemberServlet extends HttpServlet {
 			System.out.println(name);
 			System.out.println(email);
 			
-			request.setAttribute("name", request.getAttribute("name"));
-			request.setAttribute("email", request.getAttribute("email"));
+			request.setAttribute("name", name);
+			request.setAttribute("email", email);
 			
 			dispatch("Member/registform.jsp", request, response);
 			
@@ -291,6 +296,7 @@ public class MemberServlet extends HttpServlet {
 			session.invalidate();
 
 			jsResponse("로그아웃됬다", "main.jsp", response);
+
 
 			
 

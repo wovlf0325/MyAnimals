@@ -14,7 +14,6 @@
 		<typeAlias type="com.shop.dto.ShopDto" alias="shopDto"/>
 		<typeAlias type="com.alarm.dto.AlarmDto" alias="alarmDto"/>
 		<typeAlias type="com.calendar.dto.VolunteerDto" alias="volunteerDto"></typeAlias>
-
 	</typeAliases>
 	
 

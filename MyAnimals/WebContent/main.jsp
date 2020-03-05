@@ -108,7 +108,7 @@
 									style="position: relative; display: none;"><span
 										class="nav-counter" style="display: none;"></span></a></li>
 								<input type="button"
-									onclick="location.href='Member/loginpage.jsp'" value="로그인">
+									onclick="location.href='/MyAnimals/member.do?command=loginform'" value="로그인">
 								<input type="button"
 									onclick="location.href='Member/registselect.jsp'" value="회원가입">
 							</ul>
