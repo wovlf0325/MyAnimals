@@ -34,6 +34,42 @@
 		-webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
 		box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
 	}
+	.chat-bubble {
+    background-color: #ededed;
+    border: 2px solid #666;
+    font-size: 15px;
+    line-height: 1.3em;
+    margin: 10px auto;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    width: 200px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    font-family: 'Bangers', arial, serif; 
+}
+.chat-bubble-arrow-border {
+    border-color: #666 transparent transparent transparent;
+    border-style: solid;
+    border-width: 20px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -42px;
+    left: 30px;
+}
+.chat-bubble-arrow {
+    border-color: #ededed transparent transparent transparent;
+    border-style: solid;
+    border-width: 20px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -39px;
+    left: 30px;
+}
 </style>
 
 <head>
@@ -60,7 +96,7 @@
 						<c:when test="${empty memberDto }">
 							<ul class="icons">
 								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
-										style="position: relative;"><span class="nav-counter"
+										style="position: relative; display: none;"><span class="nav-counter"
 											style="display: none;"></span></a></li>
 								<input type="button" onclick="location.href='Member/loginpage.jsp'" value="로그인">
 								<input type="button" onclick="location.href='Member/registselect.jsp'" value="회원가입">
@@ -68,8 +104,12 @@
 						</c:when>
 						<c:otherwise>
 							<ul class="icons">
+								<div class="chat-bubble">
+          							<div class="chat-bubble-arrow-border"></div>
+          							<div class="chat-bubble-arrow"></div>
+        						</div>
 								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
-										style="position: relative;"><span class="nav-counter" style="display: none;"></span></a></li>
+										style="position: relative;">1<span class="nav-counter" style="display: none;"></span></a></li>
 								<input type="button" onclick="location.href='/MyAnimals/member.do?command=myinfo'" value="내정보">
 								<input type="button" value="로그아웃" onclick="location.href='/MyAnimals/member.do?command=logout'">
 							</ul>
@@ -85,20 +125,25 @@
 					$(document).ready(
 						function () {
 							var currentDate = new Date();
-							var divClock = document
-								.getElementById("timecheck");
-							var msg = currentDate.getFullYear() + ""
-								+ currentDate.getMonth() + ""
-								+ currentDate.getDate();
-							divClock.innerText = msg;
+							var divClock = document.getElementById("timecheck");
+							var year = currentDate.getFullYear();
+							var month = currentDate.getMonth();
+							var date = currentDate.getDate();
 							$.ajax({
 								url: "alarm.do",
 								type: "POST",
-								dataType: "String",
+								dataType: "json",
 								data: {
-									'date': msg,
+									'year': year,
+									'month': month,
+									'date': date
 								},
-								success: function (data) {
+								success: function(data, textStatus, xhr) {
+							         $.each(data, function(key, val){
+							             console.log('key:' + key + ' / ' + 'value:' + val['volunteer_title']);
+							             console.log(val['volunteer_dayLeft']);
+							             $('.chat-bubble').append('D-day : '+val['volunteer_dayLeft'] +val['volunteer_title']+'<br>');
+							         });
 								},
 								error: function (request, status, error) {
 								}

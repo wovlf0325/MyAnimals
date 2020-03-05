@@ -22,8 +22,23 @@
 </head>
 <%
 	ShopDto shopDto = (ShopDto)request.getAttribute("shopDto");
+	MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");
 %>
+<script type="text/javascript">
 
+	$(document).ready(function() {
+		var id = $("#member_id").text();
+		var role = $("#member_role").text();
+		$("#member_id").hide();
+		$("#member_role").hide();
+		console.log(role);
+		if(role == 'ADMIN'|| id =='<%=shopDto.getShop_owner()%>'){
+			$("#update").css("display","");
+		}else{
+			$("#update").css("display","none");
+		}	
+	});
+</script>
 
 
 <body class="is-preload">
@@ -33,12 +48,14 @@
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
+			<div id="member_id"><%=memberDto.getMember_id()%></div>
+			<div id="member_role"><%=memberDto.getMember_role()%></div>
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>후원물품</strong></a>
-					<ul class="icons" id="roleChk()">
-						<li><a href="#" class="button big">수정하기</a></li>
+					<div class="logo"><strong>후원물품</strong></div>
+					<ul class="icons">
+						<li><a href="shop.do?command=update&shop_seq=${shopDto.shop_seq}" class="button big" id="update">수정하기</a></li>
 					</ul>
 				</header>
 
@@ -56,7 +73,7 @@
 							<li><a href="#" class="button big">후원하기</a></li>
 						</ul>
 					</div>
-					<span class="image object"> <img src="images/pic10.jpg"alt="" />
+					<span class="image object"> <img src="${shopDto.shop_photo}" style="width: 500px; height: 400px;"/>
 						잔여량 : <%=shopDto.getShop_quantity() %>
 					</span>
 				</section>

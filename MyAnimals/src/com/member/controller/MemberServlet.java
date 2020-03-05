@@ -51,14 +51,14 @@ public class MemberServlet extends HttpServlet {
 					
 				} else if(memberDto.getMember_delflag().equals("N")) {
 					session.setAttribute("memberDto", memberDto);
-					session.setMaxInactiveInterval(10*6000);
+					
 					
 					if(memberDto.getMember_role().equals("ADMIN")) {
 						jsResponse("환영한다 닝겐이여"+id, "realindex.jsp", response);
 					}else if(memberDto.getMember_role().equals("USER")){
 						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
 					}else if(memberDto.getMember_role().equals("CENTER")) {
-						jsResponse("환영합니다"+id, "realindex.jsp", response);
+						jsResponse("환영합니다"+id, "main.jsp", response);
 					}
 					else {
 						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "/MyAnimals/realindex.jsp", response);
@@ -279,13 +279,7 @@ public class MemberServlet extends HttpServlet {
 			
 		}else if(command.equals("logout")) {
 			session.invalidate();
-<<<<<<< HEAD
-
 			jsResponse("로그아웃됬다", "Member/member.do?command=loginmain", response);
-=======
-			jsResponse("로그아웃됬다", "realindex.jsp", response);
->>>>>>> 38c232f141cde892e5d7d6b55d4e8b98014b2256
-			
 		} else if(command.equals("idChk")) {
 			String id = request.getParameter("id");
 			MemberDto memberDto = biz.idChk(id);

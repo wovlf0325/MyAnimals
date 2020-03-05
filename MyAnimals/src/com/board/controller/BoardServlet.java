@@ -19,22 +19,12 @@ import com.board.dto.PagingDto;
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-<<<<<<< HEAD
-	public BoardServlet() {
 
-	}
-
-=======
->>>>>>> a7a019099e788969704323815a6416e80a06e1be
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
 		doPost(request, response);
-<<<<<<< HEAD
-
-=======
->>>>>>> a7a019099e788969704323815a6416e80a06e1be
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -90,12 +80,12 @@ public class BoardServlet extends HttpServlet {
 //
 //			response.sendRedirect("Board/detail.jsp");
 			System.out.println("board Servlet 도착");
-<<<<<<< HEAD
+
 
 			request.setAttribute("boardDto", dto);
-=======
+
 			request.setAttribute("dto", dto);
->>>>>>> a7a019099e788969704323815a6416e80a06e1be
+
 			dispatch("reply.do?command=list", request, response);
 			//response.sendRedirect("reply.do?command=list");
 			
