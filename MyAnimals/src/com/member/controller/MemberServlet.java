@@ -48,29 +48,27 @@ public class MemberServlet extends HttpServlet {
 			
 			MemberDto memberDto = biz.login(id, pw);
 			
-			
-			
-		 if(memberDto != null) {
-				if(memberDto.getMember_delflag().equals("Y")) {
-					jsResponse("탈퇴한 회원입니다", "Member/loginpage.jsp", response);
-					
-				} else if(memberDto.getMember_delflag().equals("N")) {
-					session.setAttribute("memberDto", memberDto);
-					
-					
-					if(memberDto.getMember_role().equals("ADMIN")) {
-						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
-					}else if(memberDto.getMember_role().equals("USER")){
-						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
-					}else if(memberDto.getMember_role().equals("CENTER")) {
-						jsResponse("환영합니다"+id, "main.jsp", response);
-
-					}
-					
-			}else{
-						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
+				 if(memberDto != null) {
+						if(memberDto.getMember_delflag().equals("Y")) {
+							jsResponse("탈퇴한 회원입니다", "Member/loginpage.jsp", response);
+							
+						} else if(memberDto.getMember_delflag().equals("N")) {
+							session.setAttribute("memberDto", memberDto);
+							
+							
+							if(memberDto.getMember_role().equals("ADMIN")) {
+								jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
+							}else if(memberDto.getMember_role().equals("USER")){
+								jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
+							}else if(memberDto.getMember_role().equals("CENTER")) {
+								jsResponse("환영합니다"+id, "main.jsp", response);
+		
+							}
+							
+						}else{
+							jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
+						}
 				}
-		}
 			//유저전체정보'0
 		}else if(command.equals("selectall")) {
 			List<MemberDto> list = biz.selectList();
