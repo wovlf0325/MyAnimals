@@ -292,7 +292,9 @@ public class MemberServlet extends HttpServlet {
 			
 		}else if(command.equals("logout")) {
 			session.invalidate();
+
 			jsResponse("로그아웃됬다", "main.jsp", response);
+
 			
 
 		} else if(command.equals("idChk")) {
