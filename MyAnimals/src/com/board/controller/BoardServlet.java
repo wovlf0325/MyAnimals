@@ -19,12 +19,6 @@ import com.board.dto.PagingDto;
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
-	public BoardServlet() {
-
-	}
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -90,7 +84,6 @@ public class BoardServlet extends HttpServlet {
 
 			request.setAttribute("boardDto", dto);
 
-			request.setAttribute("dto", dto);
 
 			dispatch("reply.do?command=list", request, response);
 			//response.sendRedirect("reply.do?command=list");

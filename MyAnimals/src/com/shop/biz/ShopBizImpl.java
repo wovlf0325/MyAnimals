@@ -23,7 +23,9 @@ public class ShopBizImpl implements ShopBiz {
 
 	@Override
 	public int insertShopList(ShopDto dto) {
-		// TODO Auto-generated method stub
+//		if(dto.getShop_photo().equals("not")) {
+//			dto.getShop_photo()
+//		}
 		return dao.insertShopList(dto);
 		
 	}
