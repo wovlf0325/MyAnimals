@@ -48,7 +48,9 @@
     -webkit-border-radius: 20px;
     -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px #888;
-    font-family: 'Bangers', arial, serif; 
+    font-family: 'Bangers', arial, serif;
+    left: 124px;
+    top: -12px; 
 }
 .chat-bubble-arrow-border {
     border-color: #666 transparent transparent transparent;
@@ -104,12 +106,12 @@
 						</c:when>
 						<c:otherwise>
 							<ul class="icons">
-								<div class="chat-bubble">
+								<div class="chat-bubble" style="display: none;">
           							<div class="chat-bubble-arrow-border"></div>
           							<div class="chat-bubble-arrow"></div>
         						</div>
 								<li><a href="#" id="alarm" class="icon brands fa-snapchat-ghost"
-										style="position: relative;">1<span class="nav-counter" style="display: none;"></span></a></li>
+										style="position: relative;"><span id="redAlarm" class="nav-counter" style="display: none;"></span></a></li>
 								<input type="button" onclick="location.href='/MyAnimals/member.do?command=myinfo'" value="내정보">
 								<input type="button" value="로그아웃" onclick="location.href='/MyAnimals/member.do?command=logout'">
 							</ul>
@@ -119,16 +121,13 @@
 
 
 				<script type="text/javascript">
-					$("#alarm").click(function () {
-
-					})
 					$(document).ready(
 						function () {
 							var currentDate = new Date();
-							var divClock = document.getElementById("timecheck");
 							var year = currentDate.getFullYear();
 							var month = currentDate.getMonth();
 							var date = currentDate.getDate();
+							var count = 0;
 							$.ajax({
 								url: "alarm.do",
 								type: "POST",
@@ -143,15 +142,22 @@
 							             console.log('key:' + key + ' / ' + 'value:' + val['volunteer_title']);
 							             console.log(val['volunteer_dayLeft']);
 							             $('.chat-bubble').append('D-day : '+val['volunteer_dayLeft'] +val['volunteer_title']+'<br>');
+							             count++;
 							         });
+							         $('#redAlarm').html(count);
+							         $('#redAlarm').css("display","");
+							         
 								},
 								error: function (request, status, error) {
 								}
 							});
+							
 						});
+					 $('#alarm').click( function() {
+				          $('.chat-bubble').toggle();
+				          $('#redAlarm').css("display","none");
+				     });
 				</script>
-				<div id="timecheck"></div>
-
 
 				<section id="banner">
 					<span class="graph" style="display: block; margin: auto;"> 

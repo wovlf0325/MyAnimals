@@ -22,7 +22,6 @@ import com.alarm.dto.AlarmDateDto;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
-
 @WebServlet("/alarm.do")
 public class AlarmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -41,26 +40,30 @@ public class AlarmController extends HttpServlet {
 		String date = request.getParameter("year") + Util.isTwo(request.getParameter("month"))
 				+ Util.isTwo(request.getParameter("date"));
 		AlarmBiz biz = new AlarmBizImpl();
-		MemberDto MDto = (MemberDto) session.getAttribute("memberDto");
-		List<AlarmDateDto> list = biz.getDate(MDto.getMember_id(), date);
-		if(list.size()!=0) {
-			request.setAttribute("alist", list);
-	           
-            //타입을 json으로 바꿔줘야됨
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-           
-            //DTO 타입의 어레이리스트를 json 형태로 바꿔주는 구문(라이브러리 필수, zip->jar 확장자명 꼭 확인)
-            String gson = new Gson().toJson(list);
-           
-            try {
-                //ajax로 리턴해주는 부분
-                response.getWriter().write(gson);
-            } catch (JsonIOException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+		if ((MemberDto) session.getAttribute("memberDto") != null) {
+			MemberDto MDto = (MemberDto) session.getAttribute("memberDto");
+			List<AlarmDateDto> list = biz.getDate(MDto.getMember_id(), date);
+			if (list.size() != 0) {
+				request.setAttribute("alist", list);
+
+				// 타입을 json으로 바꿔줘야됨
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+
+				// DTO 타입의 어레이리스트를 json 형태로 바꿔주는 구문(라이브러리 필수, zip->jar 확장자명 꼭 확인)
+				String gson = new Gson().toJson(list);
+
+				try {
+					// ajax로 리턴해주는 부분
+					response.getWriter().write(gson);
+				} catch (JsonIOException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}else {
+			System.out.println("비로그인");
 		}
 
 	}
