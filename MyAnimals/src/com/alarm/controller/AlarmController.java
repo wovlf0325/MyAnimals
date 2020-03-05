@@ -64,6 +64,7 @@ public class AlarmController extends HttpServlet {
 			}
 		}else {
 			System.out.println("비로그인");
+			
 		}
 
 	}
