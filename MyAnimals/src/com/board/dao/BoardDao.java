@@ -7,44 +7,25 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.board.dto.BoardDto;
 import com.mybatis.db.SqlMapConfig;
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 83937b76c06da009e325b6c357f4bae37b2a6722
 
 
 public class BoardDao extends SqlMapConfig {
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 83937b76c06da009e325b6c357f4bae37b2a6722
 
 	private String namespace = "boardb.";
 
 	public List<BoardDto> selectList(int to, int from) {
-		System.out.println(to);
+		
 		List<BoardDto> list = null;
-<<<<<<< HEAD
+
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("to",to);
 		map.put("from",from);
 
-=======
->>>>>>> 83937b76c06da009e325b6c357f4bae37b2a6722
 
-
-<<<<<<< HEAD
-		
-
-
-=======
->>>>>>> 83937b76c06da009e325b6c357f4bae37b2a6722
 		SqlSession session = null;
 
 		try {
@@ -80,7 +61,7 @@ public class BoardDao extends SqlMapConfig {
 	public int insert(BoardDto dto) {
 		int res = 0;
 		SqlSession session = null;
-
+		System.out.println(dto.getBoard_title());
 		try {
 			session = getSqlSessionFactory().openSession(false);
 			res = session.insert(namespace + "insert", dto);
@@ -146,6 +127,8 @@ public class BoardDao extends SqlMapConfig {
 			res = session.update(namespace + "answerUpdate", parentboardno);
 			if (res > 0) {
 				session.commit();
+			}else {
+				session.rollback();
 			}
 		} catch (Exception e) {
 			System.out.println("error:answerUpdate");
@@ -165,6 +148,8 @@ public class BoardDao extends SqlMapConfig {
 			res = session.insert(namespace + "answerInsert", dto);
 			if (res > 0) {
 				session.commit();
+			}else {
+				session.rollback();
 			}
 		} catch (Exception e) {
 			System.out.println("error:answerInsert");

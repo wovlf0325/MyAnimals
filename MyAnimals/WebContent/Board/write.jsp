@@ -15,7 +15,7 @@
 <head>
 <style type="text/css">
    th{text-align: center !important}
-   table{margin: auto;}
+   table{margin: auto; width: 100%;}
 #write{
 background-color: #f56a6a !important;
 color: #ffffff !important;
@@ -58,7 +58,7 @@ height: 3.5em;
 				<section id="banner">
 					<div class="content">
 						<header>
-							<h1></h1>
+							<h1>글 작성</h1>
 						</header>
 						
 						
@@ -78,15 +78,15 @@ height: 3.5em;
 								<table border="1">
 									<tr>
 										<th>작성자</th>
-										<td><input type="text" name="boardNickname"/></td>
+										<td><input type="text" name="nickname"/></td>
 									</tr>
 									<tr>
 										<th>제목</th>
-										<td><input type="text" name="boardTitle" /></td>
+										<td><input type="text" name="title" /></td>
 									</tr>
 									<tr>
 										<th>내용</th>
-										<td><textarea rows="10" cols="60" name="boardContent"></textarea></td>
+										<td><textarea rows="10" cols="100" name="content"></textarea></td>
 									</tr>
 									<tr>
 										<td colspan="2" align="right">

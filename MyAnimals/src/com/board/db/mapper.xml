@@ -9,7 +9,8 @@
 	SELECT B.*
 		FROM (SELECT A.*, ROWNUM AS RNUM
 		FROM (SELECT * FROM BOARD ORDER BY BOARD_SEQ DESC)A)B
-		WHERE RNUM BETWEEN #{to} AND #{from}
+		WHERE RNUM BETWEEN #{to} AND #{from} 
+		ORDER BY BOARD_REGROUP DESC, BOARD_RESTEP
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="boardDto">
