@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.board.biz.BoardBiz;
 import com.board.dto.BoardDto;
 import com.board.dto.PagingDto;
+import com.reply.dto.ReplyDto;
 
 @WebServlet("/answer.do")
 public class BoardServlet extends HttpServlet {
@@ -86,12 +87,7 @@ public class BoardServlet extends HttpServlet {
 //
 //			response.sendRedirect("Board/detail.jsp");
 			System.out.println("board Servlet 도착");
-
-
 			request.setAttribute("boardDto", dto);
-
-			request.setAttribute("dto", dto);
-
 			dispatch("reply.do?command=list", request, response);
 			//response.sendRedirect("reply.do?command=list");
 			
@@ -152,6 +148,18 @@ public class BoardServlet extends HttpServlet {
 			} else {
 				jsResponse("답변 작성 실패", "answer.do?command=answer&boardno=" + parentboardno, response);
 			}
+		}else if(command.equals("commentres")) {
+			
+			int boardseq = Integer.parseInt(request.getParameter("boardseq"));
+			String content = request.getParameter("rcontent");
+			ReplyDto dto = new ReplyDto();
+			dto.setBoard_seq(boardseq);
+			dto.setReply_content(content);
+			
+		    request.setAttribute("replyDto",dto);
+		    dispatch("Board/detail.jsp", request, response);
+			
+			
 		}
 	}
 

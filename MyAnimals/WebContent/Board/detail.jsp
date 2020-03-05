@@ -125,7 +125,7 @@ height: 3.5em;
 	<hr>
 	
 	<div class="container">
-    <form action="reply.do"  method="post" >
+    <form action="answer.do"  method="post" >
     <input type="hidden" name="command" value="commentres">
     <input type="hidden" name="boardseq" value="${boardDto.board_seq }">
     <br><br>
@@ -137,7 +137,7 @@ height: 3.5em;
                 <table class="table" style=" margin: auto; width: 100%">                    
                     <tr>
                         <td>
-                            <textarea placeholder="댓글을 입력하세요"></textarea>
+                            <textarea placeholder="댓글을 입력하세요" name="rcontent"></textarea>
                             <br>
                             <div align="right">
                                 <input type="submit"  value="insert" id="insert">
@@ -147,7 +147,7 @@ height: 3.5em;
                 </table>
             </div>
         </div>
-        <%-- <input type="hidden" id="b_code" name="b_code" value="${result.code }" />         --%>
+        
         
         
 	<!-- 댓글 리스트 -->
