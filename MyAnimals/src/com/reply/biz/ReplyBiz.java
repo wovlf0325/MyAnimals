@@ -13,11 +13,7 @@ public class ReplyBiz {
 		return dao.selectList(board_seq);
 	}
 
-	public ReplyDto selectOne(int reply_seq) {
-
-		return null;
-
-	}
+	
 
 	public int insert(ReplyDto dto) {
 

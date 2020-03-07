@@ -53,39 +53,46 @@ public class planServlet extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("command : " + command);
 
-		if (command.equals("select")) {
-			response.sendRedirect("/MyAnimals/Plan/plantest.jsp");
 
-		} else if (command.equals("showxml")) {
-
-			String sido = request.getParameter("sido");
-			String gugun = request.getParameter("gugun");
-
-			Document doc;
-			try {
-				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-				factory.setIgnoringElementContentWhitespace(true);
-
-				DocumentBuilder builder = factory.newDocumentBuilder();
-
-				doc = builder.parse(new File("C:\\Git_semi\\MyAnimals\\MyAnimals\\WebContent\\WEB-INF\\data.xml"));
-
-				XPathFactory xpathFactory = XPathFactory.newInstance();
-				XPath xpath = xpathFactory.newXPath();
-				XPathExpression expr = xpath.compile("//records/record");
-				NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-				List<planDto> list = new ArrayList<>();
-				List<planDto> plist = new ArrayList<>();
-				int nameIndex = 0;
-				int addressIndex = 4;
-				int phoneIndex = 25;
-				int latitudeIndex = 6;
-				int longitudeIndex = 7;
-				if (sido.equals("전국")) {
+		if (session.getAttribute("memberDto") == null) {
+			jsResponse("로그인을 먼저 해주세요", "Member/loginpage.jsp", response);
+		} else {
+		
+			if (command.equals("select")) {
+				response.sendRedirect("/MyAnimals/Plan/selectlocal.jsp");
+				
+			} else if (command.equals("showxml")) {
+	
+				String sido = request.getParameter("sido");
+				String gugun = request.getParameter("gugun");
+				Document doc;
+				
+				try {
+					
+					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+					factory.setIgnoringElementContentWhitespace(true);
+				
+					DocumentBuilder builder = factory.newDocumentBuilder();
+	
+					
+					doc = builder.parse(new File("C:\\Git_semi\\MyAnimals\\MyAnimals\\WebContent\\WEB-INF\\data.xml"));
+	
+					XPathFactory xpathFactory = XPathFactory.newInstance();
+					XPath xpath = xpathFactory.newXPath();
+					XPathExpression expr = xpath.compile("//records/record");
+					NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+					List<planDto> list = new ArrayList<>();
+					int nameIndex = 0;
+					int addressIndex = 4;
+					int phoneIndex = 25;
+					int latitudeIndex = 6;	
+					int longitudeIndex = 7;	
+	
 					for (int i = 0; i < nodeList.getLength(); i++) {
 						NodeList child = nodeList.item(i).getChildNodes();
 						planDto dto = new planDto();
-						dto.setCenter_seq(i + 1);
+						dto.setCenter_seq(i+1);
+						
 
 						Node node = child.item(nameIndex);
 						dto.setCenter_name(node.getTextContent());
@@ -101,6 +108,7 @@ public class planServlet extends HttpServlet {
 						dto.setCenter_latitude(node.getTextContent());
 						node = child.item(longitudeIndex);
 						dto.setCneter_longitude(node.getTextContent());
+
 
 						list.add(dto);
 					}
@@ -193,8 +201,8 @@ public class planServlet extends HttpServlet {
 
 			dispatch("/Plan/planDetail.jsp", request, response);
 
-		}
 
+		}
 	}
 
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response)

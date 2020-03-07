@@ -16,8 +16,6 @@ import org.json.simple.JSONObject;
 
 import com.member.dto.MemberDto;
 
-import oracle.net.aso.r;
-
 import com.member.biz.MemberBiz;
 import com.member.biz.MemberBizImpl;
 
@@ -48,29 +46,28 @@ public class MemberServlet extends HttpServlet {
 			
 			MemberDto memberDto = biz.login(id, pw);
 			
-			
-			
-		 if(memberDto != null) {
-				if(memberDto.getMember_delflag().equals("Y")) {
-					jsResponse("탈퇴한 회원입니다", "Member/loginpage.jsp", response);
-					
-				} else if(memberDto.getMember_delflag().equals("N")) {
-					session.setAttribute("memberDto", memberDto);
-					
-					
-					if(memberDto.getMember_role().equals("ADMIN")) {
-						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
-					}else if(memberDto.getMember_role().equals("USER")){
-						jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
-					}else if(memberDto.getMember_role().equals("CENTER")) {
-						jsResponse("환영합니다"+id, "main.jsp", response);
 
-					}
-					
-			}else{
-						jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
-				}
-		}
+				 if(memberDto != null) {
+						if(memberDto.getMember_delflag().equals("Y")) {
+							jsResponse("탈퇴한 회원입니다", "Member/loginpage.jsp", response);
+							
+						} else if(memberDto.getMember_delflag().equals("N")) {
+							session.setAttribute("memberDto", memberDto);
+							
+							
+							if(memberDto.getMember_role().equals("ADMIN")) {
+								jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
+							}else if(memberDto.getMember_role().equals("USER")){
+								jsResponse("환영한다 닝겐이여"+id, "main.jsp", response);
+							}else if(memberDto.getMember_role().equals("CENTER")) {
+								jsResponse("환영합니다"+id, "main.jsp", response);
+		
+							}
+							
+						}else{
+							jsResponse("아이디 와 비밀번호를 확인해 주세요 ㅠ.ㅠ", "main.jsp", response);
+						}
+				}	
 			//유저전체정보'0
 		}else if(command.equals("selectall")) {
 			List<MemberDto> list = biz.selectList();
@@ -123,15 +120,20 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 	}else if(command.equals("loginform")) {
-			response.sendRedirect("Member/loginpage.jsp");
+			dispatch("Member/loginpage.jsp", request, response);
 			
 		}else if(command.equals("registselectres")) {
 			request.setAttribute("name", request.getAttribute("name"));
 			request.setAttribute("email", request.getAttribute("email"));
 			dispatch("Member/registselect.jsp", request, response);
 			
+		}else if(command.equals("registkakao")){
+			request.setAttribute("name", request.getParameter("name"));
+			request.setAttribute("email", request.getParameter("email"));
+			dispatch("Member/registselect.jsp", request, response);
+			
 		}else if(command.equals("registcenter")) {
-			response.sendRedirect("Member/registcenterform.jsp");
+			dispatch("Member/registcenterform.jsp", request, response);
 			
 		}else if(command.equals("registcenterres")) {
 			String id = request.getParameter("id");
@@ -184,8 +186,8 @@ public class MemberServlet extends HttpServlet {
 			System.out.println(name);
 			System.out.println(email);
 			
-			request.setAttribute("name", request.getAttribute("name"));
-			request.setAttribute("email", request.getAttribute("email"));
+			request.setAttribute("name", name);
+			request.setAttribute("email", email);
 			
 			dispatch("Member/registform.jsp", request, response);
 			
@@ -295,6 +297,7 @@ public class MemberServlet extends HttpServlet {
 
 
 			jsResponse("로그아웃됬다", "main.jsp", response);
+
 
 			
 
