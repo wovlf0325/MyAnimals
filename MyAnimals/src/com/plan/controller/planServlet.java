@@ -59,7 +59,7 @@ public class planServlet extends HttpServlet {
 		} else {
 		
 			if (command.equals("select")) {
-				response.sendRedirect("/MyAnimals/Plan/selectlocal.jsp");
+				response.sendRedirect("/MyAnimals/Plan/plantest.jsp");
 				
 			} else if (command.equals("showxml")) {
 	
