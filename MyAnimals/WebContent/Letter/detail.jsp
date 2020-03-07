@@ -28,7 +28,7 @@
 		<tr>
 			<td colspan="2" align="right">
 				<input type="button" value="답장" onclick="window.open('/MyAnimals/letter.do?command=write', '','width=280px, height=460px, left=350px, top=100px ');return false;" target="_blank"/>
-				<input type="button" value="삭제" onclick="location.href='/MyAnimals/letter.do?command=multidelete&id=ADMIN&seq=${dto.letter_seq}'"/>
+				<input type="button" value="삭제" onclick="location.href='/MyAnimals/letter.do?command=multidelete&id=${letterDto.member_to }&chk=${letterDto.letter_seq}'"/>
 				<input type="button" value="닫기" onclick="self.close()"/>
 			</td>
 		</tr>

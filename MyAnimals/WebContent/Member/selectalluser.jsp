@@ -52,6 +52,7 @@
 							<col width="auto">
 							<col width="auto">
 							<col width="auto">
+							
 							<tr>
 								<th>탈퇴여부</th>
 								<th>등급</th>

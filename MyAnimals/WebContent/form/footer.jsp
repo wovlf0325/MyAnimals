@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="js/weatherajax.js"></script>
+<script type="text/javascript" src="/MyAnimals/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/MyAnimals/js/weatherajax.js"></script>
 </head>
 <body>
 
@@ -29,16 +29,14 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
-						<li><a href="index.html">Homepage</a></li>
-						<li><a href="generic.html">Generic</a></li>
-						<li><a href="elements.html">Elements</a></li>
+						<li><a href="/MyAnimals/main.jsp">Homepage</a></li>
+						<li><a href="/MyAnimals/planServlet?command=select">봉사 일정</a></li>
+						<li><a href="/MyAnimals/shop.do?command=selectList">shop</a></li>						
 						<li>
 							<span class="opener">커뮤니티</span>
 							<ul>
 								<li><a href="/MyAnimals/answer.do?command=list&page=1">커뮤니티 게시판</a></li>
-								<li><a href="#">Ipsum Adipiscing</a></li>
-								<li><a href="#">Tempus Magna</a></li>
-								<li><a href="#">Feugiat Veroeros</a></li>
+								<li><a href="/MyAnimals/chat.xhtml?name=${memberDto.member_id} }" onclick="window.open(this.href, '','width=650px, height=500px, left=500px, top=100px ');return false;" target="_blank">채팅방</a></li>
 							</ul>
 						</li>
 					</ul>

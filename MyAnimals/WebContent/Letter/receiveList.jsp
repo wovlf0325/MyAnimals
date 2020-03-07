@@ -34,7 +34,7 @@
 			console.log(readChks[i]);
 			if(reads[i].value == 'N'){
 				readChks[i].style.fontWeight = "bold";
-				readChks[i].style.color = "blue";
+				readChks[i].style.color = "#f66a78";
 			}
 		}
 	};

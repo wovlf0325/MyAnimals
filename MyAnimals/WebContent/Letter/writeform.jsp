@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-	onsubmit=function(){
-		opener.location.href="letter.jsp";
+	/* onsubmit=function(){
+		opener.location.reload();
 		opener.close();
 		self.close();
-	} 
+	} */ 
 
 </script>
 </head>
@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<th>보내는사람</th>
-				<td><input type="text" id="from" name="from" value="${memberDto.member_id} }" readonly="readonly"/></td>
+				<td><input type="text" id="from" name="from" value="${memberDto.member_id}" /></td>
 			</tr>
 			<tr>
 				<th>제목</th>
