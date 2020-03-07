@@ -11,7 +11,7 @@ public interface calendarDao {
 	public int insert(VolunteerDto dto);
 	public int update(CalendarDto dto);
 	public int delete(int seq);
-	public List<VolunteerDto> getCalViewList(String member_id, String yyyyMM);
+	public List<VolunteerDto> getCalViewList(String member_id, String yyyyMM, int center_seq);
 	public int getCalCount(String id, String yyyyMMdd);
 	public int insertCalBoard(CalendarDto dto);
 }

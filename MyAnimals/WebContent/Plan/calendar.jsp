@@ -107,8 +107,8 @@ var planDto = '<% planDto planDto = (planDto)session.getAttribute("planDto"); %>
  	//달력에 일정 표현
 	calendarDao dao = new calendarDaoImpl();
 	String yyyyMM = year +Util.isTwo(String.valueOf(month));
-	List<VolunteerDto> clist = dao.getCalViewList("ADMIN", yyyyMM); 
-	
+	List<VolunteerDto> clist = dao.getCalViewList(planDto.getMember_id(), yyyyMM, planDto.getCenter_seq()); 
+	System.out.println(clist);
 	
 
 %>
