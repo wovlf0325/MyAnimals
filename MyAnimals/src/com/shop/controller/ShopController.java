@@ -33,31 +33,39 @@ public class ShopController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
-	
-      
+
 		ShopBiz biz = new ShopBizImpl();
 		String command = request.getParameter("command");
-		
-		if (command.equals("selectList")) {
-			List<ShopDto> shopList = biz.selectShopList();
-			request.setAttribute("shopList", shopList);
-			dispatch("Shop/shopmain.jsp", request, response);
+		if (session.getAttribute("memberDto") == null) {
+			jsResponse("로그인을 먼저 해주세요", "Member/loginpage.jsp", response);
+		} else {
+			if (command.equals("selectList")) {
+				List<ShopDto> shopList = biz.selectShopList();
+				request.setAttribute("shopList", shopList);
+				dispatch("Shop/shopmain.jsp", request, response);
 
-		} else if (command.equals("detail")) {
-			int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
-			ShopDto shopDto = biz.selectShopOne(shop_seq);
-			MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");
-			request.setAttribute("shopDto", shopDto);
-			request.setAttribute("member_role", memberDto.getMember_role());
-			dispatch("Shop/shopdetail.jsp", request, response);
-		} else if (command.equals("insert")) {
-			response.sendRedirect("Shop/shopinsertform.jsp");
-		} else if (command.equals("search")) {
-			String searchTitle = request.getParameter("searchTitle");
-			String searchContent = request.getParameter("searchContent");
-			List<ShopDto> shopList = biz.search(searchTitle, searchContent);
-			request.setAttribute("shopList", shopList);
-			dispatch("Shop/shopmain.jsp", request, response);
+			} else if (command.equals("detail")) {
+				int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
+				ShopDto shopDto = biz.selectShopOne(shop_seq);
+				MemberDto memberDto = (MemberDto) session.getAttribute("memberDto");
+				request.setAttribute("shopDto", shopDto);
+				request.setAttribute("member_role", memberDto.getMember_role());
+				dispatch("Shop/shopdetail.jsp", request, response);
+			} else if (command.equals("insert")) {
+				response.sendRedirect("Shop/shopinsertform.jsp");
+			} else if (command.equals("search")) {
+				String searchTitle = request.getParameter("searchTitle");
+				String searchContent = request.getParameter("searchContent");
+				List<ShopDto> shopList = biz.search(searchTitle, searchContent);
+				request.setAttribute("shopList", shopList);
+				dispatch("Shop/shopmain.jsp", request, response);
+			} else if (command.equals("update")) {
+				int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
+				ShopDto shopDto = biz.selectShopOne(shop_seq);
+				request.setAttribute("shopDto", shopDto);
+				dispatch("Shop/shopupdateform.jsp", request, response);
+
+			}
 		}
 	}
 

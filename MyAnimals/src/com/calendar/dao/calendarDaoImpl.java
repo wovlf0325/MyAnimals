@@ -93,6 +93,12 @@ public class calendarDaoImpl extends SqlMapConfig implements calendarDao {
 		
 		return 0;
 	}
+
+	@Override
+	public int insertCalBoard(CalendarDto dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	/*
 	 * public int insertCalBoard(CalendarDto dto) {

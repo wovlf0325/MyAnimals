@@ -3,6 +3,7 @@
 <mapper namespace="alarm">
 
 	<select id="getDate" resultType="alarmDto" parameterType="String">
-		SELECT * FROM alarm where trunc(TO_DATE(ALARM_DATE,'yyyymmdd')) - trunc(TO_DATE(#{date},'yyyymmdd')) <![CDATA[<=]]> 7
+		SELECT VOLUNTEER_title, volunteer_date FROM VOLUNTEER where volunteer_seq in (SELECT volunteer_seq FROM apply WHERE MEMBER_ID = #{member_id})
 	</select>
+		
 </mapper>

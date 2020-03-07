@@ -32,7 +32,7 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 function forgot(){
-	open("/MyAnimals/emailchk.do?command=forgotinfo","","width=600,height=400");
+	open("/MyAnimals/emailchk.do?command=forgotinfo","","width=300,height=300");
 }
 </script>
 </head>

@@ -8,17 +8,18 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="/MyAnimals/assets/css/main.css" />
+
 </head>
 <body class="is-preload">
-<jsp:useBean id="memberDto" class="com.member.dto.MemberDto"
-							scope="session"></jsp:useBean>
+	<jsp:useBean id="memberDto" class="com.member.dto.MemberDto"
+		scope="session"></jsp:useBean>
 	<!-- Wrapper -->
 	<div id="wrapper">
 
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
-				<%@ include file="../form/header.jsp"%>
+				<%@ include file="/form/header.jsp"%>
 				<!-- Header -->
 				<!-- 				<header id="header">
 					<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
@@ -42,7 +43,7 @@
 					<div class="features">
 
 
-						
+
 						<table border="1">
 							<col width="auto">
 							<col width="auto">
@@ -60,27 +61,33 @@
 							</tr>
 							<tr>
 								<th>닉네임</th>
-								<td><jsp:getProperty property="member_nickname" name="memberDto" /></td>
+								<td><jsp:getProperty property="member_nickname"
+										name="memberDto" /></td>
 							</tr>
 							<tr>
 								<th>이름</th>
-								<td><jsp:getProperty property="member_name" name="memberDto" /></td>
+								<td><jsp:getProperty property="member_name"
+										name="memberDto" /></td>
 							</tr>
 							<tr>
 								<th>생년월일</th>
-								<td><jsp:getProperty property="member_birth" name="memberDto" /></td>
+								<td><jsp:getProperty property="member_birth"
+										name="memberDto" /></td>
 							</tr>
 							<tr>
 								<th>이메일</th>
-								<td><jsp:getProperty property="member_email" name="memberDto" /></td>
+								<td><jsp:getProperty property="member_email"
+										name="memberDto" /></td>
 							</tr>
 							<tr>
 								<th>핸드폰</th>
-								<td><jsp:getProperty property="member_phone" name="memberDto" /></td>
+								<td><jsp:getProperty property="member_phone"
+										name="memberDto" /></td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td><jsp:getProperty property="member_address" name="memberDto" /></td>
+								<td><jsp:getProperty property="member_address"
+										name="memberDto" /></td>
 							</tr>
 							<tr>
 								<td><input type="button" value="수정"
@@ -88,8 +95,7 @@
 									<input type="button" value="계정삭제"
 									onclick="location.href='/MyAnimals/member.do?command=userdeleteres&id=${memberDto.member_id}'">
 									<input type="button" value="메인"
-									onclick="location.href='/MyAnimals/realindex.jsp'">
-								</td>
+									onclick="location.href='/MyAnimals/main.jsp'"></td>
 							</tr>
 						</table>
 					</div>
@@ -102,7 +108,7 @@
 		</div>
 
 		<!-- 사이드바 시작  -->
-		<%@ include file="../form/footer.jsp"%>
+		<%@ include file="/form/footer.jsp"%>
 
 		<!-- 사이드바 끝 -->
 	</div>

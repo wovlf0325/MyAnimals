@@ -37,8 +37,11 @@ public class BoardBiz {
 	public int delete(int boardno) {
 		return dao.delete(boardno);
 	}
+	
+	
 
 	public int insert_answer(BoardDto dto) {
+		
 		int updateRes = dao.answerUpdate(dto.getBoard_seq());
 		int insertRes = dao.answerInsert(dto);
 		System.out.println(updateRes);

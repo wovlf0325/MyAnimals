@@ -52,16 +52,46 @@ public class ShopInsertController extends HttpServlet {
 			shopDto.setShop_quantity(Integer.parseInt(multipartRequest.getParameter("shop_quantity")));
 			shopDto.setShop_content(multipartRequest.getParameter("shop_content")); 
 			shopDto.setShop_owner(memberDto.getMember_id());
-		    
-		    //String food_image_name = multipartRequest.getOriginalFileName("file");
-	        String food_image_realname = multipartRequest.getFilesystemName("file"); 
-	        shopDto.setShop_photo("/MyAnimals/image/ShopImg/"+food_image_realname);
+			
+			String food_image_realname = "";
+			if(multipartRequest.getFilesystemName("file")!=null) {
+				food_image_realname = multipartRequest.getFilesystemName("file"); 
+		        shopDto.setShop_photo("/MyAnimals/image/ShopImg/"+food_image_realname);
+			}else {
+				shopDto.setShop_photo("not");
+			}
+	        
 	        
 		    int res = biz.insertShopList(shopDto);
 		    if(res>0) {
 		    	jsResponse("물품을 등록하였습니다","shop.do?command=selectList", response);
 		    }else {
 		    	jsResponse("물품 등록에 실패하였습니다", "Shop/shopinsertform.jsp", response);
+		    }
+		}else if(command.equals("updateres")) {
+			int shop_seq = Integer.parseInt(multipartRequest.getParameter("shop_seq"));
+			ShopDto shopDto = new ShopDto();
+			shopDto.setShop_name(multipartRequest.getParameter("shop_name"));  
+			shopDto.setShop_kind(multipartRequest.getParameter("shop_kind"));
+			shopDto.setShop_price(Integer.parseInt(multipartRequest.getParameter("shop_price")));
+			shopDto.setShop_quantity(Integer.parseInt(multipartRequest.getParameter("shop_quantity")));
+			shopDto.setShop_content(multipartRequest.getParameter("shop_content")); 
+			shopDto.setShop_seq(shop_seq);
+			
+		    
+			String food_image_realname = "";
+			if(multipartRequest.getFilesystemName("file")!=null) {
+				food_image_realname = multipartRequest.getFilesystemName("file"); 
+		        shopDto.setShop_photo("/MyAnimals/image/ShopImg/"+food_image_realname);
+			}else {
+				shopDto.setShop_photo("not");
+			}
+	        
+		    int res = biz.updateShopList(shopDto);
+		    if(res>0) {
+		    	jsResponse("물품수정을 성공하였습니다","shop.do?command=selectList", response);
+		    }else {
+		    	jsResponse("물품수정에 실패하였습니다", "shop.do?command=update&shop_seq="+shop_seq, response);
 		    }
 		}
 	}
