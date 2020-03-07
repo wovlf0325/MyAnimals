@@ -156,9 +156,8 @@ public class BoardServlet extends HttpServlet {
 				}
 
 			}
-		}else if(command.equals("commentres")) {
+		else if(command.equals("commentres")) {
 			ReplyDto rdto = new ReplyDto();
-		    HttpSession session = request.getSession();
 		    
 			MemberDto mdto = (MemberDto)session.getAttribute("memberDto");
 		    int boardseq = Integer.parseInt(request.getParameter("boardseq"));
@@ -184,7 +183,7 @@ public class BoardServlet extends HttpServlet {
 					jsResponse("댓글 등록 실패", "/MyAnimals/answer.do?command=list&page=1", response);
 				}
 			}
-
+			}
 		}
 	}
 

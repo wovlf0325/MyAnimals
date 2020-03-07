@@ -82,12 +82,13 @@ public class planServlet extends HttpServlet {
 					XPathExpression expr = xpath.compile("//records/record");
 					NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 					List<planDto> list = new ArrayList<>();
+					List<planDto> plist = new ArrayList<>();
 					int nameIndex = 0;
 					int addressIndex = 4;
 					int phoneIndex = 25;
 					int latitudeIndex = 6;	
 					int longitudeIndex = 7;	
-	
+					if (sido.equals("전국")) {
 					for (int i = 0; i < nodeList.getLength(); i++) {
 						NodeList child = nodeList.item(i).getChildNodes();
 						planDto dto = new planDto();
@@ -112,7 +113,9 @@ public class planServlet extends HttpServlet {
 
 						list.add(dto);
 					}
-				} else {
+				}
+					
+				 else {
 					System.out.println("와바라");
 
 					for (int i = 0; i < nodeList.getLength(); i++) {
@@ -189,6 +192,7 @@ public class planServlet extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println(e);
 			}
+				
 		} else if (command.equals("detail")) {
 
 			int seq = Integer.parseInt(request.getParameter("seq"));
@@ -203,6 +207,7 @@ public class planServlet extends HttpServlet {
 
 
 		}
+	}
 	}
 
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response)
