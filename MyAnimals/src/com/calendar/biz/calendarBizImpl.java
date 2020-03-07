@@ -35,8 +35,8 @@ public class calendarBizImpl implements calendarBiz {
 		return 0;
 	}
 	
-	public List<VolunteerDto> getCalViewList(String member_id, String yyyyMM){
-		return dao.getCalViewList(member_id, yyyyMM);
+	public List<VolunteerDto> getCalViewList(String member_id, String yyyyMM, int center_seq){
+		return dao.getCalViewList(member_id, yyyyMM, center_seq);
 	}
 	
 	public int getCalCount(String id, String yyyyMMdd) {

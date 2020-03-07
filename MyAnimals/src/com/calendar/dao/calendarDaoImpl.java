@@ -62,7 +62,7 @@ public class calendarDaoImpl extends SqlMapConfig implements calendarDao {
 	}
 	
 	@Override
-	public List<VolunteerDto> getCalViewList(String member_id, String yyyyMM){
+	public List<VolunteerDto> getCalViewList(String member_id, String yyyyMM, int center_seq){
 		
 		
 		SqlSession session = null;
@@ -71,6 +71,7 @@ public class calendarDaoImpl extends SqlMapConfig implements calendarDao {
 		HashMap<String, String> map = new HashMap<>();
 		map.put("member_id", member_id);
 		map.put("yyyyMM", yyyyMM);
+		map.put("center_seq", Integer.toString(center_seq));
 		
 		
 		try {
@@ -92,25 +93,25 @@ public class calendarDaoImpl extends SqlMapConfig implements calendarDao {
 		
 		return 0;
 	}
-	
+
+	@Override
 	public int insertCalBoard(CalendarDto dto) {
-		
-		SqlSession session = null;
-		int res = 0;
-		try {
-			session = getSqlSessionFactory().openSession();
-			res = session.insert(namespace+"insertCalBoard",dto);
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("여기는 마이바티스");
-			e.printStackTrace();
-		}finally {
-			session.commit();
-			session.close();
-		}
-		
-		return res;
-		
+		// TODO Auto-generated method stub
+		return 0;
 	}
+	
+	/*
+	 * public int insertCalBoard(CalendarDto dto) {
+	 * 
+	 * SqlSession session = null; int res = 0; try { session =
+	 * getSqlSessionFactory().openSession(); res =
+	 * session.insert(namespace+"insertCalBoard",dto); } catch (Exception e) { //
+	 * TODO: handle exception System.out.println("여기는 마이바티스"); e.printStackTrace();
+	 * }finally { session.commit(); session.close(); }
+	 * 
+	 * return res;
+	 * 
+	 * }
+	 */
 
 }
