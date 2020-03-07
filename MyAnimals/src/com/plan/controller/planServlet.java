@@ -62,89 +62,93 @@ public class planServlet extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("command : " + command);
 
-		if (command.equals("select")) {
-			response.sendRedirect("/MyAnimals/Plan/selectlocal.jsp");
-			
-		} else if (command.equals("showxml")) {
-
-			String sido = request.getParameter("sido");
-			String gugun = request.getParameter("gugun");
-			Document doc;
-			
-			try {
+		if (session.getAttribute("memberDto") == null) {
+			jsResponse("로그인을 먼저 해주세요", "Member/loginpage.jsp", response);
+		} else {
+		
+			if (command.equals("select")) {
+				response.sendRedirect("/MyAnimals/Plan/selectlocal.jsp");
 				
-				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-				factory.setIgnoringElementContentWhitespace(true);
-			
-				DocumentBuilder builder = factory.newDocumentBuilder();
-
+			} else if (command.equals("showxml")) {
+	
+				String sido = request.getParameter("sido");
+				String gugun = request.getParameter("gugun");
+				Document doc;
 				
-				doc = builder.parse(new File("C:\\Git_semi\\MyAnimals\\MyAnimals\\WebContent\\WEB-INF\\data.xml"));
-
-				XPathFactory xpathFactory = XPathFactory.newInstance();
-				XPath xpath = xpathFactory.newXPath();
-				XPathExpression expr = xpath.compile("//records/record");
-				NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-				List<planDto> list = new ArrayList<>();
-				int nameIndex = 0;
-				int addressIndex = 4;
-				int phoneIndex = 25;
-				int latitudeIndex = 6;	
-				int longitudeIndex = 7;	
-
-				for (int i = 0; i < nodeList.getLength(); i++) {
-					NodeList child = nodeList.item(i).getChildNodes();
-					planDto dto = new planDto();
-					dto.setCenter_seq(i+1);
+				try {
 					
-					Node node = child.item(nameIndex);
-					dto.setCenter_name(node.getTextContent());
-					node = child.item(addressIndex);
-					if (node.getTextContent() == "") {
-						node = child.item(addressIndex + 1);
+					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+					factory.setIgnoringElementContentWhitespace(true);
+				
+					DocumentBuilder builder = factory.newDocumentBuilder();
+	
+					
+					doc = builder.parse(new File("C:\\Git_semi\\MyAnimals\\MyAnimals\\WebContent\\WEB-INF\\data.xml"));
+	
+					XPathFactory xpathFactory = XPathFactory.newInstance();
+					XPath xpath = xpathFactory.newXPath();
+					XPathExpression expr = xpath.compile("//records/record");
+					NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+					List<planDto> list = new ArrayList<>();
+					int nameIndex = 0;
+					int addressIndex = 4;
+					int phoneIndex = 25;
+					int latitudeIndex = 6;	
+					int longitudeIndex = 7;	
+	
+					for (int i = 0; i < nodeList.getLength(); i++) {
+						NodeList child = nodeList.item(i).getChildNodes();
+						planDto dto = new planDto();
+						dto.setCenter_seq(i+1);
+						
+						Node node = child.item(nameIndex);
+						dto.setCenter_name(node.getTextContent());
+						node = child.item(addressIndex);
+						if (node.getTextContent() == "") {
+							node = child.item(addressIndex + 1);
+						}
+						dto.setCenter_addr(node.getTextContent());
+						node = child.item(phoneIndex);
+						dto.setCenter_phone(node.getTextContent());
+						
+						node = child.item(latitudeIndex);
+						dto.setCenter_latitude(node.getTextContent());
+						node = child.item(longitudeIndex);
+						dto.setCneter_longitude(node.getTextContent());
+						
+						list.add(dto);
 					}
-					dto.setCenter_addr(node.getTextContent());
-					node = child.item(phoneIndex);
-					dto.setCenter_phone(node.getTextContent());
+					request.setAttribute("list", list);
+					request.setAttribute("gugun", gugun);
+					request.setAttribute("sido", sido);
+					/*
+					int res = biz.insertList(list);
+					if(res == list.size()) {
+						System.out.println("삽입 성공");
+					}
+					*/
 					
-					node = child.item(latitudeIndex);
-					dto.setCenter_latitude(node.getTextContent());
-					node = child.item(longitudeIndex);
-					dto.setCneter_longitude(node.getTextContent());
+					dispatch("/Plan/planBoard.jsp", request, response);
 					
-					list.add(dto);
+					
+	
+				} catch (Exception e) {
+					System.out.println(e);
 				}
-				request.setAttribute("list", list);
-				request.setAttribute("gugun", gugun);
-				request.setAttribute("sido", sido);
-				/*
-				int res = biz.insertList(list);
-				if(res == list.size()) {
-					System.out.println("삽입 성공");
-				}
-				*/
+			}else if(command.equals("detail")) {
 				
-				dispatch("/Plan/planBoard.jsp", request, response);
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				System.out.println(seq);
+				
+				planDto planDto = biz.selectOne(seq);
+				
+				session.setAttribute("planDto", planDto);
+				
+				dispatch("/Plan/planDetail.jsp", request, response);
 				
 				
-
-			} catch (Exception e) {
-				System.out.println(e);
 			}
-		}else if(command.equals("detail")) {
-			
-			int seq = Integer.parseInt(request.getParameter("seq"));
-			System.out.println(seq);
-			
-			planDto planDto = biz.selectOne(seq);
-			
-			session.setAttribute("planDto", planDto);
-			
-			dispatch("/Plan/planDetail.jsp", request, response);
-			
-			
 		}
-
 	}
 
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response)
