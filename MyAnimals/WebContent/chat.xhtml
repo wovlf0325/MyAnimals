@@ -222,6 +222,12 @@ h1 {
             }
         }, false);
 
+		function idchk(){
+			if(document.getElementById("id").value == ""){
+				alert("대화명을 입력해주세요");
+				return false;
+			};
+		};
     ]]></script>
 </head>
 <body>
@@ -244,7 +250,7 @@ h1 {
       </div>
       <div class="input">
       	 <input type="text" placeholder="대화명" id="id" value=""/>
-         <input type="text" placeholder="Type message here!" id="chat"/>
+         <input type="text" placeholder="Type message here!" id="chat" onchange="idchk()"/>
          <div class="btn">Send</div>
       </div>
    </div>
