@@ -98,7 +98,7 @@ function addCalendar(){
  
  	<iframe id="calendar" src="Plan/calendar.jsp" width="600" height="600" style="border:none">
  	</iframe>
- 	<c:if test="${memberDto.member_role eq 'CENTER'}">
+ 	<c:if test="${memberDto.member_role eq 'CENTER' && planDto.member_id eq memberDto.member_id}">
 		<div id="button">
 			<button onclick="addCalendar();">일정등록</button>
 		</div>	
