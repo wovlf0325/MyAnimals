@@ -6,19 +6,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" href="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script><script type="text/javascript">
+<script src="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
+
+<script type="text/javascript">
 
 
 $(function(){
-    $('#date').appendDtpicker({'locale':'ko'});
+    $('#date').appendDtpicker({
+    	'locale':'ko',
+    	'dateOnly':true, //날짜만 선택할수 있도록
+    	'futureOnly': true,
+    	'closeOnSelected' : true
 });
+    
+}); 
+
 
 </script>
 
-<%  CalendarDto calendarDto = new CalendarDto(); %>
 <% String Member_id = (String)(request.getAttribute("Member_id")); %>
+<% int Center_seq = Integer.parseInt(request.getParameter("Center_seq")); %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -28,6 +38,7 @@ $(function(){
 			<form action="calendar.do" method="post">
 				<input type="hidden" name="command" value="insert"/>
 				<input type="hidden" name="Member_id" value="<%=Member_id%>"/>
+				<input type="hidden" name="Center_seq" value="<%=Center_seq%>"/>
 			<table border="1">
 		<tr>
 			<th>일정명</th>
@@ -39,7 +50,7 @@ $(function(){
 		</tr>
 		<tr>
 			<th>최대인원</th>
-			<td><input type="text" name="volunteer_maxvolunteer"/></td>
+			<td><input type="text" name="volunteer_maxvolunteer" placeholder="숫자만 입력하세요."/></td>
 		</tr>
 		<tr>
 			<th>날짜</th>

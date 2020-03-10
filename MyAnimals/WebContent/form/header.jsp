@@ -10,22 +10,22 @@
 <title>Insert title here</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-
-
 	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
-
 	<link rel="stylesheet" href="/MyAnimals/assets/css/main.css" />
+
 
 
 </head>
 <body>
-				
+
+	
  				<header id="header">
+ 				<h2>MyAnimals</h2>
  				<c:choose>
 				<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
 				   <ul class="icons">
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=myinfo'">내정보</button></li>
-				      <li><button onclick="#">쪽지함</button></li>
+				      <li><button onclick="location.href='/MyAnimals/letter.do?command=receiveList'">쪽지함</button></li>
 				      <li><a href="shop.do?command=buylistform" class="button big">결제목록</a></li>
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
 				   </ul>

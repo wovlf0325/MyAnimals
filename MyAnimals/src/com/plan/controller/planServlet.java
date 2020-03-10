@@ -1,12 +1,8 @@
 package com.plan.controller;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,17 +23,12 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.plan.biz.planBiz;
 import com.plan.biz.planBizImpl;
 import com.plan.dto.planDto;
-import java.io.*;
-
-import javax.xml.transform.*;
-import javax.xml.transform.stream.*;
-import javax.xml.transform.dom.*;
-import org.w3c.dom.*;
 
 /**
  * Servlet implementation class localxml
@@ -45,7 +36,7 @@ import org.w3c.dom.*;
 @WebServlet("/planServlet")
 public class planServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	planBiz biz = new planBizImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,89 +53,161 @@ public class planServlet extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("command : " + command);
 
-		if (command.equals("select")) {
-			response.sendRedirect("/MyAnimals/Plan/selectlocal.jsp");
-			
-		} else if (command.equals("showxml")) {
 
-			String sido = request.getParameter("sido");
-			String gugun = request.getParameter("gugun");
-			Document doc;
-			
-			try {
+		if (session.getAttribute("memberDto") == null) {
+			jsResponse("로그인을 먼저 해주세요", "Member/loginpage.jsp", response);
+		} else {
+		
+			if (command.equals("select")) {
+				response.sendRedirect("/MyAnimals/Plan/plantest.jsp");
 				
-				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-				factory.setIgnoringElementContentWhitespace(true);
-			
-				DocumentBuilder builder = factory.newDocumentBuilder();
-
+			} else if (command.equals("showxml")) {
+	
+				String sido = request.getParameter("sido");
+				String gugun = request.getParameter("gugun");
+				Document doc;
 				
-				doc = builder.parse(new File("C:\\Git_semi\\MyAnimals\\MyAnimals\\WebContent\\WEB-INF\\data.xml"));
-
-				XPathFactory xpathFactory = XPathFactory.newInstance();
-				XPath xpath = xpathFactory.newXPath();
-				XPathExpression expr = xpath.compile("//records/record");
-				NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-				List<planDto> list = new ArrayList<>();
-				int nameIndex = 0;
-				int addressIndex = 4;
-				int phoneIndex = 25;
-				int latitudeIndex = 6;	
-				int longitudeIndex = 7;	
-
-				for (int i = 0; i < nodeList.getLength(); i++) {
-					NodeList child = nodeList.item(i).getChildNodes();
-					planDto dto = new planDto();
-					dto.setCenter_seq(i+1);
+				try {
 					
-					Node node = child.item(nameIndex);
-					dto.setCenter_name(node.getTextContent());
-					node = child.item(addressIndex);
-					if (node.getTextContent() == "") {
-						node = child.item(addressIndex + 1);
+					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+					factory.setIgnoringElementContentWhitespace(true);
+				
+					DocumentBuilder builder = factory.newDocumentBuilder();
+	
+					
+					doc = builder.parse(new File("C:\\Git_semi\\MyAnimals\\MyAnimals\\WebContent\\WEB-INF\\data.xml"));
+	
+					XPathFactory xpathFactory = XPathFactory.newInstance();
+					XPath xpath = xpathFactory.newXPath();
+					XPathExpression expr = xpath.compile("//records/record");
+					NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+					List<planDto> list = new ArrayList<>();
+					List<planDto> plist = new ArrayList<>();
+					int nameIndex = 0;
+					int addressIndex = 4;
+					int phoneIndex = 25;
+					int latitudeIndex = 6;	
+					int longitudeIndex = 7;	
+					if (sido.equals("전국")) {
+					for (int i = 0; i < nodeList.getLength(); i++) {
+						NodeList child = nodeList.item(i).getChildNodes();
+						planDto dto = new planDto();
+						dto.setCenter_seq(i+1);
+						
+
+						Node node = child.item(nameIndex);
+						dto.setCenter_name(node.getTextContent());
+						node = child.item(addressIndex);
+						if (node.getTextContent() == "") {
+							node = child.item(addressIndex + 1);
+						}
+						dto.setCenter_addr(node.getTextContent());
+						node = child.item(phoneIndex);
+						dto.setCenter_phone(node.getTextContent());
+
+						node = child.item(latitudeIndex);
+						dto.setCenter_latitude(node.getTextContent());
+						node = child.item(longitudeIndex);
+						dto.setCneter_longitude(node.getTextContent());
+
+
+						list.add(dto);
 					}
-					dto.setCenter_addr(node.getTextContent());
-					node = child.item(phoneIndex);
-					dto.setCenter_phone(node.getTextContent());
-					
-					node = child.item(latitudeIndex);
-					dto.setCenter_latitude(node.getTextContent());
-					node = child.item(longitudeIndex);
-					dto.setCneter_longitude(node.getTextContent());
-					
-					list.add(dto);
 				}
+					
+				 else {
+					System.out.println("와바라");
+
+					for (int i = 0; i < nodeList.getLength(); i++) {
+						NodeList child = nodeList.item(i).getChildNodes();
+						planDto dto = new planDto();
+						dto.setCenter_seq(i + 1);
+
+						Node node = child.item(nameIndex);
+						dto.setCenter_name(node.getTextContent());
+						node = child.item(addressIndex);
+						if (node.getTextContent() == "") {
+							node = child.item(addressIndex + 1);
+						}
+						dto.setCenter_addr(node.getTextContent());
+						node = child.item(phoneIndex);
+						dto.setCenter_phone(node.getTextContent());
+
+						node = child.item(latitudeIndex);
+						dto.setCenter_latitude(node.getTextContent());
+						node = child.item(longitudeIndex);
+						dto.setCneter_longitude(node.getTextContent());
+
+						plist.add(dto);
+					}
+					for (int j = 0; j < plist.size(); j++) {
+						System.out.println(gugun);
+						if (plist.get(j).getCenter_addr().contains(gugun)) {
+							planDto dto = new planDto();
+							dto.setCenter_seq(plist.get(j).getCenter_seq());
+							dto.setCenter_addr(plist.get(j).getCenter_addr());
+							dto.setCenter_name(plist.get(j).getCenter_name());
+							dto.setCenter_phone(plist.get(j).getCenter_phone());
+							list.add(dto);
+						}
+
+					}
+
+					/*
+					 * if(list.size()==0) { System.out.println("안오니?");
+					 * System.out.println("왔는데 왜 안돼 listsize:"+list.size());
+					 * 
+					 * jsResponse("검색결과 x", command, response); }
+					 */
+
+				}
+
+				System.out.println("listsize : " + list.size());
 				request.setAttribute("list", list);
-				request.setAttribute("gugun", gugun);
-				request.setAttribute("sido", sido);
-				/*
-				int res = biz.insertList(list);
-				if(res == list.size()) {
-					System.out.println("삽입 성공");
+
+				// 타입을 json으로 바꿔줘야됨
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+
+				// DTO 타입의 어레이리스트를 json 형태로 바꿔주는 구문(라이브러리 필수, zip->jar 확장자명 꼭 확인)
+				String gson = new Gson().toJson(list);
+
+				try {
+					// ajax로 리턴해주는 부분
+
+					response.getWriter().write(gson);
+
+					System.out.println(gson);
+				} catch (JsonIOException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				*/
-				
-				dispatch("/Plan/planBoard.jsp", request, response);
-				
-				
+
+				/*
+				 * request.setAttribute("list", list); int res = biz.insertList(list); if(res ==
+				 * list.size()) { System.out.println("삽입 성공"); }
+				 */
 
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-		}else if(command.equals("detail")) {
-			
-			int seq = Integer.parseInt(request.getParameter("seq"));
-			System.out.println(seq);
-			
-			planDto planDto = biz.selectOne(seq);
-			
-			session.setAttribute("planDto", planDto);
-			
-			dispatch("/Plan/planDetail.jsp", request, response);
-			
-			
-		}
+				
+		} else if (command.equals("detail")) {
 
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			
+			System.out.println(seq);
+
+			planDto planDto = biz.selectOne(seq);
+
+			session.setAttribute("planDto", planDto);
+
+			dispatch("/Plan/planDetail.jsp", request, response);
+
+
+		}
+	}
 	}
 
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response)

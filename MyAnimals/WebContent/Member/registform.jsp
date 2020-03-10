@@ -15,10 +15,6 @@
 		   alert("ID 중복체크를 먼저 해주세요");
 		   document.getElementsByName("id")[0].focus();
 	   }
-<<<<<<< HEAD
-=======
-
->>>>>>> 38c232f141cde892e5d7d6b55d4e8b98014b2256
 	 };
 	 
 	 $(function(){
@@ -38,7 +34,7 @@
 			
 			$("#id").keyup(function(){
 				$.ajax({
-					url:"login.do?command=idchk&id="+$("#id").val(),
+					url:"/MyAnimals/member.do?command=idChk&id="+$("#id").val(),
 					dataType:"json",
 					success:function(res){
 						if(res.idchk == "true"){
@@ -59,8 +55,57 @@
 					}
 				});
 			});
+			
+			$("#nickname").keyup(function(){
+				$.ajax({
+					url:"/MyAnimals/member.do?command=nicknameChk&nickname="+$("#nickname").val(),
+					dataType:"json",
+					success:function(res){
+						if(res.nickchk == "true"){
+							$("#usednick").show();
+							$("#notusednic").hide();
+						} else {
+							if($("#nickname").val() == null || $("#nickname").val() == "" ){
+								$("#usednick").hide();
+								$("#notusednick").hide();
+							} else {							
+							$("#usednick").hide();
+							$("#notusednick").show();
+							}
+						}
+					},
+					error:function(){
+						alert("통신 실패");
+					}
+				});
+			});
+			
+			$("#email").keyup(function(){
+				$.ajax({
+					url:"/MyAnimals/member.do?command=emailChk&email="+$("#email").val(),
+					dataType:"json",
+					success:function(res){
+						if(res.emailchk == "true"){
+							$("#usedemail").show();
+							$("#notusedemail").hide();
+						} else {
+							if($("#email").val() == null || $("#email").val() == "" ){
+								$("#usedemail").hide();
+								$("#notusedemail").hide();
+							} else {							
+							$("#usedemail").hide();
+							$("#notusedemail").show();
+							}
+						}
+					},
+					error:function(){
+						alert("통신 실패");
+					}
+				});
+			});
+			
 		});
-<<<<<<< HEAD
+
 	 
 	function emailChk(){
 		var doc = document.getElementsByName("email")[0];
@@ -70,7 +115,7 @@
 			open("/MyAnimals/emailchk.do?command=emailchk&email="+doc.value,"","width=600,height=400");
 		}
 	};
-=======
+
 
 	 }
 function emailChk(){
@@ -82,13 +127,18 @@ function emailChk(){
 	}
 }
 
->>>>>>> 38c232f141cde892e5d7d6b55d4e8b98014b2256
 
 
 </script>
 </head>
-<body>
-<h1>봉사자 회원가입</h1>
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+<%@include file="/form/header.jsp" %>
    <form action="/MyAnimals/member.do" method="post">
       <input type="hidden" name="command" value="registres">
       <table border="1">
@@ -106,14 +156,14 @@ function emailChk(){
          </tr>
          <tr>
             <th>비밀번호</th>
-            <td><input type="password" name="pw" required="required" onclick="idChkConfirm()"></td>
+            <td><input type="password" name="pw" id="pw" required="required" onclick="idChkConfirm()"></td>
          </tr>
          <tr>
             <th>비밀번호 확인</th>
-            <td><input type="password" name="pwchk" required="required" onclick="idChkConfirm()"></td>
+            <td><input type="password" name="pwchk" id="pwchk" required="required" onclick="idChkConfirm()"></td>
          </tr>
          <tr>
-         	<td>
+         	<td colspan="2">
          		<div class="chkList" id="success" style="color: blue">비밀번호가 일치합니다.</div>
          		<div class="chkList" id="fail" style="color: red">비밀번호가 일치하지 않습니다.</div>
          	</td>
@@ -121,13 +171,13 @@ function emailChk(){
          <tr>
             <th>닉네임</th>
             <td>
-               <input type="text" name="nickname" required="required" onclick="idChkConfirm()">
+               <input type="text" name="nickname" id="nickname" required="required" onclick="idChkConfirm()">
             </td>
          </tr>
          <tr>
          	<td colspan="2">
-         		<div class="chkList"  id="usednick">이미 사용중인 닉네임 입니다.</div>
-         		<div class="chkList"  id="notusednick">사용할 수 있는 닉네임 입니다.</div>
+         		<div class="chkList"  id="usednick" style="color: red;">이미 사용중인 닉네임 입니다.</div>
+         		<div class="chkList"  id="notusednick" style="color: blue;">사용할 수 있는 닉네임 입니다.</div>
          	</td>
          </tr>
          <tr>
@@ -137,7 +187,7 @@ function emailChk(){
          <tr>
             <th>성별</th>
             <td>
-            	<input type="text" name="gender" value="M" readonly="readonly"/>
+            	<input type="text" name="gender" value="" placeholder="M 또는 F 입력"/>
             <!-- 
                <input type="radio" name="gender" value="M">남자
                <input type="radio" name="gender" value="F">여자
@@ -151,14 +201,14 @@ function emailChk(){
          <tr>
             <th>이메일</th>
             <td>
-               <input type="text" name="email" required="required" onclick="idChkConfirm()" value="${email }">
+               <input type="text" name="email" id="email" required="required" onclick="idChkConfirm()" value="${email }">
                <input type="button" value="이메일인증" required="required" onclick="emailChk()">  
             </td>
          </tr>
          <tr>
          	<td colspan="2">
-         		<div class="chkList"  id="usedemail">이미 사용중인 이메일 입니다.</div>
-         		<div class="chkList"  id="notusedemail">사용할 수 있는 이메일 입니다.</div>
+         		<div class="chkList"  id="usedemail" style="color: red;">이미 사용중인 이메일 입니다.</div>
+         		<div class="chkList"  id="notusedemail" style="color: blue;">사용할 수 있는 이메일 입니다.</div>
          	</td>
          </tr>
          <tr>
@@ -178,5 +228,15 @@ function emailChk(){
          
       </table>
    </form>
+   </div>
+   </div>
+<%@include file="/form/footer.jsp" %>
+</div>
+<!-- Scripts -->
+	<script src="/MyAnimals/assets/js/jquery.min.js"></script>
+	<script src="/MyAnimals/assets/js/browser.min.js"></script>
+	<script src="/MyAnimals/assets/js/breakpoints.min.js"></script>
+	<script src="/MyAnimals/assets/js/util.js"></script>
+	<script src="/MyAnimals/assets/js/main.js"></script>
 </body>
 </html>

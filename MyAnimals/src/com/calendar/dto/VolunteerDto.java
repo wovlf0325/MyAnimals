@@ -9,13 +9,16 @@ public class VolunteerDto {
 	private int volunteer_maxvolunteer;
 	private int vlounteer_nowvolunteer;
 	private String volunteer_date;
+	private int center_seq;
 	
 	public VolunteerDto() {
 		
 	}
 
+	
+
 	public VolunteerDto(int volunteer_seq, String member_id, String volunteer_title, String volunteer_content,
-			int volunteer_maxvolunteer, int vlounteer_nowvolunteer, String volunteer_date) {
+			int volunteer_maxvolunteer, int vlounteer_nowvolunteer, String volunteer_date, int center_seq) {
 		super();
 		this.volunteer_seq = volunteer_seq;
 		this.member_id = member_id;
@@ -24,7 +27,22 @@ public class VolunteerDto {
 		this.volunteer_maxvolunteer = volunteer_maxvolunteer;
 		this.vlounteer_nowvolunteer = vlounteer_nowvolunteer;
 		this.volunteer_date = volunteer_date;
+		this.center_seq = center_seq;
 	}
+
+	
+
+	public int getCenter_seq() {
+		return center_seq;
+	}
+
+
+
+	public void setCenter_seq(int center_seq) {
+		this.center_seq = center_seq;
+	}
+
+
 
 	public int getVolunteer_seq() {
 		return volunteer_seq;

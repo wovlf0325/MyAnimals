@@ -35,5 +35,13 @@ public interface MemberDao {
 	public int findPw(String id, String email);
 	
 	public int changePw(String id, String pw);
+	
+	// 중복체크
+		// 아이디
+		public MemberDto idChk(String id);
+		// 닉네임
+		public MemberDto nicknameChk(String nickname);
+		// 이메일 
+		public MemberDto emailChk(String email);
     
 }

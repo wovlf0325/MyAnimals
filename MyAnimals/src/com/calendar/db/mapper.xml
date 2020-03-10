@@ -5,7 +5,7 @@
 
 
 	<select id="getCalView" resultType="volunteerDto" parameterType="map">
-		SELECT * FROM VOLUNTEER WHERE MEMBER_ID=#{member_id} AND SUBSTR(VOLUNTEER_DATE,1,6)= #{yyyyMM}
+		SELECT * FROM VOLUNTEER WHERE SUBSTR(VOLUNTEER_DATE,1,6)= #{yyyyMM} AND CENTER_SEQ = ${center_seq}
 	</select>
 	
 	<insert id="insertCalBoard" parameterType="calendarDto">
@@ -13,7 +13,7 @@
 	</insert>
 	
 	<insert id="insert" parameterType="volunteerDto">
-		INSERT INTO VOLUNTEER VALUES(VOLUNTEER_SEQUENCE.NEXTVAL, 'ADMIN', #{volunteer_title}, #{volunteer_content}, #{volunteer_maxvolunteer}, 2, #{volunteer_date})
+		INSERT INTO VOLUNTEER VALUES(VOLUNTEER_SEQUENCE.NEXTVAL,#{center_seq}, #{member_id}, #{volunteer_title}, #{volunteer_content}, #{volunteer_maxvolunteer}, 0, #{volunteer_date})
 	</insert>
 	
 </mapper>

@@ -59,4 +59,17 @@
 	<update id="changePw" parameterType="map" >
 	   UPDATE MEMBER SET MEMBER_PW = #{pw} WHERE MEMBER_ID = #{id}
 	</update>
+	
+	<select id="idChk" parameterType="String" resultType="memberDto">
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{id}
+	</select>
+	
+	<select id="nicknameChk" parameterType="String" resultType="memberDto">
+		SELECT * FROM MEMBER WHERE MEMBER_NICKNAME = #{nickname}
+	</select>
+	
+	<select id="emailChk" parameterType="String" resultType="memberDto">
+		SELECT * FROM MEMBER WHERE MEMBER_EMAIL = #{email}
+	</select>
+
 </mapper>

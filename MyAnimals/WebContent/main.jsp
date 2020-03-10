@@ -108,7 +108,7 @@
 									style="position: relative; display: none;"><span
 										class="nav-counter" style="display: none;"></span></a></li>
 								<input type="button"
-									onclick="location.href='Member/loginpage.jsp'" value="로그인">
+									onclick="location.href='/MyAnimals/member.do?command=loginform'" value="로그인">
 								<input type="button"
 									onclick="location.href='Member/registselect.jsp'" value="회원가입">
 							</ul>
@@ -136,6 +136,9 @@
 								<input type="button"
 									onclick="location.href='/MyAnimals/member.do?command=myinfo'"
 									value="내정보">
+								<input type="button"
+									onclick="location.href='/MyAnimals/letter.do?command=receiveList'"
+									value="쪽지함">
 								<input type="button" value="로그아웃"
 									onclick="location.href='/MyAnimals/member.do?command=logout'">
 							</ul>
@@ -223,6 +226,7 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
+
 						<li><a href="/MyAnimals/main.jsp">Homepage</a></li>
 						<li><a href="/MyAnimals/planServlet?command=select">봉사 일정</a></li>
 						<li><a href="/MyAnimals/shop.do?command=selectList">shop</a></li>
@@ -232,6 +236,7 @@
 										게시판</a></li>
 								<li><a href="/MyAnimals/chat.xhtml" onclick="window.open(this.href, '','width=650px, height=500px, left=500px, top=100px ');return false;" target="_blank">채팅방</a></li>
 							</ul></li>
+
 					</ul>
 				</nav>
 
