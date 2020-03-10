@@ -17,6 +17,7 @@ import com.calendar.biz.calendarBizImpl;
 import com.calendar.dao.Util;
 import com.calendar.dao.calendarDao;
 import com.calendar.dao.calendarDaoImpl;
+import com.calendar.dto.ApplyDto;
 import com.calendar.dto.CalendarDto;
 import com.calendar.dto.VolunteerDto;
 import com.plan.dto.planDto;
@@ -68,6 +69,8 @@ public class calendarServlet extends HttpServlet {
 		System.out.println("command : " + command);
 		
 		calendarBiz biz = new calendarBizImpl();
+
+		PrintWriter out = response.getWriter();
 		
 		if(command.equals("insertCalendar")) {
 			
@@ -111,24 +114,106 @@ public class calendarServlet extends HttpServlet {
 			
 			int res = biz.insert(volunteerDto);
 			
-			PrintWriter out = response.getWriter();
 			
 			if(res>0) {
 				out.println("<script type='text/javascript'>");
-				out.println("alert('입력성공)';");
-				out.println("opener.location.onload();");
+				out.println("alert('입력성공');");
+				out.println("opener.location.reload();");
 				out.println("self.close();");
 				out.println("</script>");
 			}else{
 				out.println("<script type='text/javascript'>");
-				out.println("alert('입력실패)';");
+				out.println("alert('입력실패');");
 				out.println("opener.location.onload();");
 				out.println("self.close();");
 				out.println("</script>");
 			}
 			
-		}else if(command.equals("volunteerApply")) {
+		}else if(command.equals("volunteerDetail")) {
 			
+			int center_seq = Integer.parseInt(request.getParameter("center_seq"));
+			String year = request.getParameter("year");
+			String month = request.getParameter("month");
+			String date = request.getParameter("date");
+			
+			month = Util.isTwo(month);
+			date = Util.isTwo(date);
+			
+			String yyyyMMdd = year+month+date;
+			
+			VolunteerDto volunteerDto = biz.selectOne(center_seq , yyyyMMdd);
+			
+			request.setAttribute("volunteerDto", volunteerDto);
+			
+			dispatch("Plan/calendarDetail.jsp", request, response);
+			
+			
+		}else if(command.equals("applyInsert")) {
+			
+			int volunteer_seq = Integer.parseInt(request.getParameter("volunteer_seq"));
+			
+			request.setAttribute("volunteer_seq", volunteer_seq);
+			
+			dispatch("Plan/applyForm.jsp", request, response);
+			
+		}else if(command.equals("applyInserForm")) {
+			
+			String Member_id = request.getParameter("Member_id");
+			int volunteer_seq = Integer.parseInt(request.getParameter("volunteer_seq"));
+			String apply_name = request.getParameter("apply_name");
+			String apply_phone = request.getParameter("apply_phone");
+			String apply_email = request.getParameter("apply_email");
+			
+			System.out.println("Member_id ="+Member_id);
+			System.out.println("volunteer_seq="+volunteer_seq);
+			System.out.println("name="+apply_name);
+			System.out.println("phone="+apply_phone);
+			System.out.println("email="+apply_email);
+			
+			ApplyDto applyDto = new ApplyDto();
+			
+			applyDto.setMember_id(Member_id);
+			applyDto.setVolunteer_seq(volunteer_seq);
+			applyDto.setApply_name(apply_name);
+			applyDto.setApply_phone(apply_phone);
+			applyDto.setApply_email(apply_email);
+			
+			int res = biz.applyInsert(applyDto);
+			
+			if(res>0) {
+				out.println("<script type='text/javascript'>");
+				out.println("alert('봉사 신청 성공');");
+				out.println("self.close();");
+				out.println("opener.location.reload();");
+				out.println("</script>");
+			}else{
+				out.println("<script type='text/javascript'>");
+				out.println("alert('입력실패');");
+				out.println("self.close();");
+				out.println("</script>");
+			}
+			
+			
+		}else if(command.equals("volunteerDelete")) {
+			
+			int volunteer_seq = Integer.parseInt(request.getParameter("volunteer_seq"));
+			int center_seq = Integer.parseInt(request.getParameter("center_seq"));
+			
+			System.out.println("delete_seq:"+ volunteer_seq);
+			
+			int res = biz.delete(volunteer_seq);
+			
+			if(res>0) {
+				out.println("<script type='text/javascript'>");
+				out.println("alert('일정 삭제 성공');");
+				out.println("location.href='/MyAnimals/Plan/calendar.jsp'");
+				out.println("</script>");
+			}else{
+				out.println("<script type='text/javascript'>");
+				out.println("alert('입력실패');");
+				out.println("history.back();");
+				out.println("</script>");
+			}
 			
 			
 		}

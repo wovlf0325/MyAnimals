@@ -21,10 +21,40 @@
 
 <title>Insert title here</title>
 
+<style type="text/css">
+
+#map{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#calendar{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#table{
+	text-align: center;
+	
+}
+
+
+</style>
+
 </head>
-<body>
+<body class="is-preload">
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+      <!-- Main -->
+      <div id="main">
+         <div class="inner">
+<%@include file="/form/header.jsp" %>
+
 	<h1>보호소</h1>
 	<div id="map" style="width:500px;height:400px;"></div>
+	<br>
+	<br>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d88d544f75c4ee7cfb6abfeda2856aa6"></script>
 <script>
 
@@ -49,7 +79,7 @@ var marker = new kakao.maps.Marker({
     position: markerPosition
 });
 
-var iwContent = '<div style="padding:5px;"><%=planDto.getCenter_name() %> <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+var iwContent = '<div style="padding:5px;"><%=planDto.getCenter_name() %> <br><a href="https://map.kakao.com/link/map/<%=planDto.getCenter_name() %>,<%=planDto.getCenter_latitude()%>,<%=planDto.getCneter_longitude()%>" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/<%=planDto.getCenter_name() %>,<%=planDto.getCenter_latitude()%>,<%=planDto.getCneter_longitude()%>" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 
 //인포윈도우를 생성합니다
@@ -69,7 +99,7 @@ marker.setMap(map);
 </script>
 
 	
-	<table border="1">
+	<table border="1" id="cneter_info">
 		<tr>
 			<th>보호소 명: </th>
 			<td><%=planDto.getCenter_name() %></td>
@@ -89,23 +119,34 @@ marker.setMap(map);
 
 function addCalendar(){
 	var Member_id ='<%=memberDto.getMember_id() %>'
-	open("calendar.do?command=insertCalendar&Member_id="+Member_id+"&Center_seq="+<%=planDto.getCenter_seq()%>,"","width=300,height=250");
+	open("calendar.do?command=insertCalendar&Member_id="+Member_id+"&Center_seq="+<%=planDto.getCenter_seq()%>,"","width=600,height=500");
 }
 
 </script>	
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
- 
- 	<iframe id="calendar" src="Plan/calendar.jsp" width="600" height="600" style="border:none">
- 	</iframe>
- 	<c:if test="${memberDto.member_role eq 'CENTER' && planDto.member_id eq memberDto.member_id}">
+	<c:if test="${memberDto.member_role eq 'CENTER' && planDto.member_id eq memberDto.member_id}">
 		<div id="button">
 			<button onclick="addCalendar();">일정등록</button>
 		</div>	
- 	</c:if>
- 	<!-- && ${centerDto.member_id eq memberDto.member_id } -->
+ 	</c:if> 
+ 	<br>
+ 	<br>
+ 	<iframe id="calendar" src="Plan/calendar.jsp" width="600" height="600" style="border:none">
+ 	</iframe>
+ 	
+ 	
  
 	
-
+   </div>
+   </div>
+<%@include file="/form/footer.jsp" %>
+</div>
+<!-- Scripts -->
+   <script src="/MyAnimals/assets/js/jquery.min.js"></script>
+   <script src="/MyAnimals/assets/js/browser.min.js"></script>
+   <script src="/MyAnimals/assets/js/breakpoints.min.js"></script>
+   <script src="/MyAnimals/assets/js/util.js"></script>
+   <script src="/MyAnimals/assets/js/main.js"></script>
 </body>
 </html>

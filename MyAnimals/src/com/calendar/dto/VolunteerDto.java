@@ -7,7 +7,7 @@ public class VolunteerDto {
 	private String volunteer_title;
 	private String volunteer_content;
 	private int volunteer_maxvolunteer;
-	private int vlounteer_nowvolunteer;
+	private int volunteer_nowvolunteer;
 	private String volunteer_date;
 	private int center_seq;
 	
@@ -18,14 +18,14 @@ public class VolunteerDto {
 	
 
 	public VolunteerDto(int volunteer_seq, String member_id, String volunteer_title, String volunteer_content,
-			int volunteer_maxvolunteer, int vlounteer_nowvolunteer, String volunteer_date, int center_seq) {
+			int volunteer_maxvolunteer, int volunteer_nowvolunteer, String volunteer_date, int center_seq) {
 		super();
 		this.volunteer_seq = volunteer_seq;
 		this.member_id = member_id;
 		this.volunteer_title = volunteer_title;
 		this.volunteer_content = volunteer_content;
 		this.volunteer_maxvolunteer = volunteer_maxvolunteer;
-		this.vlounteer_nowvolunteer = vlounteer_nowvolunteer;
+		this.volunteer_nowvolunteer = volunteer_nowvolunteer;
 		this.volunteer_date = volunteer_date;
 		this.center_seq = center_seq;
 	}
@@ -84,12 +84,12 @@ public class VolunteerDto {
 		this.volunteer_maxvolunteer = volunteer_maxvolunteer;
 	}
 
-	public int getVlounteer_nowvolunteer() {
-		return vlounteer_nowvolunteer;
+	public int getVolunteer_nowvolunteer() {
+		return volunteer_nowvolunteer;
 	}
 
 	public void setVlounteer_nowvolunteer(int vlounteer_nowvolunteer) {
-		this.vlounteer_nowvolunteer = vlounteer_nowvolunteer;
+		this.volunteer_nowvolunteer = vlounteer_nowvolunteer;
 	}
 
 	public String getVolunteer_date() {
