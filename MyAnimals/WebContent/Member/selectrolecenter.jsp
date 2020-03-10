@@ -76,7 +76,7 @@
 									</tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${memberList }" var="memberDto">
+									<c:forEach items="${memberList }" var="memberDto" >
 										<tr>
 											<td>${memberDto.member_delflag }</td>
 											<td>${memberDto.member_role }</td>

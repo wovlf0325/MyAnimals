@@ -13,6 +13,7 @@
 		<typeAlias type="com.reply.dto.ReplyDto" alias="replyDto"/>
 		<typeAlias type="com.shop.dto.ShopDto" alias="shopDto"/>
 		<typeAlias type="com.alarm.dto.AlarmDto" alias="alarmDto"/>
+		<typeAlias type="com.shop.dto.OrderDto" alias="orderDto"/>
 		<typeAlias type="com.calendar.dto.VolunteerDto" alias="volunteerDto"></typeAlias>
 	</typeAliases>
 	
@@ -38,6 +39,7 @@
 	    <mapper resource="com/board/db/mapper.xml"/>
 	    <mapper resource="com/reply/db/mapper.xml"/>
 	    <mapper resource="com/alarm/db/mapper.xml"/>
+	    
 	  </mappers>
 
 </configuration>
