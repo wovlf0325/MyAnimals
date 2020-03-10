@@ -84,19 +84,19 @@ public class MemberBizImpl implements MemberBiz {
 	@Override
 	public MemberDto idChk(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.idChk(id);
 	}
 
 	@Override
 	public MemberDto nicknameChk(String nickname) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.nicknameChk(nickname);
 	}
 
 	@Override
 	public MemberDto emailChk(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.emailChk(email);
 	}
 	public int changePw(String id, String pw) {
 		// TODO Auto-generated method stub

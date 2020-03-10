@@ -36,7 +36,7 @@
 							<span class="opener">커뮤니티</span>
 							<ul>
 								<li><a href="/MyAnimals/answer.do?command=list&page=1">커뮤니티 게시판</a></li>
-								<li><a href="/MyAnimals/chat.xhtml?name=${memberDto.member_id} }" onclick="window.open(this.href, '','width=650px, height=500px, left=500px, top=100px ');return false;" target="_blank">채팅방</a></li>
+								<li><a href="/MyAnimals/chat.xhtml?name=${memberDto.member_id}" onclick="window.open(this.href, '','width=650px, height=500px, left=500px, top=100px ');return false;" target="_blank">채팅방</a></li>
 							</ul>
 						</li>
 					</ul>

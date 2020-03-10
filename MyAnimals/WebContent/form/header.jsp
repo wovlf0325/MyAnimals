@@ -25,7 +25,7 @@
 				<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
 				   <ul class="icons">
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=myinfo'">내정보</button></li>
-				      <li><button onclick="#">쪽지함</button></li>
+				      <li><button onclick="location.href='/MyAnimals/letter.do?command=receiveList'">쪽지함</button></li>
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
 				   </ul>
 				</c:when>

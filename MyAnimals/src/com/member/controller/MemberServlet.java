@@ -316,6 +316,39 @@ public class MemberServlet extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.print(res);
+		
+		}else if(command.equals("nicknameChk")) {
+			String nickname = request.getParameter("nickname");
+			MemberDto memberDto = biz.nicknameChk(nickname);
+			JSONObject obj = new JSONObject();
+			if(memberDto == null || memberDto.getMember_nickname().equals(null) || memberDto.getMember_nickname() == null) {
+				obj.put("nickchk", "false");				
+			} else if(memberDto.getMember_nickname() == nickname || memberDto.getMember_nickname().equals(nickname))  {
+				obj.put("nickchk", "true");
+			}
+			
+			String res = obj.toJSONString();
+			System.out.println("servlet에서 만들어짐" + res);
+			
+			PrintWriter out = response.getWriter();
+			out.print(res);
+			
+		}else if(command.equals("emailChk")) {
+			String email = request.getParameter("email");
+			MemberDto memberDto = biz.emailChk(email);
+			JSONObject obj = new JSONObject();
+			if(memberDto == null || memberDto.getMember_email().equals(null) || memberDto.getMember_email() == null) {
+				obj.put("emailchk", "false");				
+			} else if(memberDto.getMember_email() == email || memberDto.getMember_email().equals(email))  {
+				obj.put("emailchk", "true");
+			}
+			
+			String res = obj.toJSONString();
+			System.out.println("servlet에서 만들어짐" + res);
+			
+			PrintWriter out = response.getWriter();
+			out.print(res);
+			
 		}
 		
 		
