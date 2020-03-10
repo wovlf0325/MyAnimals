@@ -23,7 +23,6 @@ import com.reply.dto.ReplyDto;
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -47,27 +46,27 @@ public class BoardServlet extends HttpServlet {
 			pdto.setPage(page);
 			pdto.setRows(10);
 			pdto.setPagescale(3);
-		
+
 			pdto.setTotalpage(biz.totalPage(pdto.getRows()));
 
 			List<BoardDto> list = biz.selectList(pdto);
 			request.setAttribute("boardPdto", pdto);
 
 			request.setAttribute("boardList", list);
-			
-	
+
 			dispatch("Board/answerlist.jsp", request, response);
-			
+
 		} else if (command.equals("writeform")) {
 
-			//response.sendRedirect("Board/write.jsp");
+			// response.sendRedirect("Board/write.jsp");
 			dispatch("Board/write.jsp", request, response);
+			
 		} else if (command.equals("writeres")) {
 			String writer = request.getParameter("nickname");
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			BoardDto dto = new BoardDto(writer, title, content);
-            System.out.println(title);
+			System.out.println(title);
 			int res = biz.insert(dto);
 			if (res > 0) {
 				jsResponse("글 작성 성공", "answer.do?command=list&page=1", response);
@@ -75,8 +74,10 @@ public class BoardServlet extends HttpServlet {
 				jsResponse("글 작성 실패", "answer.do?command=writeform", response);
 			}
 		} else if (command.equals("detail")) {
+
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
 			BoardDto dto = biz.selectOne(boardno);
+
 			// (request.getSession() 메서드는 session이 생성되어 있는 경우 생성된 session을 리턴하고,
 			// 생성되어 있지 않은 경우 새롭게 session을 생성하여 리턴한다.)
 			// 조회수 새로고침 증가 방지
@@ -84,12 +85,11 @@ public class BoardServlet extends HttpServlet {
 //			session.setAttribute("dto", dto);
 //
 //			response.sendRedirect("Board/detail.jsp");
-			System.out.println("board Servlet 도착");
+
 			request.setAttribute("boardDto", dto);
 
 			dispatch("reply.do?command=list", request, response);
-			//response.sendRedirect("reply.do?command=list");
-			
+			// response.sendRedirect("reply.do?command=list");
 
 		} else if (command.equals("updateform")) {
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
@@ -119,58 +119,54 @@ public class BoardServlet extends HttpServlet {
 			} else {
 				jsResponse("글 삭제 실패", "answer.do?command=detail&boardno=" + boardno, response);
 			}
-		}else if (command.equals("answer")) {
+		} else if (command.equals("answer")) {
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
 			BoardDto dto = biz.selectOne(boardno);
 			request.setAttribute("boardDto", dto);
 			dispatch("Board/answerform.jsp", request, response);
-			
+
 		} else if (command.equals("answerres")) {
-			
+
 			int parentboardno = Integer.parseInt(request.getParameter("parentboardno"));
-			
+
 			String writer = request.getParameter("nickname");
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			
+
 			BoardDto dto = new BoardDto();
-			
+
 			dto.setBoard_seq(parentboardno);
 			dto.setMember_nickname(writer);
 			dto.setBoard_title(title);
 			dto.setBoard_content(content);
-			
+
 			int res = biz.insert_answer(dto);
-			
+
 			if (res > 0) {
 				jsResponse("답변 작성 성공", "answer.do?command=list&page=1", response);
 			} else {
 				jsResponse("답변 작성 실패", "answer.do?command=answer&boardno=" + parentboardno, response);
 			}
-		}else if(command.equals("commentres")) {
+		} else if (command.equals("commentres")) {
 			ReplyDto rdto = new ReplyDto();
-		    HttpSession session = request.getSession();
-		    
-			MemberDto mdto = (MemberDto)session.getAttribute("memberDto");
-		    int boardseq = Integer.parseInt(request.getParameter("boardseq"));
+			HttpSession session = request.getSession();
+
+			MemberDto mdto = (MemberDto) session.getAttribute("memberDto");
+			int boardseq = Integer.parseInt(request.getParameter("boardseq"));
 			String content = request.getParameter("rcontent");
-			
-			if(mdto == null) {
+
+			if (mdto == null) {
 				jsResponse("로그인을 해주세요", "Member/loginpage.jsp", response);
 			} else {
 				rdto.setMember_id(mdto.getMember_id());
-			    System.out.println(mdto.getMember_id());
 				rdto.setBoard_seq(boardseq);
-				System.out.println(boardseq);
 				rdto.setReply_content(content);
-				System.out.println(content);
-				// String userid=(String)session.getAttribute("userid");
-		        //dto.setReplyer(userid);
-				
+
 				ReplyBiz rbiz = new ReplyBiz();
+
 				int res = rbiz.insert(rdto);
 				if (res > 0) {
-					jsResponse("댓글 성공", "/MyAnimals/answer.do?command=detail&boardno="+boardseq, response);
+					jsResponse("댓글 성공", "/MyAnimals/answer.do?command=detail&boardno=" + boardseq, response);// 절대경로
 				} else {
 					jsResponse("댓글 등록 실패", "/MyAnimals/answer.do?command=list&page=1", response);
 				}

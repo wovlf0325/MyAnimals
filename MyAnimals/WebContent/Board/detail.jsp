@@ -1,4 +1,7 @@
-<%@page import="com.board.dto.PagingDto"%>
+<%@page import="com.board.dto.BoardDto"%>
+<%@page import="com.reply.dto.ReplyDto"%>
+<%@page import="com.member.dto.MemberDto"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -65,10 +68,14 @@ height: 3.5em;
 
 }
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+</script>
 	<title>Editorial by HTML5 UP</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="/assets/css/main.css" />
 
 </head>
 
@@ -80,7 +87,7 @@ height: 3.5em;
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
-<%@ include file="../form/header.jsp" %>
+<%@ include file="/form/header.jsp" %>
 	
 
 				<!-- Banner -->
@@ -115,10 +122,10 @@ height: 3.5em;
 							</tr>
 							<tr>
 								<td colspan="2" align="right">
-									<input type="button" value="update" onclick="location.href='answer.do?command=updateform&boardno=${boardDto.board_seq}'" id="update"/>
-									<input type="button" value="delete" onclick="location.href='answer.do?command=delete&boardno=${boardDto.board_seq}'" id="delete"/>
-									<input type="button" value="list"   onclick="location.href='answer.do?command=list&page=1'" id="list"/>
-									<input type="button" value="answer" onclick="location.href='answer.do?command=answer&boardno=${boardDto.board_seq}'" id="answer"/>
+									<input type="button" value="update" class="button primary small" onclick="location.href='answer.do?command=updateform&boardno=${boardDto.board_seq}'" id="update"/>
+									<input type="button" value="delete" class="button primary small" onclick="location.href='answer.do?command=delete&boardno=${boardDto.board_seq}'" id="delete"/>
+									<input type="button" value="list"   class="button primary small" onclick="location.href='answer.do?command=list&page=1'" id="list"/>
+									<input type="button" value="answer" class="button primary small" onclick="location.href='answer.do?command=answer&boardno=${boardDto.board_seq}'" id="answer"/>
 								</td>
 							</tr>
 						</table>
@@ -140,7 +147,7 @@ height: 3.5em;
                             <textarea placeholder="댓글을 입력하세요" name="rcontent"></textarea>
                             <br>
                             <div align="right">
-                                <input type="submit"  value="insert" id="insert">
+                                <input type="submit"  value="insert" id="insert" class="button primary small">
                             </div>
                         </td>
                     </tr>
@@ -158,11 +165,13 @@ height: 3.5em;
 		<col width="100">
 		<col width="200">
 		<col width="100">
+		<col width="100">
 		<tr>
 			<th>번호</th>
 			<th>아이디</th>
 			<th>내용</th>
 			<th>작성일</th>
+			<th></th>
 		</tr>
 		<c:choose>
 			<c:when test="${empty replyList}">
@@ -182,8 +191,10 @@ height: 3.5em;
 								<fmt:formatDate value="${replyDto.reply_regdate }" pattern="YYYY/MM/dd" type="date"/>
 								</td>
 								<td>
-									<input type="button" value="update" onclick="location.href='reply.do?command=update&replyno=${replyDto.reply_seq}'">
-								    <input type="button" value="delete" onclick="location.href='reply.do?command=delete&replyno=${replyDto.reply_seq}'">
+									<c:if test="${memberDto.member_id eq replyDto.member_id}">
+										<input type="button" class="button small" value="update" onclick="location.href='reply.do?command=update&replyno=${replyDto.reply_seq}'">
+									    <input type="button" class="button small" value="delete" onclick="location.href='reply.do?command=delete&replyno=${replyDto.reply_seq}'">
+									</c:if>								    
 								</td>
 							</tr>
 						
@@ -207,17 +218,17 @@ height: 3.5em;
 		</div>
 
 <!-- 사이드바 시작  -->
-<%@ include file="../form/footer.jsp" %>
+<%@ include file="/form/footer.jsp" %>
 	
 <!-- 사이드바 끝 -->
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
 
 </body>
 
