@@ -52,21 +52,9 @@ public class ReplyServlet extends HttpServlet {
 			request.setAttribute("boardDto", dto);
 			dispatch("Board/detail.jsp", request, response);
 					
-		}else if(command.equals("commentres")) {
-			String reply_content = request.getParameter("content");
-			ReplyDto dto = new ReplyDto();
-			dto.setReply_content(reply_content);
-			int res = biz.insert(dto);
-			if(res>0) {
-				jsResponse("댓글 성공", "reply.do?command=detail", response);
-			}else {
-				jsResponse("댓글 실패", "board.do?command=detail", response);
-			}
-			
-		}else if(command.equals("update")) {
-			int reply_seq = Integer.parseInt(request.getParameter("replyno"));
-		
 		}
+			
+		
 	}
 	
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

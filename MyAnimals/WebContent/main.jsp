@@ -226,6 +226,7 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
+
 						<li><a href="/MyAnimals/main.jsp">Homepage</a></li>
 						<li><a href="/MyAnimals/planServlet?command=select">봉사 일정</a></li>
 						<li><a href="/MyAnimals/shop.do?command=selectList">shop</a></li>
@@ -235,6 +236,7 @@
 										게시판</a></li>
 								<li><a href="/MyAnimals/chat.xhtml" onclick="window.open(this.href, '','width=650px, height=500px, left=500px, top=100px ');return false;" target="_blank">채팅방</a></li>
 							</ul></li>
+
 					</ul>
 				</nav>
 
