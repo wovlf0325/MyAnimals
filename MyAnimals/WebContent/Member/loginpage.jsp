@@ -27,6 +27,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="955044676304-9g5lqe9k6picqmct6qai7eq5es3lg87o.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 <title>Insert title here</title>
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -81,10 +84,34 @@ function forgot(){
             	<td colspan="4" align="center">
             		<a id="kakao-login-btn"></a>
             		<a href="<%=apiURL%>"><img height="50" src="/MyAnimals/image/naver.PNG"/></a>
+            		<a class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></a>
             	</td>
             </tr>
          </table>
    </form>
+   
+   
+    <script>
+        function onSignIn(googleUser) {
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+            
+            var name = profile.getName();
+            var email = profile.getEmail();
+            
+            location.href="/MyAnimals/member.do?command=registuser&name="+name+"&email="+email;
+
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+        };
+    </script>
 
 
 <script type='text/javascript'>
@@ -197,11 +224,11 @@ function forgot(){
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="/MyAnimals/assets/js/jquery.min.js"></script>
+	<script src="/MyAnimals/assets/js/browser.min.js"></script>
+	<script src="/MyAnimals/assets/js/breakpoints.min.js"></script>
+	<script src="/MyAnimals/assets/js/util.js"></script>
+	<script src="/MyAnimals/assets/js/main.js"></script>
 
 </body>
 </html>

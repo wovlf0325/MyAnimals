@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,7 +132,7 @@ table{
 												href="/MyAnimals/letter.do?command=detail&id=${dto.member_to }&seq=${dto.letter_seq }"
 												onclick="window.open(this.href, '','width=280px, height=480px, left=650px, top=100px ');return false;"
 												target="_blank">${dto.letter_title }</a></td>
-											<td align="center">${dto.letter_regdate }</td>
+											<td align="center"><fmt:formatDate value="${dto.letter_regdate }" pattern="YYYY/MM/dd" type="date"/></td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

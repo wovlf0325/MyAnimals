@@ -264,5 +264,56 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao {
 		}
 		return res;
 	}
+	@Override
+	public MemberDto idChk(String id) {
+		SqlSession session = null;
+		MemberDto dto = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			dto = session.selectOne(namespace+"idChk", id);
+		} catch (Exception e) {
+			System.out.println("[error] : idChk");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return dto;
+	}
+	@Override
+	public MemberDto nicknameChk(String nickname) {
+		SqlSession session = null;
+		MemberDto dto = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			dto = session.selectOne(namespace+"nicknameChk", nickname);
+		} catch (Exception e) {
+			System.out.println("[error] : nicknameChk");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return dto;
+	}
+	@Override
+	public MemberDto emailChk(String email) {
+		SqlSession session = null;
+		MemberDto dto = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			dto = session.selectOne(namespace+"emailChk", email);
+		} catch (Exception e) {
+			System.out.println("[error] : emailChk");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return dto;
+	}
 
 }

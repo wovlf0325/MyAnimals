@@ -16,9 +16,12 @@ drop sequence shopseq;
 
 insert into shop values(shopseq.nextval ,'ADMIN', 'test', 'test', 1000, 1000, 'test', '');
 
+UPDATE SHOP SET SHOP_QUANTITY = SHOP_QUANTITY-1 WHERE SHOP_SEQ = 1;
 
 select * from shop where shop_name like'%he%';
 
 select * from shop;
+
+UPDATE SHOP SET SHOP_QUANTITY = 100 WHERE SHOP_SEQ = 2;
 
 select * from member;

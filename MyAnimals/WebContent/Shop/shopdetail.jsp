@@ -38,6 +38,8 @@
 			$("#update").css("display","none");
 		}	
 	});
+	
+
 </script>
 
 
@@ -60,22 +62,43 @@
 				</header>
 
 				<section id="banner">
+				<form action="shop.do" method="post">
 					<div class="content">
 						<header>
 							<h1>
-								<%=shopDto.getShop_name() %><br/>
+								<%=shopDto.getShop_name() %>
+								
 							</h1>
+							
+							<input type="hidden" name="command" value="flex">
+							<input type="hidden" name="shop_seq" value="${shopDto.shop_seq}">
+							
+							잔여량 : <%=shopDto.getShop_quantity() %>
+							<select name="opt">
+								<%
+									for(int i=1; i<=shopDto.getShop_quantity(); i++){
+										%>
+										<option><%=i %></option>
+										<% 		
+									}
+								%>
+							</select>
+							
 						</header>
 						<p>
 							<%=shopDto.getShop_content() %><br/>
+							
 						</p>
 						<ul class="actions">
-							<li><a href="#" class="button big">후원하기</a></li>
+							<li><input type="submit" class="button big" value="후원하기"></li>
+							<span class="image object"> 
+								<img src="${shopDto.shop_photo}" style="width: 500px; height: 400px;"/>
+							</span>
 						</ul>
+						
 					</div>
-					<span class="image object"> <img src="${shopDto.shop_photo}" style="width: 500px; height: 400px;"/>
-						잔여량 : <%=shopDto.getShop_quantity() %>
-					</span>
+					
+					</form>
 				</section>
 			</div>
 		</div>
@@ -83,7 +106,7 @@
 		<!-- Sidebar -->
 		<div id="sidebar">
 			<div class="inner">
-
+0
 				<!-- Search -->
 				<section id="search" class="alt">
 					<form method="post" action="#">

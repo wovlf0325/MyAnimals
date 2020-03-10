@@ -17,25 +17,15 @@
 		width: 100px !important;
 	}
 	
+	.features{
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+	
 	</style>
 
 </head>
-<body class="is-preload">
-
-	<!-- Wapper -->
-	<div id="wrapper">
-	
-		<!-- main -->
-		<div id="main">
-			<div class="inner">
-
-
-<%@include file="../form/header.jsp" %>
-
-
-<section>
-<div class="features">
-
+<body >
 
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
@@ -121,32 +111,11 @@
 						});
 					}
 				});
-
 			});
 	</script>
-	<form action="/MyAnimals/planServlet" method="post">
-		<input type="hidden" name="command" value="showxml">
 		<select name="sido" id="sido"></select>
 		<select name="gugun" id="gugun"> </select>
-		<input type="submit" value="검색">
-	</form>
-		</div>
-	</section>
-	
-	</div>
-		</div>
-	<!-- 사이드바 시작 -->
-	
-<%@ include file = "../form/footer.jsp" %>
+		<input  type="button" value="검색" id="getList">
 
-<!-- 사이드바 끝 -->	
-	</div>
-	
-	<script src="../assets/js/jquery.min.js"></script>
-	<script src="../assets/js/browser.min.js"></script>
-	<script src="../assets/js/breakpoints.min.js"></script>
-	<script src="../assets/js/util.js"></script>
-	<script src="../assets/js/main.js"></script>
-	
 </body>
 </html>

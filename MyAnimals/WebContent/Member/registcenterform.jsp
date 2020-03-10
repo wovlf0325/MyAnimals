@@ -51,7 +51,7 @@ function idChkConfirm(){
          <tr>
             <th>성별</th>
             <td>
-            	<input type="text" name="gender" value="M" readonly="readonly"/>
+            	<input type="text" name="gender" value="" placeholder="M 또는 F 입력"/>
             <!-- 
                <input type="radio" name="gender" value="M">남자
                <input type="radio" name="gender" value="F">여자

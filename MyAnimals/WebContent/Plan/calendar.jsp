@@ -15,6 +15,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
+	<link rel="stylesheet" href="/MyAnimals/assets/css/main.css" />
+
+
 <style type="text/css">
 
 	#calendar{
@@ -42,7 +47,7 @@
 	.clist > p {
 	font-size: 10px;
 	margin: 1px;
-	background-color: skyblue;
+	background-color: #ffe0e6;
 	}
 	
 	.cpreview{
@@ -107,7 +112,8 @@ var planDto = '<% planDto planDto = (planDto)session.getAttribute("planDto"); %>
  	//달력에 일정 표현
 	calendarDao dao = new calendarDaoImpl();
 	String yyyyMM = year +Util.isTwo(String.valueOf(month));
-	List<VolunteerDto> clist = dao.getCalViewList("ADMIN", yyyyMM); 
+	List<VolunteerDto> clist = dao.getCalViewList(planDto.getMember_id(), yyyyMM, planDto.getCenter_seq()); 
+	System.out.println(clist);
 	
 	
 
@@ -136,9 +142,12 @@ var planDto = '<% planDto planDto = (planDto)session.getAttribute("planDto"); %>
 
 	for(int i=1; i<=lastDay; i++){
 %>
+
+
+
 	<td>
-		<a class="countview" href="calendar.do?command=list&year=<%=year%>&month=<%=month%>&date=<%=i%>" style="color:<%=Util.fontColor(i,dayOfWeek)%>"><%=i %></a>
-		<div class="clist" onclick="location.href='calendar.do?command=volunteerApply&year=<%=year%>&month=<%=month%>&date=<%=i%>'">
+		<a class="countview" style="color:<%=Util.fontColor(i,dayOfWeek)%>"><%=i %></a>
+		<div class="clist" onclick="location.href='/MyAnimals/calendar.do?command=volunteerDetail&center_seq=<%=planDto.getCenter_seq()%>&year=<%=year%>&month=<%=month%>&date=<%=i%>'">
 			<%=Util.getCalView(i, clist) %>
 		</div>
 	</td>

@@ -29,6 +29,7 @@
 					      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
 					   </ul>
 					</c:when>
+
 				<c:when test="${memberDto.member_role eq 'ADMIN' }">
 				   <ul class="icons">
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=selectall'">회원전체조회</button></li>

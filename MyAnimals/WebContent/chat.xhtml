@@ -49,7 +49,7 @@
 html, body {
   padding: 0px;
   margin: 0px;
-  background:#131417;
+  background:white;
   font-family: 'Karla', sans-serif;
   color: #FFF;
 }
@@ -64,7 +64,7 @@ h1 {
   margin: 20px auto;
   border: 1px solid rgba(0, 0, 0, 0.25);
   max-width: 600px;
-  background: #4772C1;
+  background: #f56a6a;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 3px;
   animation:flyin 0.75s;
@@ -222,6 +222,12 @@ h1 {
             }
         }, false);
 
+		function idchk(){
+			if(document.getElementById("id").value == ""){
+				alert("대화명을 입력해주세요");
+				return false;
+			};
+		};
     ]]></script>
 </head>
 <body>
@@ -244,7 +250,7 @@ h1 {
       </div>
       <div class="input">
       	 <input type="text" placeholder="대화명" id="id" value=""/>
-         <input type="text" placeholder="Type message here!" id="chat"/>
+         <input type="text" placeholder="Type message here!" id="chat" onchange="idchk()"/>
          <div class="btn">Send</div>
       </div>
    </div>
