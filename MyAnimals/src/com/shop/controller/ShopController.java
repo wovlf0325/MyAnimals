@@ -2,6 +2,7 @@ package com.shop.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,12 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.member.biz.MemberBiz;
+import com.member.biz.MemberBizImpl;
 import com.member.dto.MemberDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.shop.biz.ShopBiz;
 import com.shop.biz.ShopBizImpl;
+import com.shop.dto.OrderDto;
 import com.shop.dto.ShopDto;
+import com.shop.biz.OrderBiz;
+import com.shop.biz.OrderBizImpl;
 
 @WebServlet("/shop.do")
 public class ShopController extends HttpServlet {
@@ -35,6 +41,8 @@ public class ShopController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		ShopBiz biz = new ShopBizImpl();
+		OrderBiz biz1 = new OrderBizImpl();
+		MemberBiz biz2 = new MemberBizImpl();
 		String command = request.getParameter("command");
 		if (session.getAttribute("memberDto") == null) {
 			jsResponse("로그인을 먼저 해주세요", "Member/loginpage.jsp", response);
@@ -65,6 +73,44 @@ public class ShopController extends HttpServlet {
 				request.setAttribute("shopDto", shopDto);
 				dispatch("Shop/shopupdateform.jsp", request, response);
 
+			}else if(command.equals("flex")) {
+				int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
+				int opt = Integer.parseInt(request.getParameter("opt"));
+				
+				ShopDto shopDto = biz.selectShopOne(shop_seq);
+				
+				request.setAttribute("opt", opt);
+				request.setAttribute("shopDto", shopDto);
+				
+				
+				dispatch("Shop/shopflex.jsp", request, response);
+			}else if(command.equals("buylistres")) {
+				int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
+				int opt = Integer.parseInt(request.getParameter("opt"));
+				int res = biz1.updateOrderList(shop_seq, opt);
+				if(res>0) {
+					OrderDto orderDto = new OrderDto();
+					MemberDto memberDto = (MemberDto) session.getAttribute("memberDto");
+					orderDto.setShop_seq(shop_seq);
+					orderDto.setMember_id(memberDto.getMember_id());
+					orderDto.setOrder_stuff(request.getParameter("shop_name"));
+					orderDto.setOrder_content(request.getParameter("shop_content"));
+					orderDto.setOrder_count(opt);
+					orderDto.setOrder_buymoney(Integer.parseInt(request.getParameter("order_buymoney")));
+					
+					int ui = biz1.insertOrderList(orderDto);
+
+						if(ui > 0){
+						
+						dispatch("main.jsp", request, response);
+						
+					}
+				}
+			}else if(command.equals("buylistform")) {
+				List<OrderDto> orderList = biz1.selectOrderList();
+				request.setAttribute("orderList", orderList);
+				
+				dispatch("Shop/buylist.jsp", request, response);
 			}
 		}
 	}

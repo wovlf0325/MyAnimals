@@ -51,6 +51,8 @@
 									style="display: none;">후원 등록하기</a></li>
 							</ul>
 						</c:otherwise>
+						
+						
 					</c:choose>
 
 				</header>
