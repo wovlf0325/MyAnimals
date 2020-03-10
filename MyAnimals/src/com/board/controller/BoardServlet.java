@@ -23,7 +23,6 @@ import com.reply.dto.ReplyDto;
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -156,6 +155,49 @@ public class BoardServlet extends HttpServlet {
 				}
 
 
+
+
+			int res = biz.delete(boardno);
+			if (res > 0) {
+				jsResponse("글 삭제 성공", "answer.do?command=list&page=1", response);
+			} else {
+				jsResponse("글 삭제 실패", "answer.do?command=detail&boardno=" + boardno, response);
+			}
+		} else if (command.equals("answer")) {
+			int boardno = Integer.parseInt(request.getParameter("boardno"));
+			BoardDto dto = biz.selectOne(boardno);
+			request.setAttribute("boardDto", dto);
+			dispatch("Board/answerform.jsp", request, response);
+
+		} else if (command.equals("answerres")) {
+
+			int parentboardno = Integer.parseInt(request.getParameter("parentboardno"));
+
+			String writer = request.getParameter("nickname");
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+
+			BoardDto dto = new BoardDto();
+
+			dto.setBoard_seq(parentboardno);
+			dto.setMember_nickname(writer);
+			dto.setBoard_title(title);
+			dto.setBoard_content(content);
+
+			int res = biz.insert_answer(dto);
+
+			if (res > 0) {
+				jsResponse("답변 작성 성공", "answer.do?command=list&page=1", response);
+			} else {
+				jsResponse("답변 작성 실패", "answer.do?command=answer&boardno=" + parentboardno, response);
+			}
+		} else if (command.equals("commentres")) {
+			ReplyDto rdto = new ReplyDto();
+			HttpSession session = request.getSession();
+
+			MemberDto mdto = (MemberDto) session.getAttribute("memberDto");
+			int boardseq = Integer.parseInt(request.getParameter("boardseq"));
+
 			
 		}else if(command.equals("commentres")) {
 			ReplyDto rdto = new ReplyDto();
@@ -164,23 +206,19 @@ public class BoardServlet extends HttpServlet {
 			MemberDto mdto = (MemberDto)session.getAttribute("memberDto");
 		    int boardseq = Integer.parseInt(request.getParameter("boardseq"));
 			String content = request.getParameter("rcontent");
-			
-			if(mdto == null) {
+
+			if (mdto == null) {
 				jsResponse("로그인을 해주세요", "Member/loginpage.jsp", response);
 			} else {
 				rdto.setMember_id(mdto.getMember_id());
-			    System.out.println(mdto.getMember_id());
 				rdto.setBoard_seq(boardseq);
-				System.out.println(boardseq);
 				rdto.setReply_content(content);
-				System.out.println(content);
-				// String userid=(String)session.getAttribute("userid");
-		        //dto.setReplyer(userid);
-				
+
 				ReplyBiz rbiz = new ReplyBiz();
+
 				int res = rbiz.insert(rdto);
 				if (res > 0) {
-					jsResponse("댓글 성공", "/MyAnimals/answer.do?command=detail&boardno="+boardseq, response);
+					jsResponse("댓글 성공", "/MyAnimals/answer.do?command=detail&boardno=" + boardseq, response);// 절대경로
 				} else {
 					jsResponse("댓글 등록 실패", "/MyAnimals/answer.do?command=list&page=1", response);
 				}
