@@ -20,9 +20,9 @@
 
 	
  				<header id="header">
- 				<h2>MyAnimals</h2>
  				<c:choose>
 				<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
+ 				<h2>MyAnimals</h2>
 				   <ul class="icons">
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=myinfo'">내정보</button></li>
 				      <li><button onclick="location.href='/MyAnimals/letter.do?command=receiveList'">쪽지함</button></li>
@@ -40,6 +40,7 @@
 				   </ul>
 				</c:when>
 				<c:otherwise>
+				<h2>MyAnimals</h2>
 				   <ul class="icons">
 						<li><button onclick="location.href='/MyAnimals/member.do?command=loginform'">로그인</button></li>
 						<li><button onclick="location.href='/MyAnimals/member.do?command=registselectres'">회원가입</button></li>
