@@ -136,6 +136,9 @@
 								<input type="button"
 									onclick="location.href='/MyAnimals/member.do?command=myinfo'"
 									value="내정보">
+								<input type="button"
+									onclick="location.href='/MyAnimals/letter.do?command=receiveList'"
+									value="쪽지함">
 								<input type="button" value="로그아웃"
 									onclick="location.href='/MyAnimals/member.do?command=logout'">
 							</ul>
