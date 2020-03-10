@@ -86,7 +86,7 @@ public class calendarServlet extends HttpServlet {
 			String volunteer_content = request.getParameter("volunteer_content");
 			int volunteer_maxvolunteer = Integer.parseInt(request.getParameter("volunteer_maxvolunteer"));
 			String volunteer_date = request.getParameter("volunteer_date");
-			//int volunteer_date = Integer.parseInt(request.getParameter("volunteer_date"));
+			int Center_seq = Integer.parseInt(request.getParameter("Center_seq"));
 			
 			String yy = volunteer_date.substring(0, 4);
 			String mm = volunteer_date.substring(5, 7);
@@ -94,27 +94,37 @@ public class calendarServlet extends HttpServlet {
 			
 			String yymmdd = yy+mm+dd;
 			
-			System.out.println(yymmdd);
-			
 			VolunteerDto volunteerDto = new VolunteerDto();
 			volunteerDto.setVolunteer_title(volunteer_title);
 			volunteerDto.setVolunteer_content(volunteer_content);
 			volunteerDto.setVolunteer_maxvolunteer(volunteer_maxvolunteer);
 			volunteerDto.setVolunteer_date(yymmdd);
+			volunteerDto.setCenter_seq(Center_seq);
+			volunteerDto.setMember_id(Member_id);
 			
 			System.out.println(volunteerDto.getMember_id());
 			System.out.println(volunteerDto.getVolunteer_title());
 			System.out.println(volunteerDto.getVolunteer_content());
 			System.out.println(volunteerDto.getVolunteer_maxvolunteer());
 			System.out.println(volunteerDto.getVolunteer_date());
-			
+			System.out.println(volunteerDto.getCenter_seq());
 			
 			int res = biz.insert(volunteerDto);
 			
+			PrintWriter out = response.getWriter();
+			
 			if(res>0) {
-				jsResponse("입력성공", "", response);
+				out.println("<script type='text/javascript'>");
+				out.println("alert('입력성공)';");
+				out.println("opener.location.onload();");
+				out.println("self.close();");
+				out.println("</script>");
 			}else{
-				jsResponse("입력실패", "", response);
+				out.println("<script type='text/javascript'>");
+				out.println("alert('입력실패)';");
+				out.println("opener.location.onload();");
+				out.println("self.close();");
+				out.println("</script>");
 			}
 			
 		}else if(command.equals("volunteerApply")) {

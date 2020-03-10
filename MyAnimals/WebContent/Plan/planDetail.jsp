@@ -1,3 +1,4 @@
+<%@page import="com.member.dto.MemberDto"%>
 <%@page import="com.calendar.dto.VolunteerDto"%>
 <%@page import="com.calendar.dto.CalendarDto"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,9 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>    
-    
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -26,6 +29,8 @@
 <script>
 
 var planDto = '<% planDto planDto = (planDto)session.getAttribute("planDto"); %>';
+
+var memberDto = '<% MemberDto memberDto = (MemberDto)session.getAttribute("memberDto"); %>'
 
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -83,8 +88,8 @@ marker.setMap(map);
 	<script type="text/javascript">
 
 function addCalendar(){
-	var Member_id ='<%=planDto.getMember_id() %>'
-	open("calendar.do?command=insertCalendar&Member_id="+Member_id,"","width=300,height=250");
+	var Member_id ='<%=memberDto.getMember_id() %>'
+	open("calendar.do?command=insertCalendar&Member_id="+Member_id+"&Center_seq="+<%=planDto.getCenter_seq()%>,"","width=300,height=250");
 }
 
 </script>	
@@ -93,10 +98,12 @@ function addCalendar(){
  
  	<iframe id="calendar" src="Plan/calendar.jsp" width="600" height="600" style="border:none">
  	</iframe>
- 
-	<div id="button">
-		<button onclick="addCalendar();">일정등록</button>
-	</div>
+ 	<c:if test="${memberDto.member_role eq 'CENTER' && planDto.member_id eq memberDto.member_id}">
+		<div id="button">
+			<button onclick="addCalendar();">일정등록</button>
+		</div>	
+ 	</c:if>
+ 	<!-- && ${centerDto.member_id eq memberDto.member_id } -->
  
 	
 
