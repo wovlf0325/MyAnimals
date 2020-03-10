@@ -155,11 +155,10 @@ public class BoardServlet extends HttpServlet {
 					jsResponse("답변 작성 실패", "answer.do?command=answer&boardno=" + parentboardno, response);
 				}
 
-			}
+			
 		}else if(command.equals("commentres")) {
 			ReplyDto rdto = new ReplyDto();
-		    HttpSession session = request.getSession();
-		    
+			
 			MemberDto mdto = (MemberDto)session.getAttribute("memberDto");
 		    int boardseq = Integer.parseInt(request.getParameter("boardseq"));
 			String content = request.getParameter("rcontent");
@@ -185,6 +184,7 @@ public class BoardServlet extends HttpServlet {
 				}
 			}
 
+		}
 		}
 	}
 
