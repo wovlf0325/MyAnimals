@@ -12,7 +12,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="is-preload">
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+      <!-- Main -->
+      <div id="main">
+         <div class="inner">
+<%@include file="/form/header.jsp" %>
+
 
 	<%@ includefile="selectlocal.jsp"%>
 	
@@ -75,5 +83,15 @@
 	</table>
 
 
+</div>
+   </div>
+<%@include file="/form/footer.jsp" %>
+</div>
+<!-- Scripts -->
+   <script src="/MyAnimals/assets/js/jquery.min.js"></script>
+   <script src="/MyAnimals/assets/js/browser.min.js"></script>
+   <script src="/MyAnimals/assets/js/breakpoints.min.js"></script>
+   <script src="/MyAnimals/assets/js/util.js"></script>
+   <script src="/MyAnimals/assets/js/main.js"></script>
 </body>
 </html>

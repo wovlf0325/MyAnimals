@@ -24,6 +24,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.calendar.biz.calendarBiz;
+import com.calendar.biz.calendarBizImpl;
+import com.calendar.dto.VolunteerDto;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.plan.biz.planBiz;
@@ -194,17 +197,18 @@ public class planServlet extends HttpServlet {
 			}
 				
 		} else if (command.equals("detail")) {
-
+			
 			int seq = Integer.parseInt(request.getParameter("seq"));
 			
 			System.out.println(seq);
 
 			planDto planDto = biz.selectOne(seq);
+			
 
 			session.setAttribute("planDto", planDto);
-
+			
+		
 			dispatch("/Plan/planDetail.jsp", request, response);
-
 
 		}
 	}

@@ -6,6 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
+	<link rel="stylesheet" href="/MyAnimals/assets/css/main.css" />
+
 
 <link rel="stylesheet" href="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -20,7 +24,12 @@ $(function(){
     	'dateOnly':true, //날짜만 선택할수 있도록
     	'futureOnly': true,
     	'closeOnSelected' : true
-});
+	});
+    
+    $('#insert').submit(function(){
+    	opener.location.reload();
+    	self.close();
+    });
     
 }); 
 
@@ -35,7 +44,7 @@ $(function(){
 <body>
 
 		<h1>봉사일정 등록</h1>
-			<form action="calendar.do" method="post">
+			<form action="calendar.do" method="post" id="insert">
 				<input type="hidden" name="command" value="insert"/>
 				<input type="hidden" name="Member_id" value="<%=Member_id%>"/>
 				<input type="hidden" name="Center_seq" value="<%=Center_seq%>"/>
