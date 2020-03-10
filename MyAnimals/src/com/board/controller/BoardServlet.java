@@ -185,10 +185,10 @@ public class BoardServlet extends HttpServlet {
 					jsResponse("댓글 등록 실패", "/MyAnimals/answer.do?command=list&page=1", response);
 				}
 			}
-			}
-		}
 		}
 	}
+}
+	
 
 	private void jsResponse(String msg, String url, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
