@@ -125,7 +125,7 @@ table{
 										<input type="hidden" name="read" value="${dto.letter_read }" />
 										<tr name="readChk">
 											<td align="center"><input type="checkbox" name="chk"
-												value="${dto.letter_seq }" /><label for="chk"></td>
+												value="${dto.letter_seq }" /></td>
 											<td align="center">${dto.letter_seq }</td>
 											<td align="center">${dto.member_from }</td>
 											<td><a

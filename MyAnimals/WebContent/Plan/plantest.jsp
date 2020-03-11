@@ -36,7 +36,7 @@
 		$('#table').append(head);
 		var i = 1;
 		$.ajax({
-			url : "../planServlet",
+			url : "/MyAnimals/planServlet",
 			type : "POST",
 			dataType: "json",
 			data : {
@@ -58,7 +58,7 @@
 				  $.each(data, function(key, val){ 
 					  var rowItem = "<tr>";
 						  rowItem += "<td>"+i+"</td>";
-						  rowItem += "<td><a href='../planServlet?command=detail&seq="+val['center_seq']+"'>"+val['center_name']+"</a></td>";
+						  rowItem += "<td><a href='/MyAnimals/planServlet?command=detail&seq="+val['center_seq']+"'>"+val['center_name']+"</a></td>";
 						  rowItem += "<td>"+val['center_addr']+"</td>";
 						  rowItem += "<td>"+val['center_phone']+"</td>";
 						  rowItem += "</tr>";

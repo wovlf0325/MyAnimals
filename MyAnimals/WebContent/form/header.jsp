@@ -25,7 +25,7 @@
  				<h2>MyAnimals</h2>
 				   <ul class="icons">
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=myinfo'">내정보</button></li>
-				      <li><button onclick="location.href='/MyAnimals/letter.do?command=receiveList'">쪽지함</button></li>
+				      <li><button onclick="location.href='/MyAnimals/letter.do?command=receiveList&id=${memberDto.member_id}'">쪽지함</button></li>
 				      <li><a href="shop.do?command=buylistform" class="button big">결제목록</a></li>
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
 				   </ul>

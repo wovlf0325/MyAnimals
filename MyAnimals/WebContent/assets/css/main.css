@@ -1087,7 +1087,7 @@ select {
 textarea {
   padding: 0.75em 1em; }
 
-input[type="checkbox"],
+/* input[type="checkbox"],
 input[type="radio"] {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -1152,7 +1152,7 @@ input[type="checkbox"] + label:before {
   border-radius: 0.375em; }
 
 input[type="radio"] + label:before {
-  border-radius: 100%; }
+  border-radius: 100%; } */
 
 ::-webkit-input-placeholder {
   color: #9fa3a6 !important;

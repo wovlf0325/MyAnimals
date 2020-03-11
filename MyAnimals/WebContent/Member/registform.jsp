@@ -117,7 +117,7 @@
 	};
 
 
-	 }
+
 function emailChk(){
 	var doc = document.getElementsByName("email")[0];
 	if(doc.value.trim()==""||doc.value==null){
@@ -220,8 +220,8 @@ function emailChk(){
             <td><input type="text" name="address" required="required" onclick="idChkConfirm()"></td>
          </tr>
          <tr>
-            <td colspan="2">
-               <input type="submit" name="regist" value="회원가입" style="display: none;">
+            <td colspan="2" align="right">
+               <input type="submit" name="regist" value="회원가입">
                <input type="button" value="취소" onclick="location.href='loginmain.jsp'">
             </td>
          </tr>
