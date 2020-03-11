@@ -21,15 +21,17 @@
 	
  				<header id="header">
  				<c:choose>
-				<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
- 				<h2>MyAnimals</h2>
-				   <ul class="icons">
-				      <li><button onclick="location.href='/MyAnimals/member.do?command=myinfo'">내정보</button></li>
-				      <li><button onclick="location.href='/MyAnimals/letter.do?command=receiveList&id=${memberDto.member_id}'">쪽지함</button></li>
-				      <li><a href="shop.do?command=buylistform" class="button big">결제목록</a></li>
-				      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
-				   </ul>
-				</c:when>
+
+					<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
+						<a href="/MyAnimals/main.jsp" class="logo"><strong>MyAnimals</strong></a>
+					   <ul class="icons">
+					      <li><button onclick="location.href='/MyAnimals/member.do?command=myinfo'">내정보</button></li>
+					      <li><button onclick="#">쪽지함</button></li>
+					      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
+					   </ul>
+					</c:when>
+
+
 				<c:when test="${memberDto.member_role eq 'ADMIN' }">
 				   <ul class="icons">
 				      <li><button onclick="location.href='/MyAnimals/member.do?command=selectall'">회원전체조회</button></li>
@@ -40,7 +42,9 @@
 				   </ul>
 				</c:when>
 				<c:otherwise>
-				<h2>MyAnimals</h2>
+
+					<a href="/MyAnimals/main.jsp" class="logo"><strong>MyAnimals</strong></a>				
+
 				   <ul class="icons">
 						<li><button onclick="location.href='/MyAnimals/member.do?command=loginform'">로그인</button></li>
 						<li><button onclick="location.href='/MyAnimals/member.do?command=registselectres'">회원가입</button></li>

@@ -1,4 +1,4 @@
-package com.weather.servlet;
+package com.weather.controller;
 
 import java.io.IOException;
 
@@ -25,7 +25,8 @@ public class WeatherServlet extends HttpServlet {
        
     
     public WeatherServlet() {
-        
+        super();
+        // TODO Auto-generated constructor stub
     }
 
 	
@@ -47,9 +48,9 @@ public class WeatherServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		
 		String code= request.getParameter("code");
-		request.setAttribute("code", code);
+		request.setAttribute("code", code);//code 받아서 담아둔다. 이유 getParameter는 string 만 받을 수 있어서,,
 
-		RequestDispatcher dispatch = request.getRequestDispatcher("weatherinfo.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("weatherinfo.jsp");//최초로 들어온 것을 weatherinfo로 보내 준다. forward
 		
 		dispatch.forward(request, response);
 		

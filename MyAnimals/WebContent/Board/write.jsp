@@ -78,7 +78,7 @@ height: 3.5em;
 								<table border="1">
 									<tr>
 										<th>작성자</th>
-										<td><input type="text" name="nickname"/></td>
+										<td>${memberDto.member_id } </td>
 									</tr>
 									<tr>
 										<th>제목</th>
