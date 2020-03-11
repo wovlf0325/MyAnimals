@@ -174,6 +174,8 @@ public class BoardServlet extends HttpServlet {
 
 		}
 	}
+}
+	
 
 	private void jsResponse(String msg, String url, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();

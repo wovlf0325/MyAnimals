@@ -21,6 +21,7 @@
 	
  				<header id="header">
  				<c:choose>
+
 					<c:when test="${memberDto.member_role eq 'USER' || memberDto.member_role eq 'CENTER'}">
 						<a href="/MyAnimals/main.jsp" class="logo"><strong>MyAnimals</strong></a>
 					   <ul class="icons">
@@ -29,6 +30,7 @@
 					      <li><button onclick="location.href='/MyAnimals/member.do?command=logout'">로그아웃</button></li>
 					   </ul>
 					</c:when>
+
 
 				<c:when test="${memberDto.member_role eq 'ADMIN' }">
 				   <ul class="icons">
@@ -40,7 +42,9 @@
 				   </ul>
 				</c:when>
 				<c:otherwise>
+
 					<a href="/MyAnimals/main.jsp" class="logo"><strong>MyAnimals</strong></a>				
+
 				   <ul class="icons">
 						<li><button onclick="location.href='/MyAnimals/member.do?command=loginform'">로그인</button></li>
 						<li><button onclick="location.href='/MyAnimals/member.do?command=registselectres'">회원가입</button></li>

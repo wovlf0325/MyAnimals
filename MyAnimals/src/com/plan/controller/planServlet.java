@@ -78,7 +78,7 @@ public class planServlet extends HttpServlet {
 					DocumentBuilder builder = factory.newDocumentBuilder();
 	
 					
-					doc = builder.parse(new File("C:\\Git_semi\\MyAnimals\\MyAnimals\\WebContent\\WEB-INF\\data.xml"));
+					doc = builder.parse(new File("C:\\Git_MyAnimals_branch\\MyAnimals\\WebContent\\WEB-INF\\data.xml"));
 	
 					XPathFactory xpathFactory = XPathFactory.newInstance();
 					XPath xpath = xpathFactory.newXPath();
@@ -119,7 +119,6 @@ public class planServlet extends HttpServlet {
 				}
 					
 				 else {
-					System.out.println("와바라");
 
 					for (int i = 0; i < nodeList.getLength(); i++) {
 						NodeList child = nodeList.item(i).getChildNodes();
@@ -180,7 +179,6 @@ public class planServlet extends HttpServlet {
 
 					response.getWriter().write(gson);
 
-					System.out.println(gson);
 				} catch (JsonIOException e) {
 					e.printStackTrace();
 				} catch (IOException e) {

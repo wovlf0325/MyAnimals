@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
@@ -30,6 +31,8 @@
 <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="955044676304-9g5lqe9k6picqmct6qai7eq5es3lg87o.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" href="http://localhost:8787/MyAnimals/assets/css/main.css" />
+	<link rel="stylesheet" href="/MyAnimals/assets/css/main.css" />
 <title>Insert title here</title>
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -51,9 +54,9 @@ function forgot(){
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
-			
-<%@ include file="/form/header.jsp" %>
-	
+			<header id="header">
+				<h2>MyAnimals</h2>
+			</header>
 
 				<!-- Banner -->
 				<section id="banner">

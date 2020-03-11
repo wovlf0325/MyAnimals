@@ -75,7 +75,7 @@ int totalpage = pdto.getTotalpage();
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
-<%@ include file="../form/header.jsp" %>
+<%@ include file="/form/header.jsp" %>
 	
 
 				<!-- Banner -->
@@ -201,7 +201,7 @@ int totalpage = pdto.getTotalpage();
 		</div>
 
 <!-- 사이드바 시작  -->
-<%@ include file="../form/footer.jsp" %>
+<%@ include file="/form/footer.jsp" %>
 	
 <!-- 사이드바 끝 -->
 	</div>
